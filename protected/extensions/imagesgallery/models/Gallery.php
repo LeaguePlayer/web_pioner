@@ -75,7 +75,7 @@ class Gallery extends CActiveRecord
         // will receive user inputs.
         return array(
 			array('gallery_name', 'required'),
-			array('gallery_name', 'unique'),
+//			array('gallery_name', 'unique'),
             array('name, description', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.

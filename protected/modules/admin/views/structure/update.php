@@ -10,8 +10,7 @@ $this->menu=array(
 );
 ?>
 
-<h1><?php echo $model->translition(); ?> - Редактирование</h1>
+<h3>Редактирование раздела «<?= $model->name ?>»</h3>
 <?php echo $this->renderPartial('_form',array(
     'model'=>$model,
-    'parent'=>$parent
 )); ?>

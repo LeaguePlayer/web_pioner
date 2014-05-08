@@ -32,9 +32,9 @@
     'type'=>TbHtml::GRID_TYPE_HOVER,
     'afterAjaxUpdate'=>"function() {sortGrid('news')}",
     'rowHtmlOptionsExpression'=>'array(
-            "id"=>"items[]_".$data->id,
-            "class"=>"status_".$data->status,
-        )',
+		"id"=>"items[]_".$data->id,
+		"class"=>"status_".$data->status,
+	)',
     'columns'=>array(
         array(
             'name'=>'img_preview',

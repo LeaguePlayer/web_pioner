@@ -68,10 +68,17 @@ class Material extends CActiveRecord
             $classname = $fileinfo['filename'];
             if ( in_array($classname, array('Material', 'Seo', 'Config', 'GalleryPhoto', 'Structure')) )
                 continue;
-            if ( in_array($classname, $exists) )
+            if ( $classname !== $this->class_name && in_array($classname, $exists) )
                 continue;
             $out[$classname] = $classname;
         }
         return $out;
     }
+
+	public function findByClassName($classname, $condition = '', $params = array())
+	{
+		return $this->findByAttributes(array(
+			'class_name' => $classname
+		), $condition, $params);
+	}
 }

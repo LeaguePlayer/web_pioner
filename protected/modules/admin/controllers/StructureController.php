@@ -8,7 +8,6 @@ class StructureController extends AdminController
 	public function actionList($opened = false)
 	{
 		$openNode = Structure::model()->findByPk($opened);
-//		var_dump( $openNode ); die();
 
 		$this->render('list', array(
 			'openNode' => $openNode
@@ -79,8 +78,9 @@ class StructureController extends AdminController
     public function actionDelete($id)
     {
         $model = Structure::model()->findByPk($id);
+		$parent_id = ( $parent = $model->parent()->find() ) ? $parent->id : 0;
         $model->deleteNode();
-        $this->redirect(array('list'));
+        $this->redirect(array('list', 'opened' => $parent_id));
     }
 
 

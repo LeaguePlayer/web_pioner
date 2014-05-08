@@ -36,12 +36,18 @@ class m140425_080143_news extends CDbMigration
 			'node_id' => 'integer NOT NULL',
 		),
 		'ENGINE=MyISAM DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci');
-    }
- 
-    public function safeDown()
-    {
-        $this->_checkTables();
-    }
+
+		$this->insert('{{materials}}', array(
+			'class_name' => 'NewsList',
+			'name' => 'Новости',
+		));
+	}
+
+	public function safeDown()
+	{
+		$this->delete('{{materials}}', "class_name='NewsList'");
+		$this->_checkTables();
+	}
  
     /**
      * Удаляет таблицы, указанные в $this->dropped из базы.

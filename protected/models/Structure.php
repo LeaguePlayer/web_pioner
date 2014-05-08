@@ -172,11 +172,6 @@ class Structure extends EActiveRecord
     private $_url;
     public function getUrl()
     {
-//        if ( $this->_url === null ) {
-//            $this->_url = Yii::app()->createUrl('structure/show', array('url'=>$this->url));
-//        }
-//        return $this->_url;
-
 		if ( $this->_url === null ) {
 			if ( $this->isRoot() )
 				return Yii::app()->createUrl('site/index');
@@ -202,4 +197,20 @@ class Structure extends EActiveRecord
         $breadcrumbs[] = $this->name;
         return $breadcrumbs;
     }
+
+
+	public function getAdminBreadcrumbs()
+	{
+		$ancestors = $this->ancestors()->findAll();
+		$breadcrumbs = array();
+		foreach ( $ancestors as $node ) {
+			if ( $node->isRoot() ) {
+				$breadcrumbs['Структура сайта'] = Yii::app()->createUrl('admin/structure/list');
+				continue;
+			}
+			$breadcrumbs[$node->name] = Yii::app()->createUrl('admin/structure/list', array('opened' => $node->id));
+		}
+		$breadcrumbs[] = $this->name;
+		return $breadcrumbs;
+	}
 }
