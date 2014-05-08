@@ -1,10 +1,5 @@
 <?php
 $this->breadcrumbs = $model->node->getAdminBreadcrumbs();
-
-$this->menu=array(
-    array('label'=>'Структура сайта','url'=>array('/admin/structure/list', 'opened' => $model->node->id)),
-    array('label'=>'Добавить новую','url'=>array('create', 'node_id'=>$model->node->id)),
-);
 if ( $model->node ) {
     $this->menu[] = array('label'=>'← К разделу', 'url'=>array('/admin/structure/update', 'id' => $model->node->id));
 }

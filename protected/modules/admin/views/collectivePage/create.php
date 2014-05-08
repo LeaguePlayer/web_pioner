@@ -1,10 +1,5 @@
 <?php
 $this->breadcrumbs = $model->node->getAdminBreadcrumbs();
-
-
-$this->menu=array(
-    array('label'=>'Структура сайта','url'=>array('/admin/structure/list', 'opened' => $_GET['node_id'])),
-);
 if ( is_numeric($_GET['node_id']) ) {
     $this->menu[] = array('label'=>'← К разделу', 'url'=>array('/admin/collectivesStructure/update', 'id' => $_GET['node_id']));
 }

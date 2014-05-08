@@ -30,12 +30,12 @@ $cs->registerCssFile( $assetsUrl.'/css/shedule.form.css' );
 	<?php $this->widget('bootstrap.widgets.TbTabs', array( 'tabs' => $tabs)); ?>
 
 
-	<div id="shedule" data-events='<?= $model->json_events ?>'></div>
+	<div id="shedule"></div>
 
 
 	<div class="form-actions">
 		<?php echo TbHtml::submitButton('Сохранить', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)); ?>
-        <?php echo TbHtml::linkButton('Отмена', array('url'=>'/admin/collectiveshedule/list')); ?>
+		<?php echo TbHtml::linkButton('Отмена', array('url'=>array('/admin/collectivesStructure/list', 'collective_id'=>$model->node->collective->id))); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
@@ -81,7 +81,7 @@ $cs->registerCssFile( $assetsUrl.'/css/shedule.form.css' );
 				</div>
 			</div>
 
-			<div class="control-group">
+			<div class="control-group hide">
 				<label class="control-label">Периодичность</label>
 				<div class="controls">
 					<label class="radio"><input type="radio" class="period" name="period" value="0" checked="checked" /> Нет</label>
@@ -132,7 +132,7 @@ $cs->registerCssFile( $assetsUrl.'/css/shedule.form.css' );
 				</div>
 			</div>
 
-			<div class="control-group">
+			<div class="control-group hide">
 				<label class="control-label">Периодичность</label>
 				<div class="controls">
 					<label class="radio"><input type="radio" class="period" name="period" value="0" checked="checked" /> Нет</label>

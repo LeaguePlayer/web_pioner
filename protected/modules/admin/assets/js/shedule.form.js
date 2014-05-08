@@ -29,6 +29,7 @@ $(document).ready(function() {
     });
 
     teachersSelect.select2();
+    $('select.event-teachers', editEventModal).select2();
 
     addEventModal.on('show', function(e) {
         var self = $(this),
@@ -54,8 +55,8 @@ $(document).ready(function() {
                 id: events[i].id,
                 title: events[i].title,
                 allDay: events[i].allDay,
-                start: events[i].start,
-                end: events[i].end,
+                start: new Date(events[i].start.getTime()),
+                end: new Date(events[i].end.getTime()),
                 repeat: events[i].repeat,
                 teachers: events[i].teachers
             }
@@ -78,25 +79,90 @@ $(document).ready(function() {
         }
         var event = {
             id: events.length + 1,
-            title: titleInput.val() + '<br>',
+            title: titleInput.val(),
             allDay: addEventModal.data('allDay'),
             start: addEventModal.data('start'),
             end: addEventModal.data('end'),
-            repeat: $('input.period:checked').val(),
+            repeat: $('input.period:checked', addEventModal).val(),
             teachers: teachers
         };
         events.push(event);
         shedule.fullCalendar('refetchEvents');
         shedule.fullCalendar('rerenderEvents');
+        teachersSelect.select2('val', '');
         addEventModal.modal('hide');
         saveEvents();
         return false;
     });
 
 
-    $('.btn.delete', editEventModal).click(function(e) {
-
+    $('.event-save', editEventModal).click(function(e) {
+        var selected = $('select.event-teachers', editEventModal).select2('data');
+        var teachers = [];
+        for ( var i = 0; i < selected.length; i++ ) {
+            teachers.push({
+                id: selected[i].id,
+                name: selected[i].text
+            });
+        }
+        var event = {
+            id: editEventModal.data('id'),
+            title: $('input.event-title', editEventModal).val(),
+            allDay: editEventModal.data('allDay'),
+            start: editEventModal.data('start'),
+            end: editEventModal.data('end'),
+            repeat: $('input.period:checked', editEventModal).val(),
+            teachers: teachers
+        };
+        for ( var i = 0; i < events.length; i++ ) {
+            if ( event.id == events[i].id ) {
+                events[i] = event;
+                break;
+            }
+        }
+        shedule.fullCalendar('refetchEvents');
+        shedule.fullCalendar('rerenderEvents');
+        editEventModal.modal('hide');
+        saveEvents();
+        return false;
     });
+
+
+    $('.btn.delete', editEventModal).click(function(e) {
+        if ( !confirm('Удалить занятие «'+$('input.event-title', editEventModal).val()+'»' ) ) {
+            return false;
+        }
+        var id = editEventModal.data('id');
+        var new_events = [];
+        for ( var i = 0; i < events.length; i++ ) {
+            if ( id == events[i].id ) {
+                continue;
+            }
+            events[i].id = i + 1;
+            new_events.push(events[i]);
+        }
+        events = new_events;
+        shedule.fullCalendar('refetchEvents');
+        shedule.fullCalendar('rerenderEvents');
+        editEventModal.modal('hide');
+        saveEvents();
+        return false;
+    });
+
+
+
+    function moveEvent(event)
+    {
+        for ( var i = 0; i < events.length; i++ ) {
+            if ( event.id == events[i].id ) {
+                events[i].start = event.start;
+                events[i].end = event.end;
+                break;
+            }
+        }
+        saveEvents();
+    }
+
 
 
     shedule.fullCalendar($.extend({
@@ -119,7 +185,12 @@ $(document).ready(function() {
             $('input.event-end', editEventModal).timepicker('setTime', event.end);
             $('input.event-title', editEventModal).val(event.title);
             $('input[value='+event.repeat+'].period', editEventModal).prop('checked', true);
-            editEventModal.modal('show');
+            var teachers = [];
+            for ( var i = 0; i < event.teachers.length; i++ ) {
+                teachers.push(event.teachers[i].id);
+            }
+            $('select.event-teachers', editEventModal).select2('val', teachers);
+            editEventModal.data({id: event.id, start: event.start, end: event.end, allDay: event.allDay}).modal('show');
         },
         eventRender: function (event, element) {
             var title = '<b>'+event.title+'</b><br>';
@@ -129,6 +200,12 @@ $(document).ready(function() {
             }
             title += teachers.join(', ');
             element.find('.fc-event-title').html(title);
+        },
+        eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ) {
+            moveEvent(event);
+        },
+        eventResize: function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ) {
+            moveEvent(event);
         },
         editable: true,
         header: {

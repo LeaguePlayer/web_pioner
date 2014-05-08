@@ -19,6 +19,8 @@ class CollectiveController extends AdminController
 		$this->render('create', array('model' => $model));
 	}
 
+
+
 	public function actionUpdate($id)
 	{
 		$model = $this->loadModel('Collective', $id);

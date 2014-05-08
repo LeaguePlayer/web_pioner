@@ -1,13 +1,5 @@
 <?php
-$this->breadcrumbs=array(
-	"{$model->translition()}"=>array('list'),
-	'Редактирование',
-);
-
-$this->menu=array(
-	array('label'=>'Список', 'url'=>array('list')),
-	array('label'=>'Добавить','url'=>array('create')),
-);
+$this->breadcrumbs=$model->node->getAdminBreadcrumbs();
 ?>
 
 <h1><?php echo $model->translition(); ?> - Редактирование</h1>

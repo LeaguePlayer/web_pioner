@@ -1,8 +1,5 @@
 <?php
-$this->breadcrumbs=array(
-	"{$model->translition()}"=>array('list'),
-	'Создание',
-);
+$this->breadcrumbs=$model->node->getAdminBreadcrumbs();
 
 $this->menu=array(
 	array('label'=>'Список','url'=>array('list')),
