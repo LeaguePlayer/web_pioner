@@ -12,6 +12,7 @@ class CollectiveController extends AdminController
 			$model->attributes = $_POST['Collective'];
 			$success = $model->save();
 			if( $success ) {
+				$this->createNodes($model);
 				$this->redirect(array('/admin/collectivesList/update', 'id'=>$model->list_id));
 			}
 		}
@@ -30,5 +31,21 @@ class CollectiveController extends AdminController
 			}
 		}
 		$this->render('update', array('model' => $model));
+	}
+
+
+
+	protected function createNodes(Collective $collective)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->addInCondition('class_name', array('CollectivePage', 'CollectiveGalleriesList', 'CollectiveTeachersList', 'CollectiveShedule'));
+		$materialsTypes = Material::model()->findAll($criteria);
+		foreach ( $materialsTypes as $material ) {
+			$node = new CollectivesStructure();
+			$node->collective_id = $collective->id;
+			$node->material_id = $material->id;
+			$node->name = $material->name;
+			$node->save();
+		}
 	}
 }
