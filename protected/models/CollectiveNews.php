@@ -1,57 +1,62 @@
 <?php
 
 /**
-* This is the model class for table "{{pages}}".
+* This is the model class for table "{{news}}".
 *
-* The followings are the available columns in table '{{pages}}':
+* The followings are the available columns in table '{{news}}':
     * @property integer $id
     * @property string $title
-    * @property string $description
-    * @property string $wswg_body
     * @property string $img_preview
-    * @property integer $node_id
+    * @property string $short_description
+    * @property string $body_content
+    * @property string $tags
+    * @property integer $list_id
+    * @property integer $seo_id
     * @property integer $status
     * @property integer $sort
     * @property string $create_time
     * @property string $update_time
 */
-class CollectivePage extends EActiveRecord
+class CollectiveNews extends EActiveRecord
 {
     public function tableName()
     {
-        return '{{collective_pages}}';
+        return '{{collective_news}}';
     }
 
 
     public function rules()
     {
         return array(
-            array('node_id, status, sort', 'numerical', 'integerOnly'=>true),
-            array('title, img_preview', 'length', 'max'=>255),
-            array('description, wswg_body, create_time, update_time', 'safe'),
+            array('title', 'required'),
+            array('list_id, seo_id, status, sort', 'numerical', 'integerOnly'=>true),
+            array('title', 'length', 'max'=>255),
+            array('create_time, update_time, short_description, body_content, tags', 'safe'),
             // The following rule is used by search().
-            array('id, title, description, wswg_body, img_preview, node_id, status, sort, create_time, update_time', 'safe', 'on'=>'search'),
+            array('id, title, img_preview, short_description, body_content, tags, list_id, seo_id, status, sort, create_time, update_time', 'safe', 'on'=>'search'),
         );
     }
 
 
-    public function relations()
-    {
-        return array(
-            'node' => array(self::BELONGS_TO, 'CollectivesStructure', 'node_id'),
-        );
-    }
+	public function relations()
+	{
+		return array(
+			'list'=>array(self::BELONGS_TO, 'CollectiveNewsList', 'list_id'),
+		);
+	}
 
 
     public function attributeLabels()
     {
         return array(
             'id' => 'ID',
-            'title' => 'Заголовок страницы',
-            'description' => 'Краткое описание',
-            'wswg_body' => 'Тело страницы',
+            'title' => 'Заголовок',
             'img_preview' => 'Превью',
-            'node_id' => 'Ссылка на раздел',
+            'short_description' => 'Краткое описание',
+            'body_content' => 'Контент',
+            'tags' => 'Тэги',
+            'list_id' => 'List',
+            'seo_id' => 'Seo',
             'status' => 'Статус',
             'sort' => 'Вес для сортировки',
             'create_time' => 'Дата создания',
@@ -72,17 +77,20 @@ class CollectivePage extends EActiveRecord
 					),
 					'small' => array(
 						'resize' => array(200, 180),
-					)
+					),
+					'big' => array(
+						'adaptiveResize' => array(800, 600),
+					),
 				),
-			),
-			'GalleryManager' => array(
-				'class' => 'application.extensions.imagesgallery.GalleryBehavior',
 			),
 			'CTimestampBehavior' => array(
 				'class' => 'zii.behaviors.CTimestampBehavior',
                 'createAttribute' => 'create_time',
                 'updateAttribute' => 'update_time',
                 'setUpdateOnCreate' => true,
+			),
+			'Seo' => array(
+				'class' => 'application.behaviors.SeoBehavior',
 			),
         ));
     }
@@ -92,10 +100,12 @@ class CollectivePage extends EActiveRecord
         $criteria=new CDbCriteria;
 		$criteria->compare('id',$this->id);
 		$criteria->compare('title',$this->title,true);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('wswg_body',$this->wswg_body,true);
 		$criteria->compare('img_preview',$this->img_preview,true);
-		$criteria->compare('node_id',$this->node_id);
+		$criteria->compare('short_description',$this->short_description,true);
+		$criteria->compare('body_content',$this->body_content,true);
+		$criteria->compare('tags',$this->tags,true);
+		$criteria->compare('list_id',$this->list_id);
+		$criteria->compare('seo_id',$this->seo_id);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('sort',$this->sort);
 		$criteria->compare('create_time',$this->create_time,true);
@@ -110,4 +120,27 @@ class CollectivePage extends EActiveRecord
     {
         return parent::model($className);
     }
+
+	public function beforeSave()
+	{
+		if (parent::beforeSave()) {
+			Tag::model()->updateValues($this->tags);
+			return true;
+		}
+		return false;
+	}
+
+	private $_tags;
+	public function getTagObjects()
+	{
+		if ( $this->_tags === null ) {
+			$tags = explode(',', $this->tags);
+		}
+		return $this->_tagItems;
+	}
+
+	public function getUrl()
+	{
+		return Yii::app()->createUrl('/collectiveNews/view', array('id'=>$this->id));
+	}
 }

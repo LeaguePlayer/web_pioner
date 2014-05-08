@@ -5,14 +5,13 @@ class CollectivePageController extends AdminController
     public function actionCreate($node_id)
     {
 		$model = new CollectivePage();
-
+		$model->node_id = $node_id;
         $node_id = Yii::app()->request->getQuery('node_id');
         if ( $node_id ) {
             $node = CollectivesStructure::model()->findByPk($node_id);
         }
         if ( $node ) {
             $model->title = $node->name;
-			$model->node_id = $node_id;
         }
 
         if(isset($_POST['CollectivePage']))

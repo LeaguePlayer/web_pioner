@@ -43,6 +43,7 @@ class Collective extends EActiveRecord
 	{
 		return array(
 			'list'=>array(self::BELONGS_TO, 'CollectivesList', 'list_id'),
+			'nodes'=>array(self::HAS_MANY, 'CollectivesStructure', 'collective_id')
 		);
 	}
 
@@ -130,5 +131,14 @@ class Collective extends EActiveRecord
 		$ageRange = explode('-', $this->age_limits);
 		$this->ageLeft = $ageRange[0];
 		$this->ageRight = $ageRange[1];
+	}
+
+
+	public function afterDelete()
+	{
+		parent::afterDelete();
+		foreach ( $this->nodes as $node ) {
+			$node->delete();
+		}
 	}
 }

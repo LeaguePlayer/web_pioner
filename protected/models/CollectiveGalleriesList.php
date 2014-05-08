@@ -32,6 +32,7 @@ class CollectiveGalleriesList extends EActiveRecord
 	{
 		return array(
 			'node' => array(self::BELONGS_TO, 'CollectivesStructure', 'node_id'),
+			'galleries' => array(self::HAS_MANY, 'CollectiveGallery', 'list_id')
 		);
 	}
 
@@ -77,4 +78,11 @@ class CollectiveGalleriesList extends EActiveRecord
     }
 
 
+	public function afterDelete()
+	{
+		parent::afterDelete();
+		foreach ( $this->galleries as $gallery ) {
+			$gallery->delete();
+		}
+	}
 }

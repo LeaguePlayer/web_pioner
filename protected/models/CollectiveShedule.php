@@ -88,14 +88,4 @@ class CollectiveShedule extends EActiveRecord
     {
         return parent::model($className);
     }
-
-
-	public function beforeSave()
-	{
-		if (parent::beforeSave()) {
-			$this->node_id = Yii::app()->request->getParam('node_id');
-			return true;
-		}
-		return false;
-	}
 }

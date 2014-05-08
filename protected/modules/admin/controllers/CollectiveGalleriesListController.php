@@ -20,6 +20,7 @@ class CollectiveGalleriesListController extends AdminController
 
 		$galleryFinder = new CollectiveGallery('search');
 		$galleryFinder->unsetAttributes();
+		$galleryFinder->list_id = $model->id;
 		if ( isset($_GET['CollectiveGallery']) ) {
 			$galleryFinder->attributes = $_GET['CollectiveGallery'];
 		}

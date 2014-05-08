@@ -27,7 +27,7 @@ class CollectiveGallery extends CActiveRecord
             array('name', 'length', 'max'=>255),
             array('date_publish, create_time, update_time', 'safe'),
             // The following rule is used by search().
-            array('id, name, date_publish, status, create_time, update_time', 'safe', 'on'=>'search'),
+            array('id, name, date_publish, status, create_time, update_time, list_id', 'safe', 'on'=>'search'),
         );
     }
 
@@ -75,6 +75,7 @@ class CollectiveGallery extends CActiveRecord
 		$criteria->compare('status',$this->status);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->compare('list_id',$this->list_id);
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));

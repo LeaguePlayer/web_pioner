@@ -6,6 +6,6 @@ $this->menu=array(
 );
 ?>
 
-<h1><?php echo $model->translition(); ?> - Добавление</h1>
+<h3>Расписание «<?= $model->node->collective->name ?>»</h3>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -14,5 +14,15 @@
 
 	<?php echo $form->textFieldControlGroup($model,'ageRight',array('class'=>'span4','maxlength'=>255)); ?>
 
-	<?php echo $form->textAreaControlGroup($model,'description',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+	<div class='control-group'>
+		<?php echo CHtml::activeLabelEx($model, 'description'); ?>
+		<?php $this->widget('appext.ckeditor.CKEditorWidget', array(
+			'model' => $model,
+			'attribute' => 'description',
+			'config' => array(
+				'width' => '99%'
+			),
+		)); ?>
+		<?php echo $form->error($model, 'description'); ?>
+	</div>
 

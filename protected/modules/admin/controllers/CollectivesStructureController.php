@@ -48,7 +48,6 @@ class CollectivesStructureController extends AdminController
 		$oldMaterialId = $model->material_id;
 		if ( isset($_POST['CollectivesStructure']) ) {
 			$model->attributes = $_POST['CollectivesStructure'];
-//			var_dump( $model->attributes ); die();
 			if ( $model->save() ) {
 				if ( $model->material_id !== $oldMaterialId ) {
 					$component = $model->getComponent();
@@ -66,6 +65,13 @@ class CollectivesStructureController extends AdminController
 		$this->render('update', array(
 			'model' => $model,
 		));
+	}
+
+
+	public function actionDelete($id)
+	{
+		$model = $this->loadModel('CollectivesStructure', $id);
+		$model->delete();
 	}
 
 
