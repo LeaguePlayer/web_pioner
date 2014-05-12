@@ -1,3 +1,12 @@
 #shedule td.focus {
   background: #F2FFFF;
 }
+#shedule .fc-event-time,
+#shedule .fc-event-title {
+  line-height: 1;
+}
+#shedule .fc-event-time,
+#shedule .fc-event-title b {
+  display: inline-block;
+  margin-bottom: 5px;
+}

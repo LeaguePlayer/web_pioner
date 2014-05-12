@@ -1,49 +1,54 @@
 
 $(document).ready(function() {
     var localOptions = {
-            buttonText: {
-                today: 'Сегодня',
-                month: 'Месяц',
-                day: 'День',
-                week: 'Неделя'
-            },
-            monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-            monthNamesShort: ['Янв','Фев','Мар','Фпр','Май','Июн','Июл','Авг','Сент','Окт','Ноя','Дек'],
-            dayNames: ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'],
-            dayNamesShort: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
+        buttonText: {
+            today: 'Сегодня',
+            month: 'Месяц',
+            day: 'День',
+            week: 'Неделя'
         },
-        shedule = $('#shedule'),
-        addEventModal = $('#addEventModal'),
-        editEventModal = $('#editEventModal'),
-        startInput = $('input.event-start', addEventModal),
-        endInput = $('input.event-end', addEventModal),
-        titleInput = $('input.event-title', addEventModal),
-        teachersSelect = $('select.event-teachers', addEventModal),
-        jsonEventsText = $('#CollectiveShedule_json_events'),
-        events = jsonEventsText.val() ? $.parseJSON(jsonEventsText.val()) : [];
+        monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        monthNamesShort: ['Янв','Фев','Мар','Фпр','Май','Июн','Июл','Авг','Сент','Окт','Ноя','Дек'],
+        dayNames: ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'],
+        dayNamesShort: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
+    };
+    var shedule = $('#shedule');
+    var eventFormModal = $('#eventFormModal');
+    var editEventModal = $('#editEventModal');
+    var jsonEventsText = $('#CollectiveShedule_json_events');
+    var editingEvent;
+    var events = jsonEventsText.val() ? $.parseJSON(jsonEventsText.val()) : [];
+    for ( var i = 0; i < events.length; i++ ) {
+        events[i].start = new Date(events[i].start);
+        events[i].end = new Date(events[i].end);
+    }
 
 
-    startInput.add(endInput).add($('input.event-start', editEventModal)).add($('input.event-end', editEventModal)).timepicker({
+    $('input.event-start', eventFormModal).add($('input.event-end', eventFormModal)).add($('input.event-start', editEventModal)).add($('input.event-end', editEventModal)).timepicker({
         minuteStep: 30,
         showMeridian: false
     });
 
-    teachersSelect.select2();
+    $('select.event-teachers', eventFormModal).select2();
     $('select.event-teachers', editEventModal).select2();
 
-    addEventModal.on('show', function(e) {
-        var self = $(this),
-            start = self.data('start'),
-            end = self.data('end'),
-            allDay = self.data('allDay');
-        startInput.timepicker('setTime', start);
-        endInput.timepicker('setTime', end);
+
+    eventFormModal.on('show', function(e) {
+        $('input.event-start', eventFormModal).timepicker('setTime', editingEvent.start);
+        $('input.event-end', eventFormModal).timepicker('setTime', editingEvent.end);
+        $('input.event-title', eventFormModal).val(editingEvent.title);
+        $('input[value='+editingEvent.repeat+'].period', eventFormModal).prop('checked', true);
+        var teachers = [];
+        for ( var i = 0; i < editingEvent.teachers.length; i++ ) {
+            teachers.push(editingEvent.teachers[i].id);
+        }
+        $('select.event-teachers', eventFormModal).select2('val', teachers);
     });
 
 
-    addEventModal.on('hide', function(e) {
+    eventFormModal.on('hide', function(e) {
         shedule.fullCalendar('unselect');
-        titleInput.val('');
+        $('input.event-title', eventFormModal).val('');
     });
 
 
@@ -59,93 +64,63 @@ $(document).ready(function() {
                 end: new Date(events[i].end.getTime()),
                 repeat: events[i].repeat,
                 teachers: events[i].teachers
-            }
-            event.start.setHours(event.start.getHours() - event.start.getTimezoneOffset() / 60);
-            event.end.setHours(event.end.getHours() - event.end.getTimezoneOffset() / 60);
+            };
             _events.push(event);
-            jsonEventsText.val( JSON.stringify(_events) );
         }
+        jsonEventsText.val( JSON.stringify(_events) );
     }
 
 
-    $('.event-save', addEventModal).click(function(e) {
-        var selected = teachersSelect.select2('data');
+    $('.event-save', eventFormModal).click(function(e) {
+        var selectedTeachers = $('select.event-teachers', eventFormModal).select2('data');
         var teachers = [];
-        for ( var i = 0; i < selected.length; i++ ) {
+        for ( var i = 0; i < selectedTeachers.length; i++ ) {
             teachers.push({
-                id: selected[i].id,
-                name: selected[i].text
+                id: selectedTeachers[i].id,
+                name: selectedTeachers[i].text
             });
         }
-        var event = {
-            id: events.length + 1,
-            title: titleInput.val(),
-            allDay: addEventModal.data('allDay'),
-            start: addEventModal.data('start'),
-            end: addEventModal.data('end'),
-            repeat: $('input.period:checked', addEventModal).val(),
-            teachers: teachers
-        };
-        events.push(event);
-        shedule.fullCalendar('refetchEvents');
-        shedule.fullCalendar('rerenderEvents');
-        teachersSelect.select2('val', '');
-        addEventModal.modal('hide');
-        saveEvents();
-        return false;
-    });
-
-
-    $('.event-save', editEventModal).click(function(e) {
-        var selected = $('select.event-teachers', editEventModal).select2('data');
-        var teachers = [];
-        for ( var i = 0; i < selected.length; i++ ) {
-            teachers.push({
-                id: selected[i].id,
-                name: selected[i].text
-            });
-        }
-        var event = {
-            id: editEventModal.data('id'),
-            title: $('input.event-title', editEventModal).val(),
-            allDay: editEventModal.data('allDay'),
-            start: editEventModal.data('start'),
-            end: editEventModal.data('end'),
-            repeat: $('input.period:checked', editEventModal).val(),
-            teachers: teachers
-        };
-        for ( var i = 0; i < events.length; i++ ) {
-            if ( event.id == events[i].id ) {
-                events[i] = event;
-                break;
+        editingEvent.title = $('input.event-title', eventFormModal).val();
+        editingEvent.repeat = $('input.period:checked', eventFormModal).val();
+        editingEvent.teachers = teachers;
+        if ( !editingEvent.id ) { // is new event?
+            editingEvent.id = events.length + 1;
+            events.push(editingEvent);
+        } else {
+            for ( var i = 0; i < events.length; i++ ) {
+                if ( editingEvent.id == events[i].id ) {
+                    events[i] = editingEvent;
+                    break;
+                }
             }
         }
+
         shedule.fullCalendar('refetchEvents');
         shedule.fullCalendar('rerenderEvents');
-        editEventModal.modal('hide');
-        saveEvents();
+
+        $('select.event-teachers', eventFormModal).select2('val', '');
+        eventFormModal.modal('hide');
         return false;
     });
 
 
-    $('.btn.delete', editEventModal).click(function(e) {
-        if ( !confirm('Удалить занятие «'+$('input.event-title', editEventModal).val()+'»' ) ) {
+    $('.btn.delete', eventFormModal).click(function(e) {
+        if ( !confirm('Удалить занятие «'+$('input.event-title', eventFormModal).val()+'»' ) ) {
             return false;
         }
-        var id = editEventModal.data('id');
-        var new_events = [];
+        var id = editingEvent.id;
+        var _events = [];
         for ( var i = 0; i < events.length; i++ ) {
             if ( id == events[i].id ) {
                 continue;
             }
             events[i].id = i + 1;
-            new_events.push(events[i]);
+            _events.push(events[i]);
         }
-        events = new_events;
+        events = _events;
         shedule.fullCalendar('refetchEvents');
         shedule.fullCalendar('rerenderEvents');
-        editEventModal.modal('hide');
-        saveEvents();
+        eventFormModal.modal('hide');
         return false;
     });
 
@@ -160,14 +135,68 @@ $(document).ready(function() {
                 break;
             }
         }
-        saveEvents();
     }
 
 
 
     shedule.fullCalendar($.extend({
         events: function(start, end, callback) {
-            callback(events);
+            var _events = [],
+                loop,
+                i;
+            for (loop = start.getTime();
+                 loop <= end.getTime();
+                 loop += (24 * 60 * 60 * 1000)) {
+
+                var test_date = new Date(loop);
+
+                for ( i = 0; i < events.length; i++ ) {
+                    var _ev = events[i];
+                    var visibleEvent = false;
+                    switch ( _ev.repeat ) {
+                        // repeat event every_day
+                        case 'every_day':
+                            visibleEvent = true;
+                            break;
+                        // repeat event every_week
+                        case 'every_week':
+                            visibleEvent = test_date.getDay() == _ev.start.getDay();
+                            break;
+                        // repeat event every_weekdays
+                        case 'every_weekdays':
+                            var current_day = test_date.getDay();
+                            visibleEvent = current_day != 0 &&  current_day != 6;
+                            break;
+                        // no repeat
+                        default:
+                            visibleEvent = false;
+                            var isCurrentDay = test_date.getFullYear() == _ev.start.getFullYear() &&
+                                               test_date.getMonth() == _ev.start.getMonth() &&
+                                               test_date.getDate() == _ev.start.getDate();
+                            if ( isCurrentDay )
+                                _events.push(_ev);
+                    }
+
+                    if ( visibleEvent ) {
+                        var _ev_start = new Date(test_date.getTime());
+                        _ev_start.setHours( _ev.start.getHours() );
+                        _ev_start.setMinutes( _ev.start.getMinutes() );
+                        var _ev_end = new Date(test_date.getTime());
+                        _ev_end.setHours( _ev.end.getHours() );
+                        _ev_end.setMinutes( _ev.end.getMinutes() );
+                        _events.push({
+                            id: _ev.id,
+                            title: _ev.title,
+                            start: _ev_start,
+                            end: _ev_end,
+                            teachers: _ev.teachers,
+                            allDay: _ev.allDay,
+                            repeat: _ev.repeat
+                        });
+                    }
+                }
+            }
+            callback(_events);
         },
         firstDay: 1,
         selectable: true,
@@ -178,19 +207,25 @@ $(document).ready(function() {
                 shedule.fullCalendar('unselect');
                 return ;
             }
-            addEventModal.data({start: start, end: end, allDay: allDay}).modal('show');
+            editingEvent = {
+                title: '',
+                start: start,
+                end: end,
+                allDay: allDay,
+                repeat: 0,
+                teachers: []
+            };
+            $('input.event-start', eventFormModal).timepicker('setTime', start);
+            $('input.event-end', eventFormModal).timepicker('setTime', end);
+            $('.modal-header h3', eventFormModal).text('Создание занятия');
+            $('.btn.delete', eventFormModal).hide();
+            eventFormModal.modal('show');
         },
         eventClick: function( event, jsEvent, view ) {
-            $('input.event-start', editEventModal).timepicker('setTime', event.start);
-            $('input.event-end', editEventModal).timepicker('setTime', event.end);
-            $('input.event-title', editEventModal).val(event.title);
-            $('input[value='+event.repeat+'].period', editEventModal).prop('checked', true);
-            var teachers = [];
-            for ( var i = 0; i < event.teachers.length; i++ ) {
-                teachers.push(event.teachers[i].id);
-            }
-            $('select.event-teachers', editEventModal).select2('val', teachers);
-            editEventModal.data({id: event.id, start: event.start, end: event.end, allDay: event.allDay}).modal('show');
+            editingEvent = event;
+            $('.modal-header h3', eventFormModal).text('Редактирование занятия «' + event.title + '»');
+            $('.btn.delete', eventFormModal).show();
+            eventFormModal.modal('show');
         },
         eventRender: function (event, element) {
             var title = '<b>'+event.title+'</b><br>';
@@ -220,28 +255,7 @@ $(document).ready(function() {
     }, localOptions));
 
 
-
-//    shedule.fullCalendar( 'addEventSource',
-//        function(start, end, callback) {
-//            var _evevens = [],
-//                loop,
-//                i;
-//            for (loop = start.getTime();
-//                 loop <= end.getTime();
-//                 loop = loop + (24 * 60 * 60 * 1000)) {
-//
-//                var test_date = new Date(loop);
-//
-//                for ( i = 0; i < events.length; i++ ) {
-//                    var _ev = events[i];
-//                    switch ( _ev.repeat ) {
-//                        case 'every_day':
-//                            console.log( _ev );
-//                            break;
-//                    }
-//                }
-//            }
-//            callback( events );
-//        }
-//    );
+    $('form').submit(function(e) {
+        saveEvents();
+    });
 });

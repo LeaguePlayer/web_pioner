@@ -43,10 +43,10 @@ $cs->registerCssFile( $assetsUrl.'/css/shedule.form.css' );
 
 
 <!-- Add Schedule Event -->
-<div id="addEventModal" class="modal hide fade">
+<div id="eventFormModal" class="modal hide fade">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h3>Создание события</h3>
+		<h3></h3>
 	</div>
 	<div class="modal-body">
 		<div class="evform">
@@ -81,71 +81,21 @@ $cs->registerCssFile( $assetsUrl.'/css/shedule.form.css' );
 				</div>
 			</div>
 
-			<div class="control-group hide">
+			<div class="control-group">
 				<label class="control-label">Периодичность</label>
 				<div class="controls">
 					<label class="radio"><input type="radio" class="period" name="period" value="0" checked="checked" /> Нет</label>
 					<label class="radio"><input type="radio" class="period" name="period" value="every_day" /> Каждый день</label>
-					<label class="radio"><input type="radio" class="period" name="period" value="every_week" /> Каждую неделю</label>
-					<label class="radio"><input type="radio" class="period" name="period" value="every_two_weeks" /> Через две недели</label>
+					<label class="radio"><input type="radio" class="period" name="period" value="every_weekdays" /> Каждый день по будням</label>
+					<label class="radio"><input type="radio" class="period" name="period" value="every_week" /> Раз в неделю</label>
+<!--					<label class="radio"><input type="radio" class="period" name="period" value="every_two_weeks" /> Через две недели</label>-->
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</a>
-		<a href="#" class="btn btn-primary event-save">Сохранить</a>
-	</div>
-</div>
-
-
-
-<!-- Edit Schedule Event -->
-<div id="editEventModal" class="modal hide fade">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h3>Редактирование</h3>
-	</div>
-	<div class="modal-body">
-		<div class="evform">
-			<div class="control-group">
-				<label class="control-label">Время занятия</label>
-				<div class="controls">
-					<input class="event-start span3" type="text" /> - <input class="event-end span3" type="text" />
-				</div>
-			</div>
-
-			<div class="control-group">
-				<label class="control-label">Название занятия</label>
-				<div class="controls">
-					<input class="event-title span12" type="text" placeholder="Введите название занятия" />
-				</div>
-			</div>
-
-			<div class="control-group">
-				<label class="control-label">Педагоги</label>
-				<div class="controls" style="margin-bottom: 15px;">
-					<?= TbHtml::dropDownList('', '', $teachersList, array(
-						'multiple' => true,
-						'class' => 'event-teachers span12',
-					)) ?>
-				</div>
-			</div>
-
-			<div class="control-group hide">
-				<label class="control-label">Периодичность</label>
-				<div class="controls">
-					<label class="radio"><input type="radio" class="period" name="period" value="0" checked="checked" /> Нет</label>
-					<label class="radio"><input type="radio" class="period" name="period" value="every_day" /> Каждый день</label>
-					<label class="radio"><input type="radio" class="period" name="period" value="every_week" /> Каждую неделю</label>
-					<label class="radio"><input type="radio" class="period" name="period" value="every_two_weeks" /> Через две недели</label>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</a>
-		<a href="#" class="btn delete">Удалить</a>
+		<a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Отмена</a>
+		<a href="#" class="btn btn-danger delete">Удалить</a>
 		<a href="#" class="btn btn-primary event-save">Сохранить</a>
 	</div>
 </div>
