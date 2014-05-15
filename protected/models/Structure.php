@@ -156,9 +156,10 @@ class Structure extends EActiveRecord
     public function getComponent()
     {
         if ( $this->_component === null ) {
+			if ( !$this->material )
+				return null;
             $component_name = $this->material->class_name;
-            $model = $component_name::model();
-			$this->_component = $model->findByAttributes(array('node_id'=>$this->id));
+			$this->_component = CActiveRecord::model($component_name)->findByAttributes(array('node_id'=>$this->id));
         }
         return $this->_component;
     }

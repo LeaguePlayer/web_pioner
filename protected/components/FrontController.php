@@ -5,7 +5,7 @@
  */
 class FrontController extends Controller
 {
-    public $layout='//layouts/simple';
+    public $layout='//layouts/main';
     public $menu=array();
     public $breadcrumbs=array();
 

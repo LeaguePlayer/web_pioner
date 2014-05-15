@@ -14,35 +14,64 @@ $(document).ready(function() {
     };
     var shedule = $('#shedule');
     var eventFormModal = $('#eventFormModal');
-    var editEventModal = $('#editEventModal');
-    var jsonEventsText = $('#CollectiveShedule_json_events');
+    var inputStartTime = $('input.event-start', eventFormModal);
+    var inputEndTime = $('input.event-end', eventFormModal);
+    // variable for ignore initialize timepickers
+    var timepickersInitialized = false;
+    var inputTeachers = $('select.event-teachers', eventFormModal);
+    var jsonEventsText = $('#Place_json_schedule');
     var editingEvent;
     var events = jsonEventsText.val() ? $.parseJSON(jsonEventsText.val()) : [];
     for ( var i = 0; i < events.length; i++ ) {
         events[i].start = new Date(events[i].start);
         events[i].end = new Date(events[i].end);
     }
+    var timepickerOptions = {
+        minuteStep: 5,
+        showMeridian: false,
+        defaultTime: false
+    };
 
 
-    $('input.event-start', eventFormModal).add($('input.event-end', eventFormModal)).add($('input.event-start', editEventModal)).add($('input.event-end', editEventModal)).timepicker({
-        minuteStep: 30,
-        showMeridian: false
+    // Обработка изменения времени с помощью timepicker
+    // Здесь editingEvent - текущее редактируемое событие
+    function updateEventTime(tpEvent)
+    {
+        if ( !editingEvent.id ) {
+            shedule.fullCalendar('select', editingEvent.start, editingEvent.end, editingEvent.allDay);
+        } else {
+            shedule.fullCalendar('renderEvent', editingEvent, true);
+        }
+    }
+
+
+    inputStartTime.timepicker(timepickerOptions).on('changeTime.timepicker', function(e) {
+        if ( !timepickersInitialized ) return true;
+        editingEvent.start.setHours(e.time.hours);
+        editingEvent.start.setMinutes(e.time.minutes);
+        updateEventTime(e);
+    });
+    inputEndTime.timepicker(timepickerOptions).on('changeTime.timepicker', function(e) {
+        if ( !timepickersInitialized ) return true;
+        editingEvent.end.setHours(e.time.hours);
+        editingEvent.end.setMinutes(e.time.minutes);
+        updateEventTime(e);
     });
 
-    $('select.event-teachers', eventFormModal).select2();
-    $('select.event-teachers', editEventModal).select2();
-
+    inputTeachers.select2();
 
     eventFormModal.on('show', function(e) {
-        $('input.event-start', eventFormModal).timepicker('setTime', editingEvent.start);
-        $('input.event-end', eventFormModal).timepicker('setTime', editingEvent.end);
+        timepickersInitialized = false;
+        inputStartTime.timepicker('setTime', editingEvent.start);
+        inputEndTime.timepicker('setTime', editingEvent.end);
         $('input.event-title', eventFormModal).val(editingEvent.title);
         $('input[value='+editingEvent.repeat+'].period', eventFormModal).prop('checked', true);
         var teachers = [];
         for ( var i = 0; i < editingEvent.teachers.length; i++ ) {
             teachers.push(editingEvent.teachers[i].id);
         }
-        $('select.event-teachers', eventFormModal).select2('val', teachers);
+        inputTeachers.select2('val', teachers);
+        setTimeout(function() {timepickersInitialized = true;}, 1000);
     });
 
 
@@ -71,8 +100,20 @@ $(document).ready(function() {
     }
 
 
+    function moveEvent(event)
+    {
+        for ( var i = 0; i < events.length; i++ ) {
+            if ( event.id == events[i].id ) {
+                events[i].start = event.start;
+                events[i].end = event.end;
+                break;
+            }
+        }
+    }
+
+
     $('.event-save', eventFormModal).click(function(e) {
-        var selectedTeachers = $('select.event-teachers', eventFormModal).select2('data');
+        var selectedTeachers = inputTeachers.select2('data');
         var teachers = [];
         for ( var i = 0; i < selectedTeachers.length; i++ ) {
             teachers.push({
@@ -98,7 +139,7 @@ $(document).ready(function() {
         shedule.fullCalendar('refetchEvents');
         shedule.fullCalendar('rerenderEvents');
 
-        $('select.event-teachers', eventFormModal).select2('val', '');
+        inputTeachers.select2('val', '');
         eventFormModal.modal('hide');
         return false;
     });
@@ -123,19 +164,6 @@ $(document).ready(function() {
         eventFormModal.modal('hide');
         return false;
     });
-
-
-
-    function moveEvent(event)
-    {
-        for ( var i = 0; i < events.length; i++ ) {
-            if ( event.id == events[i].id ) {
-                events[i].start = event.start;
-                events[i].end = event.end;
-                break;
-            }
-        }
-    }
 
 
 
@@ -202,7 +230,11 @@ $(document).ready(function() {
         selectable: true,
         selectHelper: true,
         unselectAuto: false,
-        select: function(start, end, allDay) {
+        select: function(start, end, allDay, jsEvent) {
+            if ( !jsEvent ) {
+                return ;
+            }
+
             if ( allDay ) {
                 shedule.fullCalendar('unselect');
                 return ;
@@ -215,8 +247,6 @@ $(document).ready(function() {
                 repeat: 0,
                 teachers: []
             };
-            $('input.event-start', eventFormModal).timepicker('setTime', start);
-            $('input.event-end', eventFormModal).timepicker('setTime', end);
             $('.modal-header h3', eventFormModal).text('Создание занятия');
             $('.btn.delete', eventFormModal).hide();
             eventFormModal.modal('show');

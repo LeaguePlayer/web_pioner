@@ -40,7 +40,7 @@ class CollectiveController extends AdminController
 	protected function createNodes(Collective $collective)
 	{
 		$criteria = new CDbCriteria();
-		$criteria->addInCondition('class_name', array('CollectivePage', 'CollectiveGalleriesList', 'CollectiveTeachersList', 'CollectiveShedule', 'CollectiveNewsList'));
+		$criteria->addInCondition('class_name', array('CollectivePage', 'CollectiveGalleriesList', 'CollectiveTeachersList', 'CollectiveNewsList'));
 		$materialsTypes = Material::model()->findAll($criteria);
 		foreach ( $materialsTypes as $material ) {
 			$node = new CollectivesStructure();

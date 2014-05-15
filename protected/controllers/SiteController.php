@@ -2,8 +2,6 @@
 
 class SiteController extends FrontController
 {
-	public $layout = '//layouts/simple';
-	
 	/**
 	 * Declares class-based actions.
 	 */
@@ -29,7 +27,6 @@ class SiteController extends FrontController
 	 */
 	public function actionIndex()
 	{
-		$this->redirect(array('/admin'));
         $this->title = Yii::app()->config->get('app.name');
 		$this->render('index');
 	}

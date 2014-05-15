@@ -42,7 +42,7 @@ $cs->registerCssFile( $assetsUrl.'/css/shedule.form.css' );
 
 
 
-<!-- Add Schedule Event -->
+<!-- Edit Schedule Event -->
 <div id="eventFormModal" class="modal hide fade">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

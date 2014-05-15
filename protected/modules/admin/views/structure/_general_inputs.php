@@ -29,7 +29,7 @@ Yii::app()->clientScript->registerScript('STRUCTURE_FORM', $js);
 //    echo $form->dropDownListControlGroup($model, 'parent_id', $model->getTreeListData(), array('class'=>'span6')); ?>
 <?php
 $criteria = new CDbCriteria();
-$criteria->addInCondition('class_name', array('Page', 'NewsList', 'Activity', 'Section', 'CollectivesList'));
+$criteria->addInCondition('class_name', array('Page', 'NewsList', 'Activity', 'Section', 'CollectivesList', 'PlacesList'));
 $materialsTypes = CHtml::listData(Material::model()->findAll($criteria), 'id', 'name');
 ?>
 <?= $form->dropDownListControlGroup($model, 'material_id', $materialsTypes, array('class'=>'span12', 'empty'=>'Выберите тип раздела')); ?>
