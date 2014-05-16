@@ -5,7 +5,8 @@
 	$cs->registerCssFile($assetsUrl.'/css/main.css');
 
 	$cs->registerCoreScript('jquery');
-
+	$cs->registerCoreScript('jquery.ui');
+	
 	$cs->registerCssFile($assetsUrl.'/vendor/fancybox/css/jquery.fancybox.css');
 	$cs->registerScriptFile($assetsUrl.'/vendor/fancybox/js/jquery.fancybox.js', CClientScript::POS_END);
 
