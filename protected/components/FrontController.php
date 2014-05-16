@@ -25,8 +25,8 @@ class FrontController extends Controller
         return parent::beforeRender($view);
     }
 
-    public function buildMenu($currentNode = null)
+    public function buildMenu()
     {
-        $this->menu = Menu::model()->getMenuList();
+        $this->menu = Menu::model()->getMenuList(0);
     }
 }

@@ -2,6 +2,7 @@
 
 class SectionController extends AdminController
 {
+
 	public function actionCreate($node_id)
 	{
 		$model = new Section();
@@ -34,6 +35,7 @@ class SectionController extends AdminController
 	public function actionUpdate($id)
 	{
 		$model = $this->loadModel('Section', $id);
+		$model->name = $model->node->name;
 		if(isset($_POST['Section']))
 		{
 			$model->attributes = $_POST['Section'];

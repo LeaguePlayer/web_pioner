@@ -24,8 +24,9 @@ $cs->registerScriptFile( $assetsUrl.'/vendor/jssor/jssor.jquery.min.js' );
 			<div class="block">
 				<h2>Молодежные проекты</h2>
 				<ul class="teen_streams grid">
-					<li><a href="#">Общие конкурсы и проекты</a></li>
-					<li><a href="#">Общие конкурсы и проекты</a></li>
+					<? foreach ( $teenProgectPageNodes as $pageNode ): ?>
+						<li><a href="<?= $pageNode->getUrl() ?>"><?= $pageNode->name ?></a></li>
+					<? endforeach ?>
 				</ul>
 			</div>
 		</div>
@@ -34,39 +35,39 @@ $cs->registerScriptFile( $assetsUrl.'/vendor/jssor/jssor.jquery.min.js' );
 			<div class="block">
 				<h2>Дополнительное образование</h2>
 				<ul class="additional_training">
-					<li class="art">
-						<span>Художественно-эстетическая направленность</span>
-						<ul>
-							<li><a href="#">Хореография и театральное искусство</a></li>
-							<li><a href="#">Вокальное искусство</a></li>
-						</ul>
-					</li>
-					<li class="social">
-						<span>Социально-педагогическая направленность</span>
-						<ul></ul>
-					</li>
-					<li class="sport">
-						<span>Физкультурно-спортивное направление</span>
-						<ul></ul>
-					</li>
-					<li class="natural">
-						<span>Естественно-научное направленность</span>
-						<ul></ul>
-					</li>
-					<li class="tech">
-						<span>Техническая направленность</span>
-						<ul></ul>
-					</li>
-					<li class="tourism">
-						<span>Туристско-краеведческая направленность</span>
-						<ul></ul>
-					</li>
+					<?php $firstCollectivesList = null; ?>
+					<? foreach ( $activityNodes as $activityNode ): ?>
+						<li class="<?= $activityNode->url ?>">
+							<span><?= $activityNode->name ?></span>
+							<ul>
+								<? foreach ( $activityNode->getChildNodesByType('Section') as $sectionNode ): ?>
+									<?php
+										if ( $firstCollectivesList === null ) {
+											$listNode = $sectionNode->children()->find();
+											if ( $listNode ) {
+												$firstCollectivesList = $listNode->getComponent();
+											}
+										}
+									?>
+									<li><a class="loadCollectives" href="<?= $this->createUrl('/section/loadCollectives', array('url'=>$sectionNode->url)) ?>"><?= $sectionNode->name ?></a></li>
+								<? endforeach ?>
+							</ul>
+						</li>
+					<? endforeach ?>
+
 				</ul>
+				<span class="loader"></span>
 			</div>
 		</div>
 
 		<div class="preview">
 			<div class="scroller">
+				<div class="content">
+					<? if ( $firstCollectivesList ) $this->renderPartial('//section/_collectives', array(
+						'dataProvider' => $firstCollectivesList->getCollectivesData()
+					)) ?>
+				</div>
+
 				<div class="scroller__track"><!-- Track is optional -->
 					<div class="scroller__bar"></div>
 				</div>

@@ -12,7 +12,10 @@ $js = <<< EOT
 		});
 	});
 EOT;
-Yii::app()->clientScript->registerScript('STRUCTURE_FORM', $js);
+
+if ( $model->isNewRecord ) {
+	Yii::app()->clientScript->registerScript('STRUCTURE_FORM', $js);
+}
 
 ?>
 

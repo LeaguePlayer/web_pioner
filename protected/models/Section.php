@@ -116,4 +116,18 @@ class Section extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+
+	public function beforeSave()
+	{
+		if (parent::beforeSave()) {
+			// $find parent Activity node
+			$activityNode = $this->node->getClosestNodeByType('Activity');
+			if ( $activityNode && ( $activity = $activityNode->getComponent() ) ) {
+				$this->activity_id = $activity->id;
+			}
+			return true;
+		}
+		return false;
+	}
 }

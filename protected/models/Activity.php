@@ -60,6 +60,7 @@ class Activity extends CActiveRecord
 	{
 		return array(
 			'node' => array(self::BELONGS_TO, 'Structure', 'node_id'),
+			'sections' => array(self::HAS_MANY, 'Section', 'activity_id'),
 		);
 	}
 

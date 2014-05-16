@@ -46,6 +46,50 @@ textarea {
   color: #000;
   padding: 0.2em 0;
 }
+.scroller {
+  overflow-y: scroll;
+  /* -webkit-overflow-scrolling: touch; */
+  /* uncomment to accelerate scrolling on iOS */
+}
+.scroller::-webkit-scrollbar {
+  /* Preventing webkit cross-direction scrolling bug */
+  width: 0;
+}
+.scroller__track {
+  display: none;
+  /* Invisible by default */
+  position: absolute;
+  right: 4px;
+  top: 10px;
+  bottom: 4px;
+  width: 10px;
+  background: rgba(0, 0, 0, 0.1);
+}
+.baron .scroller__track {
+  display: block;
+  /* Visible when scrolling is possible */
+}
+.scroller__bar {
+  /* The bar. You should define width, right position and background */
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  width: 10px;
+  background: #999;
+}
+.loader {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background: url(../img/loader.gif) no-repeat;
+  display: none;
+}
+.breadcrumbs {
+  margin-bottom: 10px;
+}
+ul {
+  list-style-image: url(../img/arrow.png);
+}
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -191,7 +235,14 @@ h2 {
   font-weight: normal;
   font-size: 18px;
   margin-top: 0;
-  margon-bottom: 20px;
+  margin-bottom: 20px;
+}
+h3 {
+  color: #323232;
+  font-weight: normal;
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 18px;
 }
 header .top {
   background-color: #38799e;
@@ -471,18 +522,44 @@ header .sub-menu ul li a {
 }
 .services .container .center {
   float: left;
-  width: 360px;
+  width: 340px;
   padding-bottom: 500em;
   margin-bottom: -500em;
   background-color: #ffffff;
 }
+.services .container .center .block {
+  position: relative;
+}
+.services .container .center .block .loader {
+  position: absolute;
+  z-index: 100;
+  right: -188px;
+  top: 50%;
+  margin-top: -24px;
+}
 .services .container .preview {
   float: left;
   margin-right: -1px;
-  width: 300px;
+  width: 320px;
   padding-bottom: 500em;
   margin-bottom: -500em;
   background-color: #38799e;
+}
+.services .container .preview .content {
+  padding: 15px 15px;
+}
+.services .container .preview .scroller__track {
+  display: block;
+  width: 1px;
+  background: #ffffff;
+  right: 10px;
+  bottom: 10px;
+}
+.services .container .preview .scroller__track .scroller__bar {
+  background: #ffffff;
+  width: 5px;
+  border-radius: 2.5px;
+  right: -2px;
 }
 .services .block {
   padding: 20px;
@@ -512,15 +589,8 @@ header .sub-menu ul li a {
 }
 .services ul.additional_training > li {
   background: none;
-  position: relative;
-  margin-bottom: 10px;
-}
-.services ul.additional_training > li:before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
+  padding-left: 0;
+  margin-bottom: 5px;
 }
 .services ul.additional_training > li span {
   font-size: 12px;
@@ -529,6 +599,97 @@ header .sub-menu ul li a {
   line-height: 1.2;
   display: inline-block;
   margin-bottom: 10px;
+  position: relative;
+  padding-left: 40px;
+}
+.services ul.additional_training > li span:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -18px;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  background: url(../img/directions.png) no-repeat;
+}
+.services ul.additional_training > li.art span:before {
+  background-position: 0 0;
+}
+.services ul.additional_training > li.tourism span:before {
+  background-position: -36px 0;
+}
+.services ul.additional_training > li.social span:before {
+  background-position: -72px 0;
+}
+.services ul.additional_training > li.sport span:before {
+  background-position: -108px 0;
+}
+.services ul.additional_training > li.natural span:before {
+  background-position: -144px 0;
+}
+.services ul.additional_training > li.tech span:before {
+  background-position: -180px 0;
+}
+.services ul.additional_training ul {
+  margin-bottom: 15px;
+  padding-left: 40px;
+}
+.services ul.additional_training ul li {
+  line-height: 1.2;
+}
+.services .collectives .empty {
+  color: #ffffff;
+}
+.services .collectives .item {
+  color: #ffffff;
+  margin-bottom: 25px;
+}
+.services .collectives .item img {
+  margin-bottom: 20px;
+  width: 282px;
+}
+.services .collectives .item h3 {
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.services .collectives .item h3 span {
+  text-transform: none;
+}
+.services .collectives .item > div {
+  margin-bottom: 10px;
+}
+.services .collectives .item p {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+.services .collectives .item p b {
+  margin-bottom: 8px;
+  display: inline-block;
+}
+.services .collectives .item .buttons {
+  font-size: 0;
+}
+.services .collectives .item .buttons a {
+  font-size: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  width: 88px;
+  text-align: center;
+  background-color: #255e7e;
+  line-height: 32px;
+  height: 32px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 0 5px 5px 0;
+}
+.services .collectives .item .buttons a:nth-child(5n-2) {
+  margin-right: 0;
+}
+.services .collectives .item .buttons a:hover {
+  background-color: #154059;
 }
 footer {
   background-color: #38799e;

@@ -64,7 +64,7 @@ class StructureController extends AdminController
                     $controllerID = strtolower($model->material->class_name);
                     $this->redirect(array("/admin/{$controllerID}/create", 'node_id'=>$model->id));
                 }
-                $this->redirect( array('list') );
+                $this->redirect( array('list', 'opened' => $model->id) );
             }
         }
         $this->layout = '/layouts/admin_columns';

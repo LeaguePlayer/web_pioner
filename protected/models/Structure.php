@@ -214,4 +214,44 @@ class Structure extends EActiveRecord
 		$breadcrumbs[] = $this->name;
 		return $breadcrumbs;
 	}
+
+
+	public function getChildNodesByType($class_name)
+	{
+		$criteria = new CDbCriteria;
+		$material = Material::model()->findByAttributes(array(
+			'class_name' => $class_name
+		));
+		if ( $material === null )
+			return array();
+		$criteria->compare('material_id', $material->id);
+		return $this->children()->cache(3600)->findAll($criteria);
+	}
+
+
+	public function getClosestNodeByType($class_name)
+	{
+		$criteria = new CDbCriteria;
+		$material = Material::model()->findByAttributes(array(
+			'class_name' => $class_name
+		));
+		if ( $material === null )
+			return array();
+		$criteria->compare('material_id', $material->id);
+		return $this->ancestors()->cache(3600)->find($criteria);
+	}
+
+
+	public function findAllByType($type)
+	{
+		$material = Material::model()->findByAttributes(array(
+			'class_name' => $type
+		));
+		if ( !$material ) {
+			return array();
+		}
+		return $this->findAllByAttributes(array(
+			'material_id' => $material->id
+		));
+	}
 }

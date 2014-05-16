@@ -8,7 +8,6 @@ class SectionController extends FrontController
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
 		);
 	}
 
@@ -40,6 +39,29 @@ class SectionController extends FrontController
 		$dataProvider=new CActiveDataProvider('Section');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+		));
+	}
+
+
+	public function actionLoadCollectives($url)
+	{
+		$sectionNode = Structure::model()->findByUrl($url);
+		if ( !$sectionNode ) {
+			return;
+		}
+
+		$collectivesListNode = $sectionNode->children()->find();
+		if ( !$collectivesListNode ) {
+			return;
+		}
+
+		$collectivesList = $collectivesListNode->getComponent();
+		if ( !$collectivesList ) {
+			return;
+		}
+
+		echo $this->renderPartial('_collectives', array(
+			'dataProvider' => $collectivesList->getCollectivesData()
 		));
 	}
 }

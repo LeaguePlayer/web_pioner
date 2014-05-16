@@ -27,8 +27,15 @@ class SiteController extends FrontController
 	 */
 	public function actionIndex()
 	{
+		$activityNodes = Structure::model()->findAllByType('Activity');
+		$teenProjectsNode = Structure::model()->findByUrl('teen-projects');
+		$teenProgectPageNodes = $teenProjectsNode ? $teenProjectsNode->children()->findAll() : array();
+
         $this->title = Yii::app()->config->get('app.name');
-		$this->render('index');
+		$this->render('index', array(
+			'activityNodes' => $activityNodes,
+			'teenProgectPageNodes' => $teenProgectPageNodes
+		));
 	}
 
 	/**
