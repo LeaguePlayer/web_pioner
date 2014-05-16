@@ -63,7 +63,7 @@ $cs->registerScriptFile( $assetsUrl.'/vendor/jssor/jssor.jquery.min.js' );
 		<div class="preview">
 			<div class="scroller">
 				<div class="content">
-					<? $this->renderPartial('//section/_collectives', array(
+					<? if ( $firstCollectivesList ) $this->renderPartial('//section/_collectives', array(
 						'dataProvider' => $firstCollectivesList->getCollectivesData()
 					)) ?>
 				</div>

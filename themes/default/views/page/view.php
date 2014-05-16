@@ -1,3 +1,4 @@
+
 <div>
 	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 		'separator'=>' → ',
@@ -5,6 +6,9 @@
 	)); ?>
 </div>
 
+<?
+	echo $this->renderPartial('test');
+?>
 
 <section class="page">
 	<h2><?= $node->name ?></h2>
