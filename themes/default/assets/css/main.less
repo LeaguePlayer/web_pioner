@@ -57,6 +57,34 @@ textarea {
 }
 
 
+.scroller {
+    overflow-y: scroll;
+    /* -webkit-overflow-scrolling: touch; *//* uncomment to accelerate scrolling on iOS */
+}
+.scroller::-webkit-scrollbar { /* Preventing webkit cross-direction scrolling bug */
+    width: 0;
+}
+.scroller__track {
+    display: none; /* Invisible by default */
+    position: absolute;
+    right: 4px;
+    top: 10px;
+    bottom: 4px;
+    width: 10px;
+    background: rgba(0, 0, 0, .1);
+}
+.baron .scroller__track {
+    display: block; /* Visible when scrolling is possible */
+}
+.scroller__bar { /* The bar. You should define width, right position and background */
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    width: 10px;
+    background: #999;
+}
+
+
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -231,7 +259,15 @@ h2 {
     font-weight: normal;
     font-size: 18px;
     margin-top: 0;
-    margon-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: @dark;
+    font-weight: normal;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 18px;
 }
 
 // Шапка
@@ -503,7 +539,7 @@ header {
         }
         .center {
             float: left;
-            width: 360px;
+            width: 340px;
             padding-bottom: 500em;
             margin-bottom: -500em;
             background-color: @white;
@@ -511,10 +547,29 @@ header {
         .preview {
             float: left;
             margin-right: -1px;
-            width: 300px;
+            width: 320px;
             padding-bottom: 500em;
             margin-bottom: -500em;
             background-color: @blue-dark;
+            .content {
+                padding: 15px 15px;
+            }
+            .scroller {
+                height: 500px;
+            }
+            .scroller__track {
+                display: block;
+                width: 1px;
+                background: @white;
+                right: 10px;
+                bottom: 10px;
+                .scroller__bar {
+                    background: @white;
+                    width: 5px;
+                    border-radius: 2.5px;
+                    right: -2px;
+                }
+            }
         }
     }
     .block {
@@ -548,15 +603,8 @@ header {
     ul.additional_training {
         & > li {
             background: none;
-            position: relative;
-            margin-bottom: 10px;
-            &:before {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
+            padding-left: 0;
+            margin-bottom: 5px;
             span {
                 font-size: 12px;
                 color: @orange;
@@ -564,7 +612,99 @@ header {
                 line-height: 1.2;
                 display: inline-block;
                 margin-bottom: 10px;
+                position: relative;
+                padding-left: 40px;
+                &:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -18px;
+                    left: 0;
+                    width: 36px;
+                    height: 36px;
+                    background: url(../img/directions.png) no-repeat;
+                }
             }
+            &.art span:before {
+                background-position: 0 0;
+            }
+            &.tourism span:before {
+                background-position: -36px 0;
+            }
+            &.social span:before {
+                background-position: -72px 0;
+            }
+            &.sport span:before {
+                background-position: -108px 0;
+            }
+            &.natural span:before {
+                background-position: -144px 0;
+            }
+            &.tech span:before {
+                background-position: -180px 0;
+            }
+
+        }
+        ul {
+            margin-bottom: 15px;
+            padding-left: 40px;
+            li {
+                line-height: 1.2;
+            }
+        }
+    }
+
+    .collectives {
+        .item {
+            color: @white;
+            margin-bottom: 25px;
+            img {
+                margin-bottom: 20px;
+            }
+            h3 {
+                color: @white;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+                span {
+                    text-transform: none;
+                }
+            }
+            & > div {
+                margin-bottom: 10px;
+            }
+            p {
+                margin-top: 0;
+                margin-bottom: 0;
+                line-height: 1.2;
+                b {
+                    margin-bottom: 8px;
+                    display: inline-block;
+                }
+            }
+            .buttons {
+                font-size: 0;
+                a {
+                    font-size: 12px;
+                    color: @white;
+                    text-decoration: none;
+                    width: 88px;
+                    text-align: center;
+                    background-color: #255e7e;
+                    line-height: 32px;
+                    height: 32px;
+                    border-radius: 5px;
+                    display: inline-block;
+                    margin: 0 5px 5px 0;
+                    &:nth-child(5n-2) {
+                        margin-right: 0;
+                    }
+                    &:hover {
+                        background-color: #154059;
+                    }
+                }
+            }
+
         }
     }
 }

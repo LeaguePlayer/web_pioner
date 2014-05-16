@@ -2,7 +2,9 @@
 $(document).ready(function() {
 
     $('.slider-widget').init_slider();
-    $('.scroller').baron();
+    $('.scroller').baron({
+        bar: '.scroller__bar'
+    });
 
 });
 

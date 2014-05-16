@@ -61,12 +61,66 @@ $cs->registerScriptFile( $assetsUrl.'/vendor/jssor/jssor.jquery.min.js' );
 						<span>Туристско-краеведческая направленность</span>
 						<ul></ul>
 					</li>
+
+					<? foreach ( $activities as $activity ): ?>
+						<li class="<?= $activity->node->url ?>">
+							<span><?= $activity->name ?></span>
+							<ul></ul>
+						</li>
+					<? endforeach ?>
+
 				</ul>
 			</div>
 		</div>
 
 		<div class="preview">
 			<div class="scroller">
+				<div class="content">
+					<div class="collectives">
+						<div class="item">
+							<img src="/media/temp/photo.png" alt=""/>
+							<h3>Школа «БИБОИНГА» <span>с 7 до 25 лет</span></h3>
+							<div>
+								<p><b>Тренеры-преподаватели:</b></p>
+								<p>Иванов Иван Иванович</p>
+								<p>Иванов Иван Иванович</p>
+							</div>
+							<div>
+								<p><b>Место проведения занятий:</b></p>
+								<p>ул. Челюскинцев, 46, Дворец искусств «Пионер»</p>
+							</div>
+							<div class="buttons">
+								<a href="#">Мероприятия</a>
+								<a href="#">Информация</a>
+								<a href="#">Преподаватели</a>
+								<a href="#">Контакты</a>
+								<a href="#">Записаться</a>
+							</div>
+						</div>
+
+						<div class="item">
+							<img src="/media/temp/photo.png" alt=""/>
+							<h3>Школа «БИБОИНГА» <span>с 7 до 25 лет</span></h3>
+							<div>
+								<p><b>Тренеры-преподаватели:</b></p>
+								<p>Иванов Иван Иванович</p>
+								<p>Иванов Иван Иванович</p>
+							</div>
+							<div>
+								<p><b>Место проведения занятий:</b></p>
+								<p>ул. Челюскинцев, 46, Дворец искусств «Пионер»</p>
+							</div>
+							<div class="buttons">
+								<a href="#">Мероприятия</a>
+								<a href="#">Информация</a>
+								<a href="#">Преподаватели</a>
+								<a href="#">Контакты</a>
+								<a href="#">Записаться</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<div class="scroller__track"><!-- Track is optional -->
 					<div class="scroller__bar"></div>
 				</div>
