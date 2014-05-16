@@ -6,10 +6,6 @@
 	)); ?>
 </div>
 
-<?
-	echo $this->renderPartial('test');
-?>
-
 <section class="page">
 	<h2><?= $node->name ?></h2>
 	<? if ( empty($page->wswg_body) ): ?>
