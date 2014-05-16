@@ -1,5 +1,5 @@
 <div class="item">
-	<?= $data->getImage('small') ?>
+	<a class="fancybox" title="<?= CHtml::encode($data->name) ?>" href="<?= $data->getImageUrl('medium') ?>"><?= $data->getImage('small') ?></a>
 	<h3><?= $data->name ?></h3>
 <!--	<div>-->
 <!--		<p><b>Тренеры-преподаватели:</b></p>-->

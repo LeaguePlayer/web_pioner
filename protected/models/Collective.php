@@ -79,6 +79,9 @@ class Collective extends EActiveRecord
 					),
 					'small' => array(
 						'resize' => array(282),
+					),
+					'medium' => array(
+						'resize' => array(800)
 					)
 				),
 			),

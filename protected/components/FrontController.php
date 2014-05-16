@@ -15,7 +15,7 @@ class FrontController extends Controller
     }
 
     //Check home page
-    public function is_home(){
+    public function is_home() {
         return $this->route == 'site/index';
     }
 

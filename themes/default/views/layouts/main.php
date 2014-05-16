@@ -6,8 +6,8 @@
 
 	$cs->registerCoreScript('jquery');
 
-	$cs->registerCssFile($assetsUrl.'/vendor/fancybox/css/jquery.fancybox.css');
-	$cs->registerScriptFile($assetsUrl.'/vendor/fancybox/js/jquery.fancybox.js', CClientScript::POS_END);
+	$cs->registerCssFile($assetsUrl.'/vendor/fancybox/jquery.fancybox.css');
+	$cs->registerScriptFile($assetsUrl.'/vendor/fancybox/jquery.fancybox.pack.js', CClientScript::POS_END);
 
 	$cs->registerCssFile($assetsUrl.'/vendor/baron/baron.css');
 	$cs->registerScriptFile($assetsUrl.'/vendor/baron/baron.js', CClientScript::POS_END);

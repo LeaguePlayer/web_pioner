@@ -16,12 +16,16 @@ $(document).ready(function() {
             bar: '.scroller__bar'
         });
         var loader = $('.loader', services_block);
+
+        $('a.fancybox', services_block).fancybox({
+        });
         $('.loadCollectives', services_block).click(function(e) {
             loader.show();
             $.ajax({
                 url: $(this).attr('href'),
                 success: function(data) {
                     $('.content', scroller).html(data);
+                    $('a.fancybox', scroller).fancybox();
                     scroll.update();
                     scroller.scrollTop(0);
                     loader.hide();
