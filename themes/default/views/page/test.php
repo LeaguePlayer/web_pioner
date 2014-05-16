@@ -7,7 +7,6 @@
 
 	$cs->registerScriptFile($assetsUrl.'/js/owl.carousel.min.js', CClientScript::POS_END);
 	$cs->registerScriptFile($assetsUrl.'/js/script.js', CClientScript::POS_END);
-	$cs->registerScriptFile($assetsUrl.'/js/script.js', CClientScript::POS_END);
 ?>
 <div class="cpation">
 	Фотоотчеты

@@ -7,7 +7,7 @@
 </div>
 
 <?
-	//echo $this->renderPartial('test');
+	echo $this->renderPartial('test');
 ?>
 
 <section class="page">
