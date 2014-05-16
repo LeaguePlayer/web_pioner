@@ -27,6 +27,6 @@ class FrontController extends Controller
 
     public function buildMenu()
     {
-        $this->menu = Menu::model()->getMenuList();
+        $this->menu = Menu::model()->getMenuList(0);
     }
 }
