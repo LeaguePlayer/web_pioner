@@ -56,16 +56,16 @@
 
 			<nav class="main-menu">
 				<div class="fix-width">
-					<ul>
-						<li><a href="#">Общие сведения</a></li>
-					</ul>
+					<? $this->widget('zii.widgets.CMenu', array(
+						'items' => $this->menu
+					)); ?>
 				</div>
 			</nav>
 
 			<div class="sub-menu">
 				<div class="fix-width">
 					<ul>
-						<li><a href="#">Дворец искусств Пионер</a></li>
+<!--						<li><a href="#">Дворец искусств Пионер</a></li>-->
 					</ul>
 				</div>
 			</div>

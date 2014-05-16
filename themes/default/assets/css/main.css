@@ -77,6 +77,19 @@ textarea {
   width: 10px;
   background: #999;
 }
+.loader {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background: url(../img/loader.gif) no-repeat;
+  display: none;
+}
+.breadcrumbs {
+  margin-bottom: 10px;
+}
+ul {
+  list-style-image: url(../img/arrow.png);
+}
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -514,6 +527,16 @@ header .sub-menu ul li a {
   margin-bottom: -500em;
   background-color: #ffffff;
 }
+.services .container .center .block {
+  position: relative;
+}
+.services .container .center .block .loader {
+  position: absolute;
+  z-index: 100;
+  right: -188px;
+  top: 50%;
+  margin-top: -24px;
+}
 .services .container .preview {
   float: left;
   margin-right: -1px;
@@ -524,9 +547,6 @@ header .sub-menu ul li a {
 }
 .services .container .preview .content {
   padding: 15px 15px;
-}
-.services .container .preview .scroller {
-  height: 500px;
 }
 .services .container .preview .scroller__track {
   display: block;
@@ -618,12 +638,16 @@ header .sub-menu ul li a {
 .services ul.additional_training ul li {
   line-height: 1.2;
 }
+.services .collectives .empty {
+  color: #ffffff;
+}
 .services .collectives .item {
   color: #ffffff;
   margin-bottom: 25px;
 }
 .services .collectives .item img {
   margin-bottom: 20px;
+  width: 282px;
 }
 .services .collectives .item h3 {
   color: #ffffff;

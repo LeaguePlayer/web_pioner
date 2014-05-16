@@ -161,19 +161,22 @@ class UploadableImageBehavior extends CActiveRecordBehavior
     public function getImage($version = false, $alt = '', $htmlOptions = array())
     {
         $src = $this->getImageUrl($version);
-        if ( class_exists('TbHtml') ) {
-            return TbHtml::image($src, $alt, $htmlOptions);
-        } else {
-            return CHtml::image($src, $alt, $htmlOptions);
-        }
+		if ( empty($src) ) {
+			return '';
+		}
+		return CHtml::image($src, $alt, $htmlOptions);
     }
 
     public function getImageUrl($version = false)
     {
+		$attrValue = $this->owner->getAttribute($this->attributeName);
+		if ( empty($attrValue) ) {
+			return '';
+		}
         if ($version) {
-            return '/'.$this->getThumbsUrl().'/'.$version.'_'.$this->owner->getAttribute($this->attributeName);
+            return '/'.$this->getThumbsUrl().'/'.$version.'_'.$attrValue;
         } else {
-            return '/'.$this->saveUrl.'/'.$this->owner->getAttribute($this->attributeName);
+            return '/'.$this->saveUrl.'/'.$attrValue;
         }
     }
 }

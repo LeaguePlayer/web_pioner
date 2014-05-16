@@ -2,6 +2,7 @@
 
 class SectionController extends AdminController
 {
+
 	public function actionCreate($node_id)
 	{
 		$model = new Section();

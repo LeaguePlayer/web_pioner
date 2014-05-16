@@ -74,6 +74,17 @@ class CollectivesList extends CActiveRecord
         ));
     }
 
+
+	public function getCollectivesData()
+	{
+		$criteria=new CDbCriteria;
+		$criteria->compare('list_id', $this->id);
+		return new CActiveDataProvider('Collective', array(
+			'criteria'=>$criteria,
+		));
+	}
+
+
     public static function model($className=__CLASS__)
     {
         return parent::model($className);

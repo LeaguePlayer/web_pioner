@@ -78,7 +78,7 @@ class Collective extends EActiveRecord
 						'centeredpreview' => array(90, 90),
 					),
 					'small' => array(
-						'resize' => array(200, 180),
+						'resize' => array(282),
 					)
 				),
 			),
@@ -140,5 +140,11 @@ class Collective extends EActiveRecord
 		foreach ( $this->nodes as $node ) {
 			$node->delete();
 		}
+	}
+
+
+	public function getUrl()
+	{
+		return Yii::app()->createUrl('collective/view', array('id'=>$this->id));
 	}
 }

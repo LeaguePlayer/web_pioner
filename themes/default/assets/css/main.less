@@ -84,6 +84,22 @@ textarea {
     background: #999;
 }
 
+.loader {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background: url(../img/loader.gif) no-repeat;
+    display: none;
+}
+
+.breadcrumbs {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-image: url(../img/arrow.png);
+}
+
 
 /* ==========================================================================
    Author's custom styles
@@ -543,6 +559,16 @@ header {
             padding-bottom: 500em;
             margin-bottom: -500em;
             background-color: @white;
+            .block {
+                position: relative;
+                .loader {
+                    position: absolute;
+                    z-index: 100;
+                    right: -188px;
+                    top: 50%;
+                    margin-top: -24px;
+                }
+            }
         }
         .preview {
             float: left;
@@ -555,7 +581,6 @@ header {
                 padding: 15px 15px;
             }
             .scroller {
-                height: 500px;
             }
             .scroller__track {
                 display: block;
@@ -656,11 +681,15 @@ header {
     }
 
     .collectives {
+        .empty {
+            color: @white;
+        }
         .item {
             color: @white;
             margin-bottom: 25px;
             img {
                 margin-bottom: 20px;
+                width: 282px;
             }
             h3 {
                 color: @white;

@@ -240,4 +240,18 @@ class Structure extends EActiveRecord
 		$criteria->compare('material_id', $material->id);
 		return $this->ancestors()->cache(3600)->find($criteria);
 	}
+
+
+	public function findAllByType($type)
+	{
+		$material = Material::model()->findByAttributes(array(
+			'class_name' => $type
+		));
+		if ( !$material ) {
+			return array();
+		}
+		return $this->findAllByAttributes(array(
+			'material_id' => $material->id
+		));
+	}
 }

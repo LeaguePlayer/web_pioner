@@ -2,13 +2,9 @@
 
 class CollectiveController extends FrontController
 {
-	public $layout='//layouts/simple';
-
-	
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
 		);
 	}
 
@@ -29,8 +25,9 @@ class CollectiveController extends FrontController
 	
 	public function actionView($id)
 	{
+		$model = $this->loadModel('Collective', $id);
 		$this->render('view',array(
-			'model'=>$this->loadModel('Collective', $id),
+			'model'=>$model,
 		));
 	}
 

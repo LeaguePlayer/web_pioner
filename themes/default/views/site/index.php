@@ -24,8 +24,9 @@ $cs->registerScriptFile( $assetsUrl.'/vendor/jssor/jssor.jquery.min.js' );
 			<div class="block">
 				<h2>Молодежные проекты</h2>
 				<ul class="teen_streams grid">
-					<li><a href="#">Общие конкурсы и проекты</a></li>
-					<li><a href="#">Общие конкурсы и проекты</a></li>
+					<? foreach ( $teenProgectPageNodes as $pageNode ): ?>
+						<li><a href="<?= $pageNode->getUrl() ?>"><?= $pageNode->name ?></a></li>
+					<? endforeach ?>
 				</ul>
 			</div>
 		</div>
@@ -34,91 +35,37 @@ $cs->registerScriptFile( $assetsUrl.'/vendor/jssor/jssor.jquery.min.js' );
 			<div class="block">
 				<h2>Дополнительное образование</h2>
 				<ul class="additional_training">
-					<li class="art">
-						<span>Художественно-эстетическая направленность</span>
-						<ul>
-							<li><a href="#">Хореография и театральное искусство</a></li>
-							<li><a href="#">Вокальное искусство</a></li>
-						</ul>
-					</li>
-					<li class="social">
-						<span>Социально-педагогическая направленность</span>
-						<ul></ul>
-					</li>
-					<li class="sport">
-						<span>Физкультурно-спортивное направление</span>
-						<ul></ul>
-					</li>
-					<li class="natural">
-						<span>Естественно-научное направленность</span>
-						<ul></ul>
-					</li>
-					<li class="tech">
-						<span>Техническая направленность</span>
-						<ul></ul>
-					</li>
-					<li class="tourism">
-						<span>Туристско-краеведческая направленность</span>
-						<ul></ul>
-					</li>
-
-					<? foreach ( $activities as $activity ): ?>
-						<li class="<?= $activity->node->url ?>">
-							<span><?= $activity->name ?></span>
-							<ul></ul>
+					<?php $firstCollectivesList = null; ?>
+					<? foreach ( $activityNodes as $activityNode ): ?>
+						<li class="<?= $activityNode->url ?>">
+							<span><?= $activityNode->name ?></span>
+							<ul>
+								<? foreach ( $activityNode->getChildNodesByType('Section') as $sectionNode ): ?>
+									<?php
+										if ( $firstCollectivesList === null ) {
+											$listNode = $sectionNode->children()->find();
+											if ( $listNode ) {
+												$firstCollectivesList = $listNode->getComponent();
+											}
+										}
+									?>
+									<li><a class="loadCollectives" href="<?= $this->createUrl('/section/loadCollectives', array('url'=>$sectionNode->url)) ?>"><?= $sectionNode->name ?></a></li>
+								<? endforeach ?>
+							</ul>
 						</li>
 					<? endforeach ?>
 
 				</ul>
+				<span class="loader"></span>
 			</div>
 		</div>
 
 		<div class="preview">
 			<div class="scroller">
 				<div class="content">
-					<div class="collectives">
-						<div class="item">
-							<img src="/media/temp/photo.png" alt=""/>
-							<h3>Школа «БИБОИНГА» <span>с 7 до 25 лет</span></h3>
-							<div>
-								<p><b>Тренеры-преподаватели:</b></p>
-								<p>Иванов Иван Иванович</p>
-								<p>Иванов Иван Иванович</p>
-							</div>
-							<div>
-								<p><b>Место проведения занятий:</b></p>
-								<p>ул. Челюскинцев, 46, Дворец искусств «Пионер»</p>
-							</div>
-							<div class="buttons">
-								<a href="#">Мероприятия</a>
-								<a href="#">Информация</a>
-								<a href="#">Преподаватели</a>
-								<a href="#">Контакты</a>
-								<a href="#">Записаться</a>
-							</div>
-						</div>
-
-						<div class="item">
-							<img src="/media/temp/photo.png" alt=""/>
-							<h3>Школа «БИБОИНГА» <span>с 7 до 25 лет</span></h3>
-							<div>
-								<p><b>Тренеры-преподаватели:</b></p>
-								<p>Иванов Иван Иванович</p>
-								<p>Иванов Иван Иванович</p>
-							</div>
-							<div>
-								<p><b>Место проведения занятий:</b></p>
-								<p>ул. Челюскинцев, 46, Дворец искусств «Пионер»</p>
-							</div>
-							<div class="buttons">
-								<a href="#">Мероприятия</a>
-								<a href="#">Информация</a>
-								<a href="#">Преподаватели</a>
-								<a href="#">Контакты</a>
-								<a href="#">Записаться</a>
-							</div>
-						</div>
-					</div>
+					<? $this->renderPartial('//section/_collectives', array(
+						'dataProvider' => $firstCollectivesList->getCollectivesData()
+					)) ?>
 				</div>
 
 				<div class="scroller__track"><!-- Track is optional -->
