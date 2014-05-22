@@ -1,6 +1,9 @@
 <?php
 	$cs = Yii::app()->clientScript;
 	$assetsPath = $this->getAssetsUrl();
+
+	$cs->registerScriptFile( $assetsPath.'/vendor/bootbox/bootbox.min.js', CClientScript::POS_END );
+
 	$cs->registerCssFile($assetsPath.'/vendor/kladr/jquery.kladr.min.css');
 	$cs->registerScriptFile($assetsPath.'/vendor/kladr/jquery.kladr.min.js', CClientScript::POS_END);
 

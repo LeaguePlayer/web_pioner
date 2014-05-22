@@ -27,6 +27,21 @@ $cs->registerScript('tagsinput', $js_tagsinput);
 
 <?php echo $form->textFieldControlGroup($model,'title',array('class'=>'span12','maxlength'=>255)); ?>
 
+<div class='control-group'>
+	<?php echo CHtml::activeLabelEx($model, 'date_public'); ?>
+	<?php $this->widget('yiiwheels.widgets.datetimepicker.WhDateTimePicker', array(
+		'model' => $model,
+		'attribute' => 'date_public',
+		'pluginOptions' => array(
+			'format' => 'dd-MM-yyyy',
+			'language' => 'ru',
+			'pickSeconds' => false,
+			'pickTime' => false
+		)
+	)); ?>
+	<?php echo $form->error($model, 'date_public'); ?>
+</div>
+
 <?php echo $form->textFieldControlGroup($model,'tags',array('maxlength'=>255, 'style'=>'width:100%')); ?>
 
 

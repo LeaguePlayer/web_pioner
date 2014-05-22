@@ -31,7 +31,7 @@ class News extends EActiveRecord
             array('title', 'required'),
             array('list_id, seo_id, status, sort', 'numerical', 'integerOnly'=>true),
             array('title', 'length', 'max'=>255),
-            array('create_time, update_time, short_description, body_content, tags', 'safe'),
+            array('create_time, update_time, short_description, body_content, tags, date_public', 'safe'),
             // The following rule is used by search().
             array('id, title, img_preview, short_description, body_content, tags, list_id, seo_id, status, sort, create_time, update_time', 'safe', 'on'=>'search'),
         );
@@ -51,6 +51,7 @@ class News extends EActiveRecord
         return array(
             'id' => 'ID',
             'title' => 'Заголовок',
+            'date_public' => 'Дата публикации',
             'img_preview' => 'Превью',
             'short_description' => 'Краткое описание',
             'body_content' => 'Контент',
@@ -73,13 +74,16 @@ class News extends EActiveRecord
 				'attributeName' => 'img_preview',
 				'versions' => array(
 					'icon' => array(
-						'centeredpreview' => array(90, 90),
+						'centeredpreview' => array(112, 96),
 					),
 					'small' => array(
-						'resize' => array(200, 180),
+						'resize' => array(265),
+					),
+					'slider' => array(
+						'adaptiveResize' => array(450, 250),
 					),
 					'big' => array(
-						'adaptiveResize' => array(800, 600),
+						'resize' => array(800, 600),
 					),
 				),
 			),
@@ -121,10 +125,19 @@ class News extends EActiveRecord
         return parent::model($className);
     }
 
+	public function afterFind()
+	{
+		parent::afterFind();
+		if ( in_array($this->scenario, array('insert', 'update')) ) {
+			$this->date_public = ($this->date_public !== '0000-00-00 00:00:00' ) ? date('d-m-Y', strtotime($this->date_public)) : '';
+		}
+	}
+
 	public function beforeSave()
 	{
 		if (parent::beforeSave()) {
 			Tag::model()->updateValues($this->tags);
+			$this->date_public = date('Y-m-d', strtotime($this->date_public));
 			return true;
 		}
 		return false;

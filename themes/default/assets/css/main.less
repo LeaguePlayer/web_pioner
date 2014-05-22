@@ -91,6 +91,13 @@ textarea {
     background: url(../img/loader.gif) no-repeat;
     display: none;
 }
+.loader-orange {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: url(../img/loader-orange.gif) no-repeat;
+    display: none;
+}
 
 .breadcrumbs {
     margin-bottom: 10px;
@@ -101,59 +108,84 @@ ul {
 }
 
 
-
-.ui-datepicker-calendar tr th{
-    color: @orange;
-}
-.ui-datepicker-calendar tr td {
-    padding: 4px;
-    text-align: center;
-}
-.ui-datepicker-prev{
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: @white;
-    background: url('../img/dt-arrow-left.png') no-repeat;
-    height: 21px;
-    width: 21px;
-    cursor: pointer;
-}
-.ui-datepicker-next{
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: @white;
-    background: url('../img/dt-arrow-right.png') no-repeat;
-    height: 21px;
-    width: 21px;
-    cursor: pointer;
-}
-.ui-datepicker-calendar tr td a:hover
-{
-    background: @orange;
-    border-radius: 45px;
-}
-.ui-datepicker-calendar tr td a{
-    font-size: 14px;
-    color: #3a3b36;
-    padding: 4px;
-    text-decoration: none;
-}
-
-.ui-datepicker-title{
-    text-align: center;
-    font-size: 18px;
-    color: #3a3b36;
-    margin-bottom: 30px;
+.ui-datepicker {
+    .ui-datepicker-header {
+        position: relative;
+        .ui-datepicker-title{
+            text-align: center;
+            font-size: 18px;
+            color: @dark;
+            margin-bottom: 30px;
+        }
+        .ui-datepicker-prev{
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: @white;
+            background: url(../img/navigators.png) 0 0 no-repeat;
+            height: 21px;
+            width: 21px;
+            cursor: pointer;
+            text-indent: -9999px;
+        }
+        .ui-datepicker-next{
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: @white;
+            background: url(../img/navigators.png) -21px 0 no-repeat;
+            height: 21px;
+            width: 21px;
+            cursor: pointer;
+            text-indent: -9999px;
+        }
+    }
+    table.ui-datepicker-calendar {
+        width: 100%;
+        th {
+            color: @orange;
+            text-transform: uppercase;
+            font-size: 10px;
+        }
+        td {
+            .ui-state-default {
+                font-size: 14px;
+                color: @dark;
+                padding: 4px;
+                border-radius: 45px;
+                display: inline-block;
+                min-width: 28px;
+                height: 28px;
+                text-align: center;
+            }
+            a.ui-state-default {
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                    color: @orange;
+                }
+            }
+            a.ui-state-active {
+                background: @orange;
+                color: @white;
+                &:hover {
+                    color: @white;
+                    text-decoration: none;
+                }
+            }
+            &.ui-state-disabled {
+                .ui-state-default {
+                    color: @gray-white;
+                }
+            }
+        }
+    }
 }
 
 
 
 // Form
-input[type=submit],
-button,
-a.btn {
+.btn {
     display: inline-block;
     color: @white;
     padding: 8px 25px 10px;
@@ -172,21 +204,6 @@ a.btn {
     }
     &:active {
         border-bottom-color: @button-hover;
-    }
-}
-
-
-
-
-// Calendar
-.calendar {
-    width: 300px;
-    height: 265px;
-    background: #fff;
-    padding: 30px;
-    display: inline-block;
-    .calendar-item {
-        position: relative;
     }
 }
 
@@ -257,7 +274,9 @@ a.btn {
 @black:         #000000;
 @dark:          #323232;
 @gray:          #808384;
+@gray-cod:      #1c1c1c;
 @gray-lite:     #f2f2f2;
+@gray-white:    #e7e7e7;
 @blue:          #8bd2f9;
 @blue-dark:     #38799e;
 @blue-lite:     #eaf6fc;
@@ -408,6 +427,8 @@ body {
     line-height: 1.4;
     background-color: @gray-lite;
     * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
 }
@@ -621,73 +642,199 @@ header {
 }
 
 
-.slider-widget {
-    width: 450px;
-    display: inline-block;
-    // Slider Skin
-    .slnav-l, .slnav-r, .slnav-ldn, .slnav-rdn {
-        position: absolute;
-        width: 18px;
-        height: 19px;
-        cursor: pointer;
-        display: block;
-        background: url(../img/navigators.png) no-repeat;
-        overflow:hidden;
-        bottom: 14px;
-        z-index: 100;
-        &.slnav-r, &.slnav-rdn {
-            background-position: -18px 0;
+.gallery {
+    font-size: 0;
+    .item {
+        width: 234px;
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 14px;
+        margin-bottom: 14px;
+        &:nth-child(4n) {
+            margin-right: 0;
         }
-    }
-    .slnav-l, .slnav-ldn {
-        left: 8px;
-    }
-    .slnav-r, .slnav-rdn {
-        right: 8px;
-    }
-    .feed {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: @black;
-        height: 50px;
-        .view {
-            position: relative;
-            width: 100%;
-            height: 100%;
+        img {
+            width: 234px;
+            height: 166px;
+        }
+        .desc {
+            margin-top: 10px;
             overflow: hidden;
-            .float {
-                position: absolute;
-                width: 9999px;
-                height: 100%;
-                top: 0;
-                left: 0px;
-                display: inline-block;
+            h3 {
+                font-weight: bold;
+                line-height: 1;
+                margin-bottom: 5px;
             }
-            ul {
+            p {
                 margin: 0;
-                padding: 0;
-                list-style: none;
-                overflow: hidden;
-                li {
-                    float: left;
-                    text-align: center;
-                    color: @white;
-                    width: 160px;
-                    height: 100%;
-                    b {
-                        display: block;
-                        p {
-                            margin: 0
-                        }
-                    }
-                }
+            }
+            .btn {
+                float: right;
+                border-radius: 6px;
             }
         }
     }
 }
 
+
+// Новостной блок
+.news-section  {
+    font-size: 0;
+    margin-bottom: 20px;
+    .news-carousel {
+        font-size: 14px;
+        width: 450px;
+        height: 300px;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 5px;
+        .captions {
+            background-color: @black;
+            height: 50px;
+            padding: 10px 0;
+            position: relative;
+            .carousel-viewport {
+                height: 100%;
+                margin: 0 40px;
+                overflow: hidden;
+                text-align: center;
+            }
+            .caption-carousel-wrap {
+                display: inline-block;
+                width: 200px;
+                height: 50px;
+            }
+            .caption-carousel {
+                color: @white;
+                .owl-wrapper-outer {
+                    overflow: visible !important;
+                }
+                .item {
+                    position: relative;
+                    h3 {
+                        font-weight: bold;
+                        color: @white;
+                        text-transform: uppercase;
+                        margin: 0;
+                        overflow: hidden;
+                        font-size: 12px;
+                        height: 16px;
+                        line-height: 16px;
+                    }
+                    p {
+                        margin: 0;
+                        text-transform: uppercase;
+                        font-size: 10px;
+                        height: 14px;
+                        line-height: 14px;
+                        overflow: hidden;
+                    }
+                    a.news-url {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+            }
+
+            .next, .prev {
+                position: absolute;
+                width: 18px;
+                height: 19px;
+                cursor: pointer;
+                display: block;
+                background: url(../img/navigators.png) no-repeat;
+                top: 50%;
+                margin-top: -10px;
+                z-index: 100;
+                outline: none;
+            }
+            .prev {
+                left: 16px;
+                background-position: 0 -42px;
+            }
+            .next {
+                right: 16px;
+                background-position: -21px -42px;
+            }
+        }
+    }
+    .news-feed {
+        width: 215px;
+        height: 300px;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 5px;
+        .item {
+            height: (290px / 3);
+            overflow: hidden;
+            margin-bottom: 5px;
+            position: relative;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            img {
+                display: block;
+                float: left;
+                height: 100%;
+                width: 112px;
+            }
+            .description {
+                float: left;
+                height: (290px / 3);
+                width: 215px - 112px;
+                font-size: 14px;
+                height: 100%;
+                border-top: 2px solid @orange;
+                background-color: @white;
+                padding: 3px 6px 6px;
+                h3 {
+                    font-size: 10px;
+                    color: @gray-cod;
+                    margin: 0;
+                    text-transform: uppercase;
+                    overflow: hidden;
+                    height: 12px;
+                    line-height: 12px;
+                }
+                .date {
+                    display: block;
+                    margin-top: 0;
+                    margin-bottom: 6px;
+                    line-height: 1.1;
+                    font-size: 10px;
+                    color: @orange;
+                    overflow: hidden;
+                    height: 12px;
+                    line-height: 12px;
+                }
+                p {
+                    margin: 0;
+                    font-size: 10px;
+                    line-height: 11px;
+                    overflow: hidden;
+                    height: 56px;
+                }
+            }
+            a {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .news-calendar {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+    }
+}
 
 
 .services {
@@ -728,21 +875,6 @@ header {
             background-color: @blue-dark;
             .content {
                 padding: 15px 15px;
-            }
-            .scroller {
-            }
-            .scroller__track {
-                display: block;
-                width: 1px;
-                background: @white;
-                right: 10px;
-                bottom: 10px;
-                .scroller__bar {
-                    background: @white;
-                    width: 5px;
-                    border-radius: 2.5px;
-                    right: -2px;
-                }
             }
         }
     }
@@ -968,6 +1100,162 @@ footer {
         }
     }
 }
+
+
+/* ==========================================================================
+   Widgets
+   ========================================================================== */
+.scroller {
+    .scroller__track {
+        display: block;
+        width: 1px;
+        background: @white;
+        right: 10px;
+        bottom: 10px;
+        .scroller__bar {
+            background: @white;
+            width: 5px;
+            border-radius: 2.5px;
+            right: -2px;
+        }
+    }
+}
+
+
+.flip-calendar {
+    display: inline-block;
+    vertical-align: top;
+    width: 305px;
+    height: 300px;
+    position: relative;
+    color: @black;
+    font-size: 14px;
+    &:before,
+    &:after {
+        content: "";
+        display: block;
+        width: 26px;
+        height: 0;
+        position: absolute;
+        border-top: 14px solid @orange;
+        border-bottom: 14px solid @orange-dark;
+        top: -14px;
+        z-index: 200;
+    }
+    &:before {
+        left: 60px;
+    }
+    &:after {
+        right: 60px;
+    }
+    .cover {
+        background-color: @white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        .loader {
+            .loader-orange;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            left: 50%;
+            margin-left: -18px;
+        }
+        .back {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            color: @black;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: none;
+            line-height: 17px;
+            &:before {
+                content: "";
+                display: inline-block;
+                vertical-align: top;
+                background: url(../img/navigators.png) 0 -21px no-repeat;
+                width: 21px;
+                height: 21px;
+                margin-right: 5px;
+                line-height: 21px;
+            }
+        }
+        &.cover-main {
+            z-index: 10;
+            .calendar {
+                margin-top: 20px;
+            }
+        }
+        &.cover-top {
+            top: -300px;
+            display: none;
+            .scroller {
+                height: 230px;
+            }
+            .ui-datepicker {
+                padding: 10px 20px;
+                .ui-datepicker-title {
+                    margin-bottom: 0;
+                }
+            }
+        }
+        &.cover-bottom {
+            z-index: 5;
+            border-top: 3px solid @gray-lite;
+            .scroller {
+                margin-top: 20px;
+                height: 230px;
+            }
+        }
+        .cover-content {
+            overflow: hidden;
+            .scroller-wrap {
+                position: relative;
+            }
+            .scroller {
+                .scroller__track {
+                    background: #e7e7e7;
+                    .scroller__bar {
+                        background: #e7e7e7;
+                    }
+                }
+            }
+            .content {
+                padding: 0 20px;
+                overflow: hidden;
+            }
+        }
+        .news-list {
+            .item {
+                margin-bottom: 30px;
+                a.title {
+                    display: inline-block;
+                    margin-bottom: 10px;
+                    color: @orange-dark;
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+            }
+        }
+        .news-description {
+            h3 {
+                font-weight: 300;
+                font-size: 22px;
+            }
+            .btn {
+                margin-top: 20px;
+            }
+        }
+    }
+}
+
+
+
+
 
 /* ==========================================================================
    Media Queries

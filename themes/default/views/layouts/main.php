@@ -13,6 +13,9 @@
 	$cs->registerCssFile($assetsUrl.'/vendor/baron/baron.css');
 	$cs->registerScriptFile($assetsUrl.'/vendor/baron/baron.js', CClientScript::POS_END);
 
+	$cs->registerCssFile($assetsUrl.'/vendor/owl/owl.carousel.css');
+	$cs->registerScriptFile($assetsUrl.'/vendor/owl/owl.carousel.js', CClientScript::POS_END);
+
 	$cs->registerScriptFile($assetsUrl.'/js/main.js', CClientScript::POS_END);
 ?><!DOCTYPE html>
 <html lang="ru">

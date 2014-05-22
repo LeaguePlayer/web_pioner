@@ -32,7 +32,7 @@ if ( $model->isNewRecord ) {
 //    echo $form->dropDownListControlGroup($model, 'parent_id', $model->getTreeListData(), array('class'=>'span6')); ?>
 <?php
 $criteria = new CDbCriteria();
-$criteria->addInCondition('class_name', array('Page', 'NewsList', 'Activity', 'Section', 'CollectivesList', 'PlacesList'));
+$criteria->addInCondition('class_name', array('Page', 'NewsList', 'Activity', 'Section', 'CollectivesList', 'PlacesList', 'EmployeeList'));
 $materialsTypes = CHtml::listData(Material::model()->findAll($criteria), 'id', 'name');
 ?>
 <?= $form->dropDownListControlGroup($model, 'material_id', $materialsTypes, array('class'=>'span12', 'empty'=>'Выберите тип раздела')); ?>

@@ -17,4 +17,12 @@ class GalleryController extends FrontController
 			'gallery' => $gallery
 		));
 	}
+
+	public function actionView($id)
+	{
+		$gallery = $this->loadModel('Gallery', $id);
+		$this->render('view', array(
+			'gallery' => $gallery
+		));
+	}
 }

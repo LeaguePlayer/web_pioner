@@ -31,10 +31,16 @@ class SiteController extends FrontController
 		$teenProjectsNode = Structure::model()->findByUrl('teen-projects');
 		$teenProgectPageNodes = $teenProjectsNode ? $teenProjectsNode->children()->findAll() : array();
 
+		$criteria = new CDbCriteria();
+		$criteria->compare('status', News::STATUS_PUBLISH);
+		$criteria->order = 'date_public DESC';
+		$news = News::model()->findAll($criteria);
+
         $this->title = Yii::app()->config->get('app.name');
 		$this->render('index', array(
 			'activityNodes' => $activityNodes,
-			'teenProgectPageNodes' => $teenProgectPageNodes
+			'teenProgectPageNodes' => $teenProgectPageNodes,
+			'news' => $news
 		));
 	}
 

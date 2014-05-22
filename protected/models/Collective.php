@@ -32,7 +32,7 @@ class Collective extends EActiveRecord
             array('name', 'required'),
             array('list_id, status, sort, ageLeft, ageRight', 'numerical', 'integerOnly'=>true),
             array('name, img_preview', 'length', 'max'=>255),
-            array('description, create_time, update_time', 'safe'),
+            array('description, create_time, update_time, employeesArray', 'safe'),
             // The following rule is used by search().
             array('id, name, img_preview, age_limits, description, list_id, status, sort, create_time, update_time', 'safe', 'on'=>'search'),
         );
@@ -43,7 +43,8 @@ class Collective extends EActiveRecord
 	{
 		return array(
 			'list'=>array(self::BELONGS_TO, 'CollectivesList', 'list_id'),
-			'nodes'=>array(self::HAS_MANY, 'CollectivesStructure', 'collective_id')
+			'nodes'=>array(self::HAS_MANY, 'CollectivesStructure', 'collective_id'),
+			'employees'=>array(self::MANY_MANY, 'Employee', '{{collective_employees}}(collective_id, employee_id)'),
 		);
 	}
 
@@ -63,6 +64,7 @@ class Collective extends EActiveRecord
             'sort' => 'Вес для сортировки',
             'create_time' => 'Дата создания',
             'update_time' => 'Дата последнего редактирования',
+			'employeesArray' => 'Сотрудники',
         );
     }
 
@@ -128,6 +130,18 @@ class Collective extends EActiveRecord
 		return false;
 	}
 
+	public function afterSave()
+	{
+		Yii::app()->db->createCommand()->delete('{{collective_employees}}', 'collective_id=:collective_id', array(':collective_id'=>$this->id));
+		foreach ( $this->employeesArray as $employee_id ) {
+			Yii::app()->db->createCommand()->insert('{{collective_employees}}', array(
+				'collective_id' => $this->id,
+				'employee_id' => $employee_id,
+			));
+		}
+		parent::afterSave();
+	}
+
 	public function afterFind()
 	{
 		parent::afterFind();
@@ -149,5 +163,23 @@ class Collective extends EActiveRecord
 	public function getUrl()
 	{
 		return Yii::app()->createUrl('collective/view', array('id'=>$this->id));
+	}
+
+
+	private $_employeesArray;
+	public function getEmployeesArray()
+	{
+		if ( $this->_employeesArray === null ) {
+			$this->_employeesArray = array();
+			foreach ( $this->employees as $employee ) {
+				$this->_employeesArray[] = $employee->id;
+			}
+		}
+		return $this->_employeesArray;
+	}
+
+	public function setEmployeesArray($value)
+	{
+		$this->_employeesArray = $value;
 	}
 }

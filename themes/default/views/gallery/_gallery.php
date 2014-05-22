@@ -1,14 +1,11 @@
-<div class="gallary-item">
-	<div class="gallary-item-preview">
-		<img src="<?=$assetsUrl.'/img/3.jpg'?>" alt="">
+<div class="item">
+	<?php $url = $this->createUrl('/gallery/view', array('id' => $data->id)) ?>
+	<a href="<?= $url ?>">
+		<?= $data->firstPhoto->getImage('small') ?>
+	</a>
+	<div class="desc">
+		<a class="btn" href="<?= $url ?>">8 фото</a>
+		<h3>Фестиваль красок</h3>
+		<p>21.06.2014</p>
 	</div>
-	<div class="caption">
-		<p class="header">
-			Фестиваль красок
-		</p>
-		<p class="date-create">
-			21.06.2014
-		</p>
-	</div>
-	<a class="btn" href="#">8 фото</a>
 </div>

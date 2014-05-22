@@ -1,5 +1,45 @@
 
+jQuery.fn.sortElements = (function () {
+    var sort = [].sort;
+    return function (comparator, getSortable) {
+        getSortable = getSortable ||
+            function () {
+                return this;
+            };
+        var placements = this.map(function () {
+            var sortElement = getSortable.call(this),
+                parentNode = sortElement.parentNode,
+            // Since the element itself will change position, we have
+            // to have some way of storing its original position in
+            // the DOM. The easiest way is to have a 'flag' node:
+                nextSibling = parentNode.insertBefore(
+                    document.createTextNode(''), sortElement.nextSibling);
+            return function () {
+                if (parentNode === this) {
+                    throw new Error("You can't sort elements if any one is a descendant of another.");
+                }
+                // Insert before flag:
+                parentNode.insertBefore(this, nextSibling);
+                // Remove flag:
+                parentNode.removeChild(nextSibling);
+            };
+        });
+        return sort.call(this, comparator).each(function (i) {
+            placements[i].call(getSortable.call(this));
+        });
+    };
+})();
+
+
 $(document).ready(function() {
+
+    bootbox.setDefaults({
+        locale: 'ru',
+        animate: false,
+        closeButton: false,
+        backdrop: true
+    });
+
     var localOptions = {
         buttonText: {
             today: 'Сегодня',
@@ -20,17 +60,39 @@ $(document).ready(function() {
     var timepickersInitialized = false;
     var inputTeachers = $('select.event-teachers', eventFormModal);
     var jsonEventsText = $('#Place_json_schedule');
+    var cabinetsBlock = $('.cabinets');
+    var currentCabinetBlock = $('.current_cabinet_info', cabinetsBlock).hide();
+    var currentCabinet;
+
     var editingEvent;
-    var events = jsonEventsText.val() ? $.parseJSON(jsonEventsText.val()) : [];
-    for ( var i = 0; i < events.length; i++ ) {
-        events[i].start = new Date(events[i].start);
-        events[i].end = new Date(events[i].end);
-    }
+    var events = [];
+    var eventsMap = jsonEventsText.val() ? $.parseJSON(jsonEventsText.val()) : {};
     var timepickerOptions = {
         minuteStep: 5,
         showMeridian: false,
         defaultTime: false
     };
+
+
+
+    function initialize()
+    {
+        for ( var cabinet in eventsMap ) {
+            if ( !currentCabinet ) {
+                currentCabinet = cabinet;
+            }
+            var cab_events = eventsMap[cabinet];
+            for ( var i = 0; i < eventsMap[cabinet].length; i++ ) {
+                eventsMap[cabinet][i].start = new Date(eventsMap[cabinet][i].start);
+                eventsMap[cabinet][i].end = new Date(eventsMap[cabinet][i].end);
+            }
+        }
+        if ( currentCabinet ) {
+            selectCabinet(currentCabinet);
+        }
+    }
+
+    initialize();
 
 
     // Обработка изменения времени с помощью timepicker
@@ -83,20 +145,7 @@ $(document).ready(function() {
 
     function saveEvents()
     {
-        var _events = [];
-        for ( var i = 0; i < events.length; i++ ) {
-            var event = {
-                id: events[i].id,
-                title: events[i].title,
-                allDay: events[i].allDay,
-                start: new Date(events[i].start.getTime()),
-                end: new Date(events[i].end.getTime()),
-                repeat: events[i].repeat,
-                teachers: events[i].teachers
-            };
-            _events.push(event);
-        }
-        jsonEventsText.val( JSON.stringify(_events) );
+        jsonEventsText.val( JSON.stringify(eventsMap) );
     }
 
 
@@ -231,6 +280,13 @@ $(document).ready(function() {
         selectHelper: true,
         unselectAuto: false,
         select: function(start, end, allDay, jsEvent) {
+            if ( !currentCabinet ) {
+                bootbox.alert('Не выбран кабинет!', function(result) {
+                    shedule.fullCalendar('unselect');
+                });
+                return;
+            }
+
             if ( !jsEvent ) {
                 return ;
             }
@@ -283,6 +339,73 @@ $(document).ready(function() {
         minTime: 7,
         maxTime: 22
     }, localOptions));
+
+
+
+    // Управление кабинетами
+    function selectCabinet(rel) {
+        currentCabinet = rel;
+        $('.cabinet', cabinetsBlock).removeClass('btn-info');
+        $('.cabinet[rel="'+currentCabinet+'"]', cabinetsBlock).addClass('btn-info');
+        $('strong', currentCabinetBlock).text(currentCabinet);
+        currentCabinetBlock.show();
+        events = eventsMap[currentCabinet];
+        shedule.fullCalendar('refetchEvents');
+        shedule.fullCalendar('rerenderEvents');
+    }
+
+    function removeCabinet(rel) {
+        var button = $('.cabinet[rel="'+rel+'"]', cabinetsBlock);
+
+        var newSelected = button.prev();
+        if ( !newSelected.length ) {
+            newSelected = button.next();
+        }
+        button.remove();
+        currentCabinet = null;
+        currentCabinetBlock.hide();
+        delete eventsMap[rel];
+
+        if ( newSelected.length ) {
+            selectCabinet(newSelected.attr('rel'));
+        }
+    }
+
+    cabinetsBlock.on('click', 'a.cabinet', function(e) {
+        selectCabinet($(this).attr('rel'));
+        return false;
+    });
+
+    $('.add-cabinet', cabinetsBlock).click(function(e) {
+        bootbox.prompt('Введите номер кабинета', function(result) {
+            if ( !result || $('.cabinet[rel="'+result+'"]', cabinetsBlock).length ) {
+                return;
+            }
+            var button = $('<a class="btn btn-mini cabinet" href="#" />').attr('rel', result).text(result);
+            $('.buttons', cabinetsBlock).append(button);
+            $('.cabinet', cabinetsBlock).sortElements(function(a, b) {
+                return $(a).attr("rel") > $(b).attr("rel") ? 1 : -1;
+            });
+            eventsMap[result] = [];
+            selectCabinet(result);
+        });
+        return false;
+    });
+
+    $('.delete-cabinet', cabinetsBlock).click(function(e) {
+        if ( !currentCabinet ) {
+            return false;
+        }
+        bootbox.confirm('Удалить кабинет «'+currentCabinet+'»', function(result) {
+            if ( !result ) {
+                return false;
+            }
+            removeCabinet(currentCabinet);
+        });
+        return false;
+    });
+
+
 
 
     $('form').submit(function(e) {

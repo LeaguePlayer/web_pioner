@@ -13,7 +13,7 @@
 	$cs->registerScriptFile( $assetsUrl.'/vendor/select2/select2.min.js', CClientScript::POS_END );
 	$cs->registerScriptFile( $assetsUrl.'/vendor/select2/select2_locale_ru.js', CClientScript::POS_END );
 
-$cs->registerCssFile( $assetsUrl.'/css/shedule.form.css' );
+	$cs->registerCssFile( $assetsUrl.'/css/shedule.form.css' );
 	$cs->registerScriptFile( $assetsUrl.'/js/shedule.form.js', CClientScript::POS_END );
 ?>
 
@@ -58,7 +58,7 @@ $cs->registerCssFile( $assetsUrl.'/css/shedule.form.css' );
 			</div>
 
 			<div class="control-group">
-				<label class="control-label">Название занятия</label>
+				<label class="control-label">Предмет</label>
 				<div class="controls">
 					<input class="event-title span12" type="text" placeholder="Введите название занятия" />
 				</div>

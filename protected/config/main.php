@@ -15,6 +15,7 @@ return array_replace_recursive(
         ),
 		'aliases'=>array(
 			'appext'=>'application.extensions',
+			'appwidgets'=>'application.widgets'
 		),
         // autoloading model and component classes
         'import'=>array(
@@ -94,7 +95,7 @@ return array_replace_recursive(
             'clientScript'=>array(
                 'class'=>'EClientScript',
 				'scriptMap'=>array(
-					'jquery.js'=>'http://code.jquery.com/jquery-1.11.0.js',
+					'jquery.js'=>'http://code.jquery.com/jquery-1.9.1.js',
 					'jquery.min.js'=>'http://code.jquery.com/jquery-1.11.0.min.js',
 				),
             ),

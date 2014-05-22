@@ -6,6 +6,7 @@ class NewsController extends AdminController
     {
         $model = new News();
         $model->list_id = $list_id;
+		$model->date_public = date('d-m-Y');
 
         if(isset($_POST['News']))
         {

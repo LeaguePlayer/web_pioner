@@ -100,7 +100,8 @@ class Gallery extends CActiveRecord
         // class name for the relations automatically generated below.
         return array(
             'galleryPhotos' => array(self::HAS_MANY, 'GalleryPhoto', 'gallery_id', 'order' => '`rank` asc'),
-        	'entities' => array(self::HAS_MANY, 'EntityGallery', 'gallery_id')
+        	'entities' => array(self::HAS_MANY, 'EntityGallery', 'gallery_id'),
+			'firstPhoto' => array(self::HAS_ONE, 'GalleryPhoto', 'gallery_id', 'order' => '`rank` asc'),
 		);
     }
 

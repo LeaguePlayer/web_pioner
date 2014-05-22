@@ -1,3 +1,19 @@
+.cabinets {
+  margin-bottom: 20px;
+}
+.cabinets .buttons {
+  font-size: 0;
+}
+.cabinets .buttons .btn.cabinet {
+  margin: 0 2px 2px;
+  font-size: 10.5px;
+}
+.cabinets .alert {
+  margin-top: 10px;
+}
+.cabinets .alert .current_cabinet_info {
+  display: inline-block;
+}
 #shedule td.focus {
   background: #F2FFFF;
 }
