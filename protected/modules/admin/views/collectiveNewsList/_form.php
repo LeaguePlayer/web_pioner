@@ -42,11 +42,22 @@
             'value'=>'$data->getImage("icon")',
             'filter'=>false
         ),
+		array(
+			'name'=>'type',
+			'type'=>'raw',
+			'value'=>'$data->getCurrentType()',
+			'filter'=>CollectiveNews::getTypes()
+		),
         array(
             'name'=>'title',
             'type'=>'raw',
             'value'=>'TbHtml::link($data->title, array("/admin/collectiveNews/update/", "id"=>$data->id, "list_id"=>'.$model->id.'))'
         ),
+		array(
+			'header'=>'Дата',
+			'type'=>'raw',
+			'value'=>'SiteHelper::russianDate($data->date_public)'
+		),
         array(
             'name'=>'status',
             'type'=>'raw',

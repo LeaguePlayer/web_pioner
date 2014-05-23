@@ -6,6 +6,6 @@ $breadcrumbs[] = $model->name;
 $this->breadcrumbs=$breadcrumbs;
 ?>
 
-<h1><?php echo $model->translition(); ?> - Редактирование</h1>
+<h1>Редактирование «<?= $model->name ?>»</h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

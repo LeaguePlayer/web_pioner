@@ -11,7 +11,7 @@
     * @property string $create_time
     * @property string $update_time
 */
-class CollectiveGallery extends CActiveRecord
+class CollectiveGallery extends EActiveRecord
 {
     public function tableName()
     {
@@ -76,6 +76,7 @@ class CollectiveGallery extends CActiveRecord
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('list_id',$this->list_id);
+		$criteria->order = 'date_publish DESC';
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));
@@ -108,5 +109,13 @@ class CollectiveGallery extends CActiveRecord
 	{
 		parent::afterDelete();
 		$this->gallery->delete();
+	}
+
+	public function getFirstPhoto($version = '')
+	{
+		$photo = $this->gallery->firstPhoto;
+		if ( $photo ) {
+			return $photo->getImage($version);
+		}
 	}
 }

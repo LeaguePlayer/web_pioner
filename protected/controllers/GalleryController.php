@@ -10,19 +10,22 @@ class GalleryController extends FrontController
 {
 	public function actionIndex()
 	{
-		$gallery = new Gallery('search');
-		$gallery->unsetAttributes();
+		$collectiveGallery = new CollectiveGallery('search');
+		$collectiveGallery->status = CollectiveGallery::STATUS_PUBLISH;
+		$collectiveGallery->unsetAttributes();
 
 		$this->render('index', array(
-			'gallery' => $gallery
+			'collectiveGallery' => $collectiveGallery
 		));
 	}
 
 	public function actionView($id)
 	{
-		$gallery = $this->loadModel('Gallery', $id);
+		$criteria = new CDbCriteria();
+		$criteria->compare('status', CollectiveGallery::STATUS_PUBLISH);
+		$collectiveGallery = $this->loadModel('collectiveGallery', $id, $criteria);
 		$this->render('view', array(
-			'gallery' => $gallery
+			'collectiveGallery' => $collectiveGallery
 		));
 	}
 }

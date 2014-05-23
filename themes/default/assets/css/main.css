@@ -362,16 +362,18 @@ input[type=search] {
   background-position: -24px -5px;
 }
 body {
-  min-width: 980px;
   font-family: 'segoe_ui', sans-serif;
   font-size: 12px;
   line-height: 1.4;
-  background-color: #f2f2f2;
 }
 body * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+body.main {
+  min-width: 980px;
+  background-color: #f2f2f2;
 }
 a {
   color: #38799e;
@@ -625,78 +627,6 @@ header .sub-menu ul li a {
   display: inline-block;
   vertical-align: top;
   margin-right: 5px;
-}
-.news-section .news-carousel .captions {
-  background-color: #000000;
-  height: 50px;
-  padding: 10px 0;
-  position: relative;
-}
-.news-section .news-carousel .captions .carousel-viewport {
-  height: 100%;
-  margin: 0 40px;
-  overflow: hidden;
-  text-align: center;
-}
-.news-section .news-carousel .captions .caption-carousel-wrap {
-  display: inline-block;
-  width: 200px;
-  height: 50px;
-}
-.news-section .news-carousel .captions .caption-carousel {
-  color: #ffffff;
-}
-.news-section .news-carousel .captions .caption-carousel .owl-wrapper-outer {
-  overflow: visible !important;
-}
-.news-section .news-carousel .captions .caption-carousel .item {
-  position: relative;
-}
-.news-section .news-carousel .captions .caption-carousel .item h3 {
-  font-weight: bold;
-  color: #ffffff;
-  text-transform: uppercase;
-  margin: 0;
-  overflow: hidden;
-  font-size: 12px;
-  height: 16px;
-  line-height: 16px;
-}
-.news-section .news-carousel .captions .caption-carousel .item p {
-  margin: 0;
-  text-transform: uppercase;
-  font-size: 10px;
-  height: 14px;
-  line-height: 14px;
-  overflow: hidden;
-}
-.news-section .news-carousel .captions .caption-carousel .item a.news-url {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.news-section .news-carousel .captions .next,
-.news-section .news-carousel .captions .prev {
-  position: absolute;
-  width: 18px;
-  height: 19px;
-  cursor: pointer;
-  display: block;
-  background: url(../img/navigators.png) no-repeat;
-  top: 50%;
-  margin-top: -10px;
-  z-index: 100;
-  outline: none;
-}
-.news-section .news-carousel .captions .prev {
-  left: 16px;
-  background-position: 0 -42px;
-}
-.news-section .news-carousel .captions .next {
-  right: 16px;
-  background-position: -21px -42px;
 }
 .news-section .news-feed {
   width: 215px;
@@ -1161,6 +1091,82 @@ footer .master .slogan {
 }
 .flip-calendar .cover .news-description .btn {
   margin-top: 20px;
+}
+.carousel {
+  width: 450px;
+  height: 300px;
+}
+.carousel .captions {
+  background-color: #000000;
+  height: 50px;
+  padding: 10px 0;
+  position: relative;
+}
+.carousel .captions .carousel-viewport {
+  height: 100%;
+  margin: 0 40px;
+  overflow: hidden;
+  text-align: center;
+}
+.carousel .captions .caption-carousel-wrap {
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+}
+.carousel .captions .caption-carousel {
+  color: #ffffff;
+}
+.carousel .captions .caption-carousel .owl-wrapper-outer {
+  overflow: visible !important;
+}
+.carousel .captions .caption-carousel .item {
+  position: relative;
+}
+.carousel .captions .caption-carousel .item h3 {
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+  overflow: hidden;
+  font-size: 12px;
+  height: 16px;
+  line-height: 16px;
+}
+.carousel .captions .caption-carousel .item p {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 10px;
+  height: 14px;
+  line-height: 14px;
+  overflow: hidden;
+}
+.carousel .captions .caption-carousel .item a.news-url {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.carousel .captions .next,
+.carousel .captions .prev {
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  cursor: pointer;
+  display: block;
+  background: url(../img/navigators.png) no-repeat;
+  top: 50%;
+  margin-top: -10px;
+  z-index: 100;
+  outline: none;
+}
+.carousel .captions .prev {
+  left: 16px;
+  background-position: 0 -42px;
+}
+.carousel .captions .next {
+  right: 16px;
+  background-position: -21px -42px;
 }
 /* ==========================================================================
    Media Queries

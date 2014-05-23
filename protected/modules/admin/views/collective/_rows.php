@@ -1,5 +1,7 @@
 	<?php echo $form->textFieldControlGroup($model,'name',array('class'=>'span8','maxlength'=>255)); ?>
 
+	<?php echo $form->textFieldControlGroup($model,'short_name',array('class'=>'span8','maxlength'=>255)); ?>
+
 	<div class='control-group'>
 		<?php echo CHtml::activeLabelEx($model, 'img_preview'); ?>
 		<?php echo $form->fileField($model,'img_preview', array('class'=>'span3')); ?>

@@ -2,7 +2,7 @@
 $breadcrumbs = $model->list->node->getAdminBreadcrumbs();
 $list_name = array_pop($breadcrumbs);
 $breadcrumbs[$list_name] = Yii::app()->createUrl('/admin/collectiveNewsList/update', array('id' => $model->list->id));
-$breadcrumbs[] = $model->name;
+$breadcrumbs[] = $model->title;
 $this->breadcrumbs=$breadcrumbs;
 
 $this->menu=array(

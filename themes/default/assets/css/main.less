@@ -421,15 +421,17 @@ input[type=search] {
 
 
 body {
-    min-width: @fix-width;
     font-family: 'segoe_ui', sans-serif;
     font-size: 12px;
     line-height: 1.4;
-    background-color: @gray-lite;
     * {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
+    }
+    &.main {
+        min-width: @fix-width;
+        background-color: @gray-lite;
     }
 }
 
@@ -689,79 +691,6 @@ header {
         display: inline-block;
         vertical-align: top;
         margin-right: 5px;
-        .captions {
-            background-color: @black;
-            height: 50px;
-            padding: 10px 0;
-            position: relative;
-            .carousel-viewport {
-                height: 100%;
-                margin: 0 40px;
-                overflow: hidden;
-                text-align: center;
-            }
-            .caption-carousel-wrap {
-                display: inline-block;
-                width: 200px;
-                height: 50px;
-            }
-            .caption-carousel {
-                color: @white;
-                .owl-wrapper-outer {
-                    overflow: visible !important;
-                }
-                .item {
-                    position: relative;
-                    h3 {
-                        font-weight: bold;
-                        color: @white;
-                        text-transform: uppercase;
-                        margin: 0;
-                        overflow: hidden;
-                        font-size: 12px;
-                        height: 16px;
-                        line-height: 16px;
-                    }
-                    p {
-                        margin: 0;
-                        text-transform: uppercase;
-                        font-size: 10px;
-                        height: 14px;
-                        line-height: 14px;
-                        overflow: hidden;
-                    }
-                    a.news-url {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                    }
-                }
-
-            }
-
-            .next, .prev {
-                position: absolute;
-                width: 18px;
-                height: 19px;
-                cursor: pointer;
-                display: block;
-                background: url(../img/navigators.png) no-repeat;
-                top: 50%;
-                margin-top: -10px;
-                z-index: 100;
-                outline: none;
-            }
-            .prev {
-                left: 16px;
-                background-position: 0 -42px;
-            }
-            .next {
-                right: 16px;
-                background-position: -21px -42px;
-            }
-        }
     }
     .news-feed {
         width: 215px;
@@ -1249,6 +1178,87 @@ footer {
             .btn {
                 margin-top: 20px;
             }
+        }
+    }
+}
+
+
+
+
+.carousel {
+    width: 450px;
+    height: 300px;
+    .captions {
+        background-color: @black;
+        height: 50px;
+        padding: 10px 0;
+        position: relative;
+        .carousel-viewport {
+            height: 100%;
+            margin: 0 40px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .caption-carousel-wrap {
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+        }
+        .caption-carousel {
+            color: @white;
+            .owl-wrapper-outer {
+                overflow: visible !important;
+            }
+            .item {
+                position: relative;
+                h3 {
+                    font-weight: bold;
+                    color: @white;
+                    text-transform: uppercase;
+                    margin: 0;
+                    overflow: hidden;
+                    font-size: 12px;
+                    height: 16px;
+                    line-height: 16px;
+                }
+                p {
+                    margin: 0;
+                    text-transform: uppercase;
+                    font-size: 10px;
+                    height: 14px;
+                    line-height: 14px;
+                    overflow: hidden;
+                }
+                a.news-url {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+        }
+
+        .next, .prev {
+            position: absolute;
+            width: 18px;
+            height: 19px;
+            cursor: pointer;
+            display: block;
+            background: url(../img/navigators.png) no-repeat;
+            top: 50%;
+            margin-top: -10px;
+            z-index: 100;
+            outline: none;
+        }
+        .prev {
+            left: 16px;
+            background-position: 0 -42px;
+        }
+        .next {
+            right: 16px;
+            background-position: -21px -42px;
         }
     }
 }

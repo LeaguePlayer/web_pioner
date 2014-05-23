@@ -1,21 +1,21 @@
 <?php
 /**
- * Миграция m140520_063917_add_date_public_to_news
+ * Миграция m140523_034601_add_short_name_to_collectives
  *
  * @property string $prefix
  */
  
-class m140520_063917_add_date_public_to_news extends CDbMigration
+class m140523_034601_add_short_name_to_collectives extends CDbMigration
 {
     public function safeUp()
     {
-		$this->addColumn('{{news}}', 'date_public', 'datetime');
+		$this->addColumn('{{collectives}}', 'short_name', 'string');
     }
  
     public function safeDown()
     {
-		$this->dropColumn('{{news}}', 'date_public');
-    }
+		$this->dropColumn('{{collectives}}', 'short_name');
+	}
  
     /**
      * Добавляет префикс таблицы при необходимости

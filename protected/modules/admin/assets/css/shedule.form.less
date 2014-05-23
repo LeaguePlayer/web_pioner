@@ -16,15 +16,21 @@
 }
 
 #shedule {
-  td.focus {
-    background: #F2FFFF;
-  }
+    td.focus {
+        background: #F2FFFF;
+    }
 
-  .fc-event-time, .fc-event-title {
-    line-height: 1;
-  }
-  .fc-event-time, .fc-event-title b {
-    display: inline-block;
-    margin-bottom: 5px;
-  }
+    .fc-event-time, .fc-event-title, .fc-event-collective, .fc-event-teachers {
+        line-height: 1;
+    }
+    .fc-event-title {
+        font-weight: bold;
+        padding: 2px 0;
+    }
+    .fc-event-collective, .fc-event-teachers {
+        font-size: 10px;
+    }
+    .fc-event-collective {
+        margin-bottom: 4px;
+    }
 }

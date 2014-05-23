@@ -2,13 +2,6 @@
 
 class NewsController extends FrontController
 {
-	public function filters()
-	{
-		return CMap::mergeArray(parent::filters(), array(
-			'ajaxOnly + loadItems, getEnabledDays, loadDescription'
-		));
-	}
-
     public function accessRules()
     {
         return array(
@@ -49,44 +42,4 @@ class NewsController extends FrontController
             'newsPage'=>$newsPage
         ));
     }
-
-	public function actionGetEnabledDays()
-	{
-		$criteria = new CDbCriteria();
-		$criteria->compare('status', News::STATUS_PUBLISH);
-		$criteria->distinct = 'date_public';
-		$criteria->select = 'date_public';
-		$criteria->order = 'date_public';
-		$news = News::model()->findAll($criteria);
-		$response = array();
-		foreach ( $news as $oneNews ) {
-			$response[] = date('j-n-Y', strtotime($oneNews->date_public));
-		}
-		echo CJSON::encode($response);
-	}
-
-	public function actionLoadItems($date)
-	{
-		$criteria = new CDbCriteria();
-		$criteria->compare('date_public', $date, true);
-		$criteria->compare('status', News::STATUS_PUBLISH);
-		$criteria->order = 'date_public';
-		$dataProvider = new CActiveDataProvider('News', array(
-			'criteria' => $criteria,
-			'pagination' => false
-		));
-		$this->renderPartial('_list', array(
-			'dataProvider' => $dataProvider
-		));
-	}
-
-	public function actionLoadDescription($id)
-	{
-		$criteria = new CDbCriteria();
-		$criteria->compare('status', News::STATUS_PUBLISH);
-		$model = $this->loadModel('News', $id);
-		$this->renderPartial('_desc', array(
-			'model' => $model
-		));
-	}
 }

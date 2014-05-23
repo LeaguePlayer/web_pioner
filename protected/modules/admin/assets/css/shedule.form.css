@@ -18,11 +18,19 @@
   background: #F2FFFF;
 }
 #shedule .fc-event-time,
-#shedule .fc-event-title {
+#shedule .fc-event-title,
+#shedule .fc-event-collective,
+#shedule .fc-event-teachers {
   line-height: 1;
 }
-#shedule .fc-event-time,
-#shedule .fc-event-title b {
-  display: inline-block;
-  margin-bottom: 5px;
+#shedule .fc-event-title {
+  font-weight: bold;
+  padding: 2px 0;
+}
+#shedule .fc-event-collective,
+#shedule .fc-event-teachers {
+  font-size: 10px;
+}
+#shedule .fc-event-collective {
+  margin-bottom: 4px;
 }

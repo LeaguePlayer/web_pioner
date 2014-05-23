@@ -58,6 +58,7 @@ $(document).ready(function() {
     var inputEndTime = $('input.event-end', eventFormModal);
     // variable for ignore initialize timepickers
     var timepickersInitialized = false;
+    var inputCollective = $('select.event-collective', eventFormModal);
     var inputTeachers = $('select.event-teachers', eventFormModal);
     var jsonEventsText = $('#Place_json_schedule');
     var cabinetsBlock = $('.cabinets');
@@ -81,7 +82,6 @@ $(document).ready(function() {
             if ( !currentCabinet ) {
                 currentCabinet = cabinet;
             }
-            var cab_events = eventsMap[cabinet];
             for ( var i = 0; i < eventsMap[cabinet].length; i++ ) {
                 eventsMap[cabinet][i].start = new Date(eventsMap[cabinet][i].start);
                 eventsMap[cabinet][i].end = new Date(eventsMap[cabinet][i].end);
@@ -120,6 +120,7 @@ $(document).ready(function() {
         updateEventTime(e);
     });
 
+    inputCollective.select2();
     inputTeachers.select2();
 
     eventFormModal.on('show', function(e) {
@@ -133,6 +134,7 @@ $(document).ready(function() {
             teachers.push(editingEvent.teachers[i].id);
         }
         inputTeachers.select2('val', teachers);
+        inputCollective.select2('val', editingEvent.collective.id);
         setTimeout(function() {timepickersInitialized = true;}, 1000);
     });
 
@@ -170,9 +172,15 @@ $(document).ready(function() {
                 name: selectedTeachers[i].text
             });
         }
+        var selectedCollective = inputCollective.select2('data');
+
         editingEvent.title = $('input.event-title', eventFormModal).val();
         editingEvent.repeat = $('input.period:checked', eventFormModal).val();
         editingEvent.teachers = teachers;
+        editingEvent.collective = {
+            id: selectedCollective.id,
+            name: selectedCollective.text
+        };
         if ( !editingEvent.id ) { // is new event?
             editingEvent.id = events.length + 1;
             events.push(editingEvent);
@@ -189,6 +197,7 @@ $(document).ready(function() {
         shedule.fullCalendar('rerenderEvents');
 
         inputTeachers.select2('val', '');
+        inputCollective.select2('val', '');
         eventFormModal.modal('hide');
         return false;
     });
@@ -266,9 +275,10 @@ $(document).ready(function() {
                             title: _ev.title,
                             start: _ev_start,
                             end: _ev_end,
-                            teachers: _ev.teachers,
                             allDay: _ev.allDay,
-                            repeat: _ev.repeat
+                            repeat: _ev.repeat,
+                            teachers: _ev.teachers,
+                            collective: _ev.collective
                         });
                     }
                 }
@@ -301,7 +311,8 @@ $(document).ready(function() {
                 end: end,
                 allDay: allDay,
                 repeat: 0,
-                teachers: []
+                teachers: [],
+                collective: {}
             };
             $('.modal-header h3', eventFormModal).text('Создание занятия');
             $('.btn.delete', eventFormModal).hide();
@@ -314,13 +325,14 @@ $(document).ready(function() {
             eventFormModal.modal('show');
         },
         eventRender: function (event, element) {
-            var title = '<b>'+event.title+'</b><br>';
             var teachers = [];
             for ( var i = 0; i < event.teachers.length; i++ ) {
                 teachers.push(event.teachers[i].name);
             }
-            title += teachers.join(', ');
-            element.find('.fc-event-title').html(title);
+            var collectiveBlock = $('<div class="fc-event-collective" />').text(event.collective.name);
+            var teachersBlock = $('<div class="fc-event-teachers" />').text(teachers.join(', '));
+            collectiveBlock.insertAfter(element.find('.fc-event-title'));
+            teachersBlock.insertAfter(element.find('.fc-event-collective'));
         },
         eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ) {
             moveEvent(event);
@@ -398,7 +410,7 @@ $(document).ready(function() {
         }
         bootbox.confirm('Удалить кабинет «'+currentCabinet+'»', function(result) {
             if ( !result ) {
-                return false;
+                return;
             }
             removeCabinet(currentCabinet);
         });

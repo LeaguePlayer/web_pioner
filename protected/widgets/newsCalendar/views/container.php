@@ -2,11 +2,11 @@
 	<div class="cover cover-main">
 		<div class="cover-content">
 			<div class="content">
-				<div class="calendar" data-endates="<?= Yii::app()->createUrl('/news/getEnabledDays') ?>"></div>
+				<div class="calendar" data-endates="<?= Yii::app()->createUrl('/event/getEnabledDays') ?>"></div>
 			</div>
 		</div>
 	</div>
-	<div class="cover cover-top" data-url="<?= Yii::app()->createUrl('/news/loadItems') ?>">
+	<div class="cover cover-top" data-url="<?= Yii::app()->createUrl('/event/loadItems') ?>">
 		<div class="cover-content">
 			<div class="ui-datepicker">
 				<div class="ui-datepicker-header">
@@ -26,7 +26,7 @@
 		</div>
 		<div class="loader"></div>
 	</div>
-	<div class="cover cover-bottom" data-url="<?= Yii::app()->createUrl('/news/loadDescription') ?>">
+	<div class="cover cover-bottom" data-url="<?= Yii::app()->createUrl('/event/loadDescription') ?>">
 		<div class="cover-content">
 			<div class="scroller-wrap">
 				<div class="scroller">

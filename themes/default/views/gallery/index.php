@@ -37,7 +37,7 @@ $cs->registerScriptFile($assetsUrl.'/js/script.js', CClientScript::POS_END);
 	<? $this->widget('zii.widgets.CListView', array(
 		'id' => 'gallery-list',
 		'template' => '{items}',
-		'dataProvider' => $gallery->search(),
+		'dataProvider' => $collectiveGallery->search(),
 		'itemView' => '_gallery'
 	)) ?>
 </section>

@@ -22,6 +22,8 @@
 		<?php echo $form->error($model, 'date_publish'); ?>
 	</div>
 
+	<?= $form->dropDownListControlGroup($model, 'status', CollectiveGallery::getStatusAliases(), array('class'=>'span12', 'displaySize'=>1)); ?>
+
 	<?php $this->widget('appext.imagesgallery.GalleryManager', array(
 		'gallery' => $model->gallery,
 		'controllerRoute' => '/admin/gallery',

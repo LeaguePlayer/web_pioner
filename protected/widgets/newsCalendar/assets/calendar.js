@@ -1,9 +1,50 @@
 
 !function($) {
-    $.fn.init_flip_calendar = function() {
-        console.log($.datepicker.regional);
-        $.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
+    function pluralMonth(textDate) {
+        var parts = textDate.split(' ');
+        switch (parts[1]) {
+            case 'Январь':
+                parts[1] = 'января';
+                break;
+            case 'Февраль':
+                parts[1] = 'февраля';
+                break;
+            case 'Март':
+                parts[1] = 'марта';
+                break;
+            case 'Апрель':
+                parts[1] = 'апреля';
+                break;
+            case 'Май':
+                parts[1] = 'мая';
+                break;
+            case 'Июнь':
+                parts[1] = 'июня';
+                break;
+            case 'Июль':
+                parts[1] = 'июля';
+                break;
+            case 'Август':
+                parts[1] = 'августа';
+                break;
+            case 'Сентябрь':
+                parts[1] = 'сентября';
+                break;
+            case 'Октябрь':
+                parts[1] = 'октября';
+                break;
+            case 'Ноябрь':
+                parts[1] = 'ноября';
+                break;
+            case 'Декабрь':
+                parts[1] = 'декабря';
+                break;
+        }
+        return parts.join(' ');
+    }
 
+
+    $.fn.init_flip_calendar = function() {
         return this.each(function() {
             var container = $(this);
             var mainPage = $('.cover-main', container);
@@ -18,11 +59,13 @@
             var topScroll = topScroller.baron({bar: '.scroller__bar'});
             var bottomScroll = bottomScroller.baron({bar: '.scroller__bar'});
 
+
             var loadNews = function() {
                 topLoader.show();
                 $('.content', bottomPage).html('');
                 var date = datepicker.datepicker('getDate');
-                $('.ui-datepicker-title', topPage).text(date.getDate() + ' ' + $('.ui-datepicker-title', mainPage).text());
+                //$('.ui-datepicker-title', topPage).text(date.getDate() + ' ' + $('.ui-datepicker-title', mainPage).text());
+                $('.ui-datepicker-title', topPage).text( pluralMonth($.datepicker.formatDate('d MM yy', date)) );
                 var month = (date.getMonth() + 1) + "";
                 if ( month.length == 1 ) {
                     month = "0" + month;

@@ -1,20 +1,22 @@
 <?php
 /**
- * Миграция m140520_063917_add_date_public_to_news
+ * Миграция m140523_062151_add_columns_to_collective_news
  *
  * @property string $prefix
  */
  
-class m140520_063917_add_date_public_to_news extends CDbMigration
+class m140523_062151_add_columns_to_collective_news extends CDbMigration
 {
     public function safeUp()
     {
-		$this->addColumn('{{news}}', 'date_public', 'datetime');
+		$this->addColumn('{{collective_news}}', 'type', 'smallint');
+		$this->addColumn('{{collective_news}}', 'date_public', 'datetime');
     }
  
     public function safeDown()
     {
-		$this->dropColumn('{{news}}', 'date_public');
+		$this->dropColumn('{{collective_news}}', 'type');
+		$this->dropColumn('{{collective_news}}', 'date_public');
     }
  
     /**

@@ -7,6 +7,8 @@
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('jquery.ui');
 
+	$cs->registerScriptFile( $assetsUrl.'/js/lib/jquery.ui.datepicker-ru.js', CClientScript::POS_END );
+
 	$cs->registerCssFile($assetsUrl.'/vendor/fancybox/jquery.fancybox.css');
 	$cs->registerScriptFile($assetsUrl.'/vendor/fancybox/jquery.fancybox.pack.js', CClientScript::POS_END);
 
@@ -26,7 +28,7 @@
 	    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	    <![endif]-->
 	</head>
-	<body>
+	<body class="main">
 		<header id="header">
 			<section class="top">
 				<div class="fix-width">

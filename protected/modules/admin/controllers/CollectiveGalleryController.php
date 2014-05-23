@@ -8,12 +8,13 @@ class CollectiveGalleryController extends AdminController
 		$model->list_id = $list_id;
 		$model->date_publish = date('d-m-Y');
 		$model->name = 'Новый фотоотчет';
+		$model->status = CollectiveGallery::STATUS_CLOSED;
 
 		$gallery = new Gallery();
 		$gallery->gallery_name = 'Новый фотоотчет';
 		$gallery->versions = array(
 			'small' => array(
-				'resize' => array(200, 160),
+				'adaptiveResize' => array(200, 160),
 			),
 			'medium' => array(
 				'resize' => array(480),
@@ -37,6 +38,8 @@ class CollectiveGalleryController extends AdminController
 		if ( isset($_POST['CollectiveGallery']) )
 		{
 			$model->attributes = $_POST['CollectiveGallery'];
+			$gallery->gallery_name = $model->name;
+			$gallery->alias = Gallery::translit( $model->name );
 			if ( $gallery->save() ) {
 				$model->gallery_id = $gallery->id;
 			}
@@ -65,6 +68,7 @@ class CollectiveGalleryController extends AdminController
 			if ( $success ) {
 				if ( $model->name != $oldName ) {
 					$model->gallery->gallery_name = $model->name;
+					$model->gallery->alias = Gallery::translit( $model->name );
 					$model->gallery->save();
 				}
 				$this->redirect(array('/admin/collectiveGalleriesList/update', 'id'=>$model->list_id));

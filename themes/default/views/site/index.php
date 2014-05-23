@@ -8,30 +8,20 @@
 	<h2>Новости</h2>
 
 	<div class="news-carousel">
-		<div class="carousel">
-			<div class="image-carousel owl-carousel ">
-				<? foreach ( $news as $oneNews ): ?>
-					<div class="item"><?= $oneNews->getImage('slider') ?></div>
-				<? endforeach ?>
-			</div>
-			<div class="captions">
-				<div class="carousel-viewport">
-					<div class="caption-carousel-wrap">
-						<div class="caption-carousel owl-carousel ">
-							<? foreach ( $news as $oneNews ): ?>
-								<div class="item">
-									<h3><?= $oneNews->title ?></h3>
-									<p><?= $oneNews->date_public ?></p>
-									<a class="news-url" href="<?= $oneNews->getUrl() ?>"></a>
-								</div>
-							<? endforeach ?>
-						</div>
-					</div>
-				</div>
-				<a class="prev" href="#"></a>
-				<a class="next" href="#"></a>
-			</div>
-		</div>
+		<?php
+			$newsItems = array();
+			foreach ( $news as $i => $oneNews ) {
+				$newsItems[] = array(
+					'title' => $oneNews->title,
+					'desc' => $oneNews->date_public,
+					'img' => $oneNews->getImageUrl('slider'),
+					'url' => $oneNews->getUrl()
+				);
+			}
+		?>
+		<?php $this->widget('appwidgets.newsCarousel.NewsCarousel', array(
+			'items' => $newsItems
+		)) ?>
 	</div>
 
 	<div class="news-feed">

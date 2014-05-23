@@ -1,9 +1,9 @@
 <?php
 
 /**
-* This is the model class for table "{{news}}".
+* This is the model class for table "{{collective_news}}".
 *
-* The followings are the available columns in table '{{news}}':
+* The followings are the available columns in table '{{collective_news}}':
     * @property integer $id
     * @property string $title
     * @property string $img_preview
@@ -16,22 +16,43 @@
     * @property integer $sort
     * @property string $create_time
     * @property string $update_time
+    * @property string $date_public
+    * @property string $type
 */
 class CollectiveNews extends EActiveRecord
 {
+	const TYPE_NEWS = 1;
+	const TYPE_EVENT = 2;
+
+
+	public static function getTypes()
+	{
+		return array(
+			self::TYPE_NEWS => 'Новость',
+			self::TYPE_EVENT => 'Мероприятие',
+		);
+	}
+
+
+	public function getCurrentType()
+	{
+		$types = self::getTypes();
+		return $types[$this->type];
+	}
+
+
     public function tableName()
     {
         return '{{collective_news}}';
     }
 
-
     public function rules()
     {
         return array(
-            array('title', 'required'),
-            array('list_id, seo_id, status, sort', 'numerical', 'integerOnly'=>true),
+            array('title, type', 'required'),
+            array('list_id, seo_id, status, sort, type', 'numerical', 'integerOnly'=>true),
             array('title', 'length', 'max'=>255),
-            array('create_time, update_time, short_description, body_content, tags', 'safe'),
+            array('create_time, update_time, short_description, body_content, tags, date_public', 'safe'),
             // The following rule is used by search().
             array('id, title, img_preview, short_description, body_content, tags, list_id, seo_id, status, sort, create_time, update_time', 'safe', 'on'=>'search'),
         );
@@ -50,6 +71,7 @@ class CollectiveNews extends EActiveRecord
     {
         return array(
             'id' => 'ID',
+			'type' => 'Тип',
             'title' => 'Заголовок',
             'img_preview' => 'Превью',
             'short_description' => 'Краткое описание',
@@ -61,6 +83,7 @@ class CollectiveNews extends EActiveRecord
             'sort' => 'Вес для сортировки',
             'create_time' => 'Дата создания',
             'update_time' => 'Дата последнего редактирования',
+			'date_public' => 'Укажите дату',
         );
     }
 
@@ -73,13 +96,16 @@ class CollectiveNews extends EActiveRecord
 				'attributeName' => 'img_preview',
 				'versions' => array(
 					'icon' => array(
-						'centeredpreview' => array(90, 90),
+						'centeredpreview' => array(112, 96),
 					),
 					'small' => array(
-						'resize' => array(200, 180),
+						'resize' => array(265),
+					),
+					'slider' => array(
+						'adaptiveResize' => array(450, 250),
 					),
 					'big' => array(
-						'adaptiveResize' => array(800, 600),
+						'resize' => array(800, 600),
 					),
 				),
 			),
@@ -110,6 +136,7 @@ class CollectiveNews extends EActiveRecord
 		$criteria->compare('sort',$this->sort);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->compare('type',$this->type);
         $criteria->order = 'sort';
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -121,10 +148,21 @@ class CollectiveNews extends EActiveRecord
         return parent::model($className);
     }
 
+	public function afterFind()
+	{
+		parent::afterFind();
+		if ( in_array($this->scenario, array('insert', 'update')) ) {
+			$this->date_public = ($this->date_public !== '0000-00-00 00:00:00' ) ? date('d-m-Y', strtotime($this->date_public)) : '';
+		}
+	}
+
 	public function beforeSave()
 	{
 		if (parent::beforeSave()) {
 			Tag::model()->updateValues($this->tags);
+			if ( !empty( $this->date_public ) ) {
+				$this->date_public = date('Y-m-d H:i', strtotime($this->date_public));
+			}
 			return true;
 		}
 		return false;
@@ -134,9 +172,9 @@ class CollectiveNews extends EActiveRecord
 	public function getTagObjects()
 	{
 		if ( $this->_tags === null ) {
-			$tags = explode(',', $this->tags);
+			$this->_tags = explode(',', $this->tags);
 		}
-		return $this->_tagItems;
+		return $this->_tags;
 	}
 
 	public function getUrl()

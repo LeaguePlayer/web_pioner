@@ -29,7 +29,7 @@ class EActiveRecord extends CActiveRecord
         $aliases = array(
             self::STATUS_CLOSED => 'Не опубликовано',
             self::STATUS_PUBLISH => 'Опубликовано',
-            self::STATUS_REMOVED => 'Удалено',
+//            self::STATUS_REMOVED => 'Удалено',
         );
 
         if ($status > -1)

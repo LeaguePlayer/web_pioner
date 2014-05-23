@@ -32,9 +32,9 @@ class SiteController extends FrontController
 		$teenProgectPageNodes = $teenProjectsNode ? $teenProjectsNode->children()->findAll() : array();
 
 		$criteria = new CDbCriteria();
-		$criteria->compare('status', News::STATUS_PUBLISH);
+		$criteria->compare('status', CollectiveNews::STATUS_PUBLISH);
 		$criteria->order = 'date_public DESC';
-		$news = News::model()->findAll($criteria);
+		$news = CollectiveNews::model()->findAll($criteria);
 
         $this->title = Yii::app()->config->get('app.name');
 		$this->render('index', array(

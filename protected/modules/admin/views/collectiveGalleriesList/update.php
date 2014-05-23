@@ -25,23 +25,28 @@ $this->menu=array(
 		"class"=>"status_".$data->status,
 	)',
 	'columns'=>array(
-//		array(
-//			'name'=>'img_preview',
-//			'type'=>'raw',
-//			'value'=>'$data->getImage("icon")',
-//			'filter'=>false
-//		),
+		array(
+			'header'=>'Фото',
+			'type'=>'raw',
+			'value'=>'TbHtml::link($data->getFirstPhoto("small"), array("/admin/collectiveGallery/update/", "id"=>$data->id, "list_id"=>'.$model->id.'))',
+			'filter'=>false
+		),
 		array(
 			'name'=>'name',
 			'type'=>'raw',
 			'value'=>'TbHtml::link($data->name, array("/admin/collectiveGallery/update/", "id"=>$data->id, "list_id"=>'.$model->id.'))'
 		),
-//		array(
-//			'name'=>'status',
-//			'type'=>'raw',
-//			'value'=>'News::getStatusAliases($data->status)',
-//			'filter'=>News::getStatusAliases()
-//		),
+		array(
+			'name'=>'date_publish',
+			'type'=>'raw',
+			'value'=>'SiteHelper::russianDate($data->date_publish)'
+		),
+		array(
+			'name'=>'status',
+			'type'=>'raw',
+			'value'=>'CollectiveGallery::getStatusAliases($data->status)',
+			'filter'=>CollectiveGallery::getStatusAliases()
+		),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{delete}',

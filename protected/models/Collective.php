@@ -31,7 +31,7 @@ class Collective extends EActiveRecord
         return array(
             array('name', 'required'),
             array('list_id, status, sort, ageLeft, ageRight', 'numerical', 'integerOnly'=>true),
-            array('name, img_preview', 'length', 'max'=>255),
+            array('name, img_preview, short_name', 'length', 'max'=>255),
             array('description, create_time, update_time, employeesArray', 'safe'),
             // The following rule is used by search().
             array('id, name, img_preview, age_limits, description, list_id, status, sort, create_time, update_time', 'safe', 'on'=>'search'),
@@ -53,7 +53,7 @@ class Collective extends EActiveRecord
     {
         return array(
             'id' => 'ID',
-            'name' => 'Название',
+            'name' => 'Полное название',
             'img_preview' => 'Превью',
             'age_limits' => 'Возраст',
             'ageLeft' => 'Не младше',
@@ -65,6 +65,7 @@ class Collective extends EActiveRecord
             'create_time' => 'Дата создания',
             'update_time' => 'Дата последнего редактирования',
 			'employeesArray' => 'Сотрудники',
+			'short_name' => 'Краткое название',
         );
     }
 
