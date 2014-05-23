@@ -1,11 +1,4 @@
 
-<div>
-	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-		'separator'=>' → ',
-		'links'=>$this->breadcrumbs,
-	)); ?>
-</div>
-
 <section class="page">
 	<h2><?= $node->name ?></h2>
 	<? if ( empty($page->wswg_body) ): ?>

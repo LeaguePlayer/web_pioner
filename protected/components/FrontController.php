@@ -29,4 +29,15 @@ class FrontController extends Controller
     {
         $this->menu = Menu::model()->getMenuList(0);
     }
+
+	public function registerSeoTags($model, $nameAttribute = false)
+	{
+		if ( !empty($model->seo->meta_title) ) {
+			$this->title = $model->seo->meta_title;
+		} else {
+			$this->title = $nameAttribute ? $model->{$nameAttribute} . ' | ' . Yii::app()->config->get('app.name') : Yii::app()->config->get('app.name');
+		}
+		Yii::app()->clientScript->registerMetaTag($model->seo->meta_desc, 'description', null, array('id'=>'meta_description'), 'meta_description');
+		Yii::app()->clientScript->registerMetaTag($model->seo->meta_keys, 'keywords', null, array('id'=>'keywords'), 'meta_keywords');
+	}
 }

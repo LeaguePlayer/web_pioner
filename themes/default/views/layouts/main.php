@@ -2,10 +2,11 @@
 	$cs = Yii::app()->clientScript;
 	$assetsUrl = $this->getAssetsUrl();
 	$cs->registerCssFile($assetsUrl.'/css/normalize.min.css');
-	$cs->registerCssFile($assetsUrl.'/css/main.css?v=2');
+	$cs->registerCssFile($assetsUrl.'/css/main.css?v=3');
 
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('jquery.ui');
+	$cs->registerScriptFile( $assetsUrl.'/js/lib/modernizr-2.6.2.min.js', CClientScript::POS_HEAD );
 
 	$cs->registerScriptFile( $assetsUrl.'/js/lib/jquery.ui.datepicker-ru.js', CClientScript::POS_END );
 
@@ -18,7 +19,7 @@
 	$cs->registerCssFile($assetsUrl.'/vendor/owl/owl.carousel.css');
 	$cs->registerScriptFile($assetsUrl.'/vendor/owl/owl.carousel.js', CClientScript::POS_END);
 
-	$cs->registerScriptFile($assetsUrl.'/js/main.js?v=2', CClientScript::POS_END);
+	$cs->registerScriptFile($assetsUrl.'/js/main.js?v=3', CClientScript::POS_END);
 ?><!DOCTYPE html>
 <html lang="ru">
 	<head>
@@ -78,6 +79,11 @@
 		</header>
 
 		<div id="layout" class="fix-width">
+			<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+				'separator'=>' → ',
+				'links'=>$this->breadcrumbs,
+			)); ?>
+
 			<?php echo $content;?>
 		</div>
 

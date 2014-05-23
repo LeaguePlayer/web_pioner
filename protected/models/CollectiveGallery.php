@@ -63,6 +63,9 @@ class CollectiveGallery extends EActiveRecord
                 'updateAttribute' => 'update_time',
                 'setUpdateOnCreate' => true,
 			),
+			'seo' => array(
+				'class' => 'application.behaviors.SeoBehavior',
+			),
         ));
     }
 

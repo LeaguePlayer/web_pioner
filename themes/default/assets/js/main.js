@@ -29,5 +29,17 @@ $(document).ready(function() {
             return false;
         });
     }
+
+    if ( window.Gamma !== undefined ) {
+        var GammaSettings = {
+            // order is important!
+            viewport : [{
+                width : 0,
+                columns : 4
+            }],
+            nextOnClickImage : true
+        };
+        Gamma.init( GammaSettings );
+    }
 });
 

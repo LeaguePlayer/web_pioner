@@ -96,7 +96,7 @@ return array_replace_recursive(
                 'class'=>'EClientScript',
 				'scriptMap'=>array(
 					'jquery.js'=>'http://code.jquery.com/jquery-1.9.1.js',
-					'jquery.min.js'=>'http://code.jquery.com/jquery-1.11.0.min.js',
+					'jquery.min.js'=>'http://code.jquery.com/jquery-1.11.0.min.js'
 				),
             ),
             'date' => array(

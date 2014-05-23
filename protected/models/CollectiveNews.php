@@ -179,6 +179,10 @@ class CollectiveNews extends EActiveRecord
 
 	public function getUrl()
 	{
-		return Yii::app()->createUrl('/collectiveNews/view', array('id'=>$this->id));
+		if ( $this->type == self::TYPE_NEWS )
+			return Yii::app()->createUrl('/news/view', array('id'=>$this->id));
+		else {
+			return Yii::app()->createUrl('/event/view', array('id'=>$this->id));
+		}
 	}
 }

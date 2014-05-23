@@ -27,6 +27,12 @@ class SiteController extends FrontController
 	 */
 	public function actionIndex()
 	{
+		$node = Structure::model()->findByUrl('main');
+		if ( $node ) {
+			$this->title = Yii::app()->config->get('app.name');
+			$this->registerSeoTags($node);
+		}
+
 		$activityNodes = Structure::model()->findAllByType('Activity');
 		$teenProjectsNode = Structure::model()->findByUrl('teen-projects');
 		$teenProgectPageNodes = $teenProjectsNode ? $teenProjectsNode->children()->findAll() : array();
@@ -36,7 +42,6 @@ class SiteController extends FrontController
 		$criteria->order = 'date_public DESC';
 		$news = CollectiveNews::model()->findAll($criteria);
 
-        $this->title = Yii::app()->config->get('app.name');
 		$this->render('index', array(
 			'activityNodes' => $activityNodes,
 			'teenProgectPageNodes' => $teenProgectPageNodes,

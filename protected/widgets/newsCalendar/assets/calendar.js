@@ -133,6 +133,11 @@
                                 loadNews();
                             }
                         });
+
+                        var containerTop = container.offset().top - 320;
+                        if ( $(document).scrollTop() > containerTop ) {
+                            $('body').scrollTo( containerTop, 300 );
+                        }
                     },
                     beforeShowDay: function(date) {
                         var dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
