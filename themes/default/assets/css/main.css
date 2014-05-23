@@ -549,6 +549,16 @@ header .main-menu ul li {
   padding: 0;
   margin: 0;
 }
+header .main-menu ul li:first-child {
+  background-image: url(../img/home.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+header .main-menu ul li:first-child a {
+  display: inline-block;
+  text-indent: -9999px;
+  width: 64px;
+}
 header .main-menu ul li:hover,
 header .main-menu ul li.active {
   background-color: #da6748;
@@ -556,7 +566,6 @@ header .main-menu ul li.active {
 header .main-menu ul li a {
   display: inline-block;
   color: #ffffff;
-  font-weight: 300;
   text-decoration: none;
   padding: 18px 20px;
 }
