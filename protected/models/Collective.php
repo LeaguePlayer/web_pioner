@@ -94,6 +94,9 @@ class Collective extends EActiveRecord
                 'updateAttribute' => 'update_time',
                 'setUpdateOnCreate' => true,
 			),
+			'Seo' => array(
+				'class' => 'application.behaviors.SeoBehavior',
+			),
         ));
     }
 

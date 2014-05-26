@@ -112,6 +112,36 @@ return array_replace_recursive(
             'errorHandler'=>array(
                 'errorAction'=>'site/error',
             ),
+			'widgetFactory' => array(
+				'widgets' => array(
+					'ImperaviRedactorWidget' => array(
+						'options' => array(
+							'lang' => 'ru',
+							'iframe' => true,
+							'minHeight' => 500,
+							'thumbLinkClass' => 'athumbnail', //Класс по-умолчанию для ссылки на полное изображение вокруг thumbnail
+							'thumbClass' => 'thumbnail pull-left', //Класс по-умолчанию для  thumbnail
+							'defaultUplthumb' => true, //Вставлять по-умолчанию после загрузки превью? если нет - полное изображение
+							//'allowedTags' => array('p', 'h1', 'h2', 'pre', 'div', 'ul', 'li'),
+							'convertDivs' => false,
+						),
+						'plugins' => array(
+							'fullscreen' => array(
+								'js' => array('fullscreen.js',),
+							),
+							'fontsize' => array(
+								'js' => array('fontsize.js',),
+							),
+							'fontcolor' => array(
+								'js' => array('fontcolor.js',),
+							),
+							'extelf' => array(
+								'js' => array('extelf.js',),
+							),
+						),
+					)
+				)
+			)
         ),
         'params'=>array(),
     ),

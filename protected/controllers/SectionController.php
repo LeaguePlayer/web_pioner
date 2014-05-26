@@ -25,11 +25,25 @@ class SectionController extends FrontController
 		);
 	}
 
-	
-	public function actionView($id)
+
+	public function actionView($url)
 	{
+		$node = Structure::model()->findByUrl($url);
+		if ( !$node )
+			throw new CHttpException(404, "Узел с псевдонимом '$url' не найден");
+
+		$collectives = array();
+		$collectivesListNode = $node->children()->find();
+		if ( $collectivesListNode ) {
+			$collectivesList = $collectivesListNode->getComponent();
+			$collectives = $collectivesList->collectives;
+		}
+
+		$this->breadcrumbs = $node->getBreadcrumbs();
+		$this->registerSeoTags($node, 'name');
 		$this->render('view',array(
-			'model'=>$this->loadModel('Section', $id),
+			'node'=>$node,
+			'collectives'=>$collectives
 		));
 	}
 

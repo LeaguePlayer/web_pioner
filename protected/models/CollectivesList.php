@@ -32,6 +32,7 @@ class CollectivesList extends CActiveRecord
 	{
 		return array(
 			'node' => array(self::BELONGS_TO, 'Structure', 'node_id'),
+			'collectives' => array(self::HAS_MANY, 'Collective', 'list_id'),
 		);
 	}
 

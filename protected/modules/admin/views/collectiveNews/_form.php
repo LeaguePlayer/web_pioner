@@ -25,10 +25,12 @@
         ),
     )); ?>
 
+
+	<?php $backUrl = $model->type == CollectiveNews::TYPE_NEWS ? '/admin/collectiveNewsList/update' : '/admin/collectiveEventList/update' ?>
 	<div class="form-actions">
 		<?php echo TbHtml::submitButton('Сохранить', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)); ?>
         <?php echo TbHtml::linkButton('Отмена', array(
-            'url'=>array('/admin/collectiveNewsList/update', 'id'=>$model->list_id)
+            'url'=>array($backUrl, 'id'=>$model->list_id)
         )); ?>
 	</div>
 

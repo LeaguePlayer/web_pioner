@@ -137,7 +137,7 @@ class CollectiveNews extends EActiveRecord
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('type',$this->type);
-        $criteria->order = 'sort';
+        $criteria->order = 'create_time DESC';
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));
@@ -188,12 +188,9 @@ class CollectiveNews extends EActiveRecord
 
 	public function getBreadcrumbs()
 	{
-		$breadcrumbs = array();
-		if ( $this->type == self::TYPE_NEWS ) {
-			$breadcrumbs['Новости'] = Yii::app()->createUrl('/news/index');
-		} else {
-			$breadcrumbs['Мероприятия'] = Yii::app()->createUrl('/event/index');
-		}
+		$breadcrumbs = $this->list->node->getBreadcrumbs();
+		$name = array_pop($breadcrumbs);
+		$breadcrumbs[$name] = $this->list->node->getUrl();
 		$breadcrumbs[] = $this->title;
 		return $breadcrumbs;
 	}

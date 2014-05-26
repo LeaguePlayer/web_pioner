@@ -2,44 +2,16 @@
 
 class ActivityController extends FrontController
 {
-	public $layout='//layouts/simple';
-
-	
-	public function filters()
+	public function actionView($url)
 	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-		);
-	}
+		$node = Structure::model()->findByUrl($url);
+		if ( !$node )
+			throw new CHttpException(404, "Узел с псевдонимом '$url' не найден");
 
-	
-	public function accessRules()
-	{
-		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
-	}
-
-	
-	public function actionView($id)
-	{
+		$this->breadcrumbs = $node->getBreadcrumbs();
+		$this->registerSeoTags($node, 'name');
 		$this->render('view',array(
-			'model'=>$this->loadModel('Activity', $id),
-		));
-	}
-
-	
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('Activity');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'node'=>$node,
 		));
 	}
 }

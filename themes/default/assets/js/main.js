@@ -43,5 +43,15 @@ $(document).ready(function() {
         };
         Gamma.init( GammaSettings );
     }
+
+    $("select").uniform();
+
+    $(document).on('click', 'a.order', function() {
+        $.fancybox.open('#order-form-modal', {
+            autoSize: false,
+            width: 600
+        });
+        return false;
+    });
 });
 

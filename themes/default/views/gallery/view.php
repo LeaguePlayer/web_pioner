@@ -11,10 +11,12 @@
 	$cs->registerScriptFile( $assetsUrl.'/vendor/gammaGallery/js/gamma.js', CClientScript::POS_END );
 ?>
 
-<h2><?= $model->name ?></h2>
+<div class="page">
+	<h2><?= $model->name ?></h2>
+	<p class="date"><?= SiteHelper::russianDate($model->date_publish); ?></p>
+</div>
 
 <div class="gamma-container gamma-loading" id="gamma-container">
-
 	<ul class="gamma-gallery">
 		<? foreach ( $model->gallery->galleryPhotos as $photo ): ?>
 			<li>
@@ -28,7 +30,5 @@
 			</li>
 		<? endforeach ?>
 	</ul>
-
 	<div class="gamma-overlay"></div>
-
 </div>

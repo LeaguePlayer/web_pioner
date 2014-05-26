@@ -948,6 +948,7 @@ header .sub-menu ul li a {
   margin-bottom: 10px;
 }
 .services .collectives .item p {
+  color: #ffffff;
   margin-top: 0;
   margin-bottom: 0;
   line-height: 1.2;
@@ -1354,6 +1355,29 @@ footer .master .slogan {
   float: left;
   width: 500px;
   height: 150px;
+}
+div.selector {
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: segoe_ui, sans-serif;
+  font-size: 12px;
+  height: 26px;
+  line-height: 26px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-bottom: 0px;
+  padding-left: 10px;
+  padding-right: 0px;
+  padding-top: 0px;
+  position: relative;
+  text-shadow: none;
+  vertical-align: middle;
+  width: 399px;
+  zoom: 1;
 }
 /* ==========================================================================
    Media Queries

@@ -19,6 +19,9 @@
 	$cs->registerCssFile($assetsUrl.'/vendor/owl/owl.carousel.css');
 	$cs->registerScriptFile($assetsUrl.'/vendor/owl/owl.carousel.js', CClientScript::POS_END);
 
+//	$cs->registerCssFile($assetsUrl.'/vendor/uniform/themes/default/css/uniform.default.css');
+	$cs->registerScriptFile($assetsUrl.'/vendor/uniform/jquery.uniform.min.js', CClientScript::POS_END);
+
 	$cs->registerScriptFile($assetsUrl.'/js/main.js?v=5', CClientScript::POS_END);
 ?><!DOCTYPE html>
 <html lang="ru">
@@ -127,5 +130,11 @@
 
 			</div>
 		</footer>
+
+
+
+		<div style="display: none;">
+			<? $this->renderPartial('//site/_order_form', array('model' => new Order)) ?>
+		</div>
 	</body>
 </html>

@@ -14,7 +14,7 @@ class m140523_121034_add_seo_id_to_collective_galleries extends CDbMigration
 
 	public function safeDown()
 	{
-		$this->dropColumn('{{collective_news}}', 'seo_id');
+		$this->dropColumn('{{collective_galleries}}', 'seo_id');
 	}
  
     /**

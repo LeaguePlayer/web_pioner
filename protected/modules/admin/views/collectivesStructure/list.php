@@ -3,8 +3,7 @@
 $breadcrumbs = $collective->list->node->getAdminBreadcrumbs();
 array_pop($breadcrumbs);
 $breadcrumbs[$collective->list->node->name] = $this->createUrl('/admin/collectivesList/update', array('id' => $collective->list->id));
-$breadcrumbs[$collective->name] = $this->createUrl('/admin/collective/update', array('id' => $collective->id));
-$breadcrumbs[] = 'Разделы';
+$breadcrumbs[] = $collective->name;
 $this->breadcrumbs = $breadcrumbs;
 
 $this->menu=array(

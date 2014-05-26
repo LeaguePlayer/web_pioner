@@ -24,7 +24,7 @@ Yii::app()->clientScript->registerScript('STRUCTURE_FORM', $js);
 
 <?php
 $criteria = new CDbCriteria();
-$criteria->addInCondition('class_name', array('CollectivePage', 'CollectiveGalleriesList', 'CollectiveShedule', 'CollectiveNewsList'));
+$criteria->addInCondition('class_name', array('CollectivePage', 'CollectiveGalleriesList', 'CollectiveShedule', 'CollectiveNewsList', 'CollectiveEventList'));
 $materialsTypes = CHtml::listData(Material::model()->findAll($criteria), 'id', 'name');
 ?>
 <?= $form->dropDownListControlGroup($model, 'material_id', $materialsTypes, array('class'=>'span12', 'empty'=>'Выберите тип раздела')); ?>

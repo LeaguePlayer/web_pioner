@@ -24,7 +24,7 @@ EOT;
 $cs->registerScript('tagsinput', $js_tagsinput);
 ?>
 
-<?php echo $form->dropDownListControlGroup($model, 'type', CollectiveNews::getTypes(), array('class'=>'span12', 'empty' => '')); ?>
+<?php //echo $form->dropDownListControlGroup($model, 'type', CollectiveNews::getTypes(), array('class'=>'span12', 'empty' => '')); ?>
 
 <?php echo $form->textFieldControlGroup($model,'title',array('class'=>'span12', 'maxlength'=>255)); ?>
 
@@ -59,14 +59,15 @@ $cs->registerScript('tagsinput', $js_tagsinput);
 
 <?php echo $form->textAreaControlGroup($model, 'short_description', array('class'=>'span12', 'rows'=>6)) ?>
 
-<div class='control-group'>
+<div class='control-group' style="overflow: hidden;">
 	<?php echo CHtml::activeLabelEx($model, 'body_content'); ?>
-	<?php $this->widget('appext.ckeditor.CKEditorWidget', array(
+	<?php $this->widget('appext.imperavielfinder.imperavi-redactor-widget.ImperaviRedactorWidget', array(
 		'model' => $model,
 		'attribute' => 'body_content',
-		'config' => array(
-			'width' => '99%'
-		)
+		'options' => array(
+			'css' => $this->getAssetsUrl('application').'/css/main.css',
+			'fmUrl' => Yii::app()->createUrl('/admin/file/fileUploaderConnector'), //ссылка на ElFinderConnectorAction
+		),
 	)); ?>
 	<?php echo $form->error($model, 'body_content'); ?>
 </div>

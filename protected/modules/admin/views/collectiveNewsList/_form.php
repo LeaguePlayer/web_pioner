@@ -19,10 +19,10 @@
 
 
 
-
-<?php echo TbHtml::linkButton('Добавить новость', array(
+<?php $buttonText = ($model instanceof CollectiveEventList) ? 'Добавить мероприятие' : 'Добавить новость' ?>
+<?php echo TbHtml::linkButton($buttonText, array(
     'icon'=>TbHtml::ICON_PLUS,
-    'url'=>array('/admin/collectiveNews/create', 'list_id'=>$model->id)
+    'url'=>array('/admin/collectiveNews/create', 'list_id'=>$model->id, 'type' => $newsFinder->type)
 )); ?>
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
@@ -42,12 +42,12 @@
             'value'=>'$data->getImage("icon")',
             'filter'=>false
         ),
-		array(
-			'name'=>'type',
-			'type'=>'raw',
-			'value'=>'$data->getCurrentType()',
-			'filter'=>CollectiveNews::getTypes()
-		),
+//		array(
+//			'name'=>'type',
+//			'type'=>'raw',
+//			'value'=>'$data->getCurrentType()',
+//			'filter'=>CollectiveNews::getTypes()
+//		),
         array(
             'name'=>'title',
             'type'=>'raw',

@@ -28,31 +28,8 @@
 		'model' => $model,
 		'attribute' => 'wswg_body',
 		'options' => array(
-			'lang' => 'ru',
-			'iframe' => true,
-			'minHeight' => 500,
 			'css' => $this->getAssetsUrl('application').'/css/main.css',
-			'thumbLinkClass' => 'athumbnail', //Класс по-умолчанию для ссылки на полное изображение вокруг thumbnail
-			'thumbClass' => 'thumbnail pull-left', //Класс по-умолчанию для  thumbnail
-			'defaultUplthumb' => true, //Вставлять по-умолчанию после загрузки превью? если нет - полное изображение
 			'fmUrl' => Yii::app()->createUrl('/admin/file/fileUploaderConnector'), //ссылка на ElFinderConnectorAction
-			//'allowedTags' => array('p', 'h1', 'h2', 'pre', 'div', 'ul', 'li'),
-			'convertDivs' => false,
-			'tabSpaces' => 2
-		),
-		'plugins' => array(
-			'fullscreen' => array(
-				'js' => array('fullscreen.js',),
-			),
-			'fontsize' => array(
-				'js' => array('fontsize.js',),
-			),
-			'fontcolor' => array(
-				'js' => array('fontcolor.js',),
-			),
-			'extelf' => array(
-				'js' => array('extelf.js',),
-			),
 		),
 	)); ?>
 	<?php echo $form->error($model, 'wswg_body'); ?>

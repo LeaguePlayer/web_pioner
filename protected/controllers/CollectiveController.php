@@ -2,32 +2,21 @@
 
 class CollectiveController extends FrontController
 {
-	public function filters()
-	{
-		return array(
-		);
-	}
-
-	
-	public function accessRules()
-	{
-		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
-	}
-
-	
 	public function actionView($id)
 	{
 		$model = $this->loadModel('Collective', $id);
+
+		$criteria = new CDbCriteria();
+		$criteria->compare('collective_id', $model->id);
+		$collectiveNodes = CollectivesStructure::model()->published()->findAll($criteria);
+
+		$this->breadcrumbs = $model->list->node->getBreadcrumbs();
+		array_pop($this->breadcrumbs);
+		$this->breadcrumbs[] = $model->name;
+		$this->registerSeoTags($model, 'name');
 		$this->render('view',array(
 			'model'=>$model,
+			'nodes'=>$collectiveNodes
 		));
 	}
 

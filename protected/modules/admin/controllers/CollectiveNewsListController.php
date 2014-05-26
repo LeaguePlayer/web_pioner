@@ -28,10 +28,11 @@ class CollectiveNewsListController extends AdminController
         $model = $this->loadModel('CollectiveNewsList', $id);
         $newsFinder = new CollectiveNews('search');
         $newsFinder->unsetAttributes();
+		$newsFinder->type = CollectiveNews::TYPE_NEWS;
+		$newsFinder->list_id = $model->id;
         if ( isset($_GET['CollectiveNews']) ) {
             $newsFinder->attributes = $_GET['CollectiveNews'];
         }
-        $newsFinder->list_id = $model->id;
 
         if(isset($_POST['CollectiveNewsList']))
         {

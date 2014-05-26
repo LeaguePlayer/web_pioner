@@ -8,7 +8,8 @@
 
 	<?php $tabs = array(); ?>
 	<?php $tabs[] = array('label' => 'Основные данные', 'content' => $this->renderPartial('_rows', array('form'=>$form, 'model' => $model), true), 'active' => true); ?>
-	
+	<?php $tabs[] = array('label' => 'SEO', 'content' => $this->getSeoForm($model)); ?>
+
 	<?php $this->widget('bootstrap.widgets.TbTabs', array( 'tabs' => $tabs)); ?>
 
 	<div class="form-actions">

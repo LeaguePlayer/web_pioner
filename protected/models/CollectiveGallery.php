@@ -121,4 +121,13 @@ class CollectiveGallery extends EActiveRecord
 			return $photo->getImage($version);
 		}
 	}
+
+	public function getBreadcrumbs()
+	{
+		$breadcrumbs = $this->list->node->getBreadcrumbs();
+		$name = array_pop($breadcrumbs);
+		$breadcrumbs[$name] = $this->list->node->getUrl();
+		$breadcrumbs[] = $this->name;
+		return $breadcrumbs;
+	}
 }

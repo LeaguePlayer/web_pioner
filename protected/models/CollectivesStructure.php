@@ -179,21 +179,42 @@ class CollectivesStructure extends EActiveRecord
 			$component = $this->getComponent();
 			if ( !$component )
 				return '';
-			$component_name = lcfirst(get_class($component));
-			$this->_url = Yii::app()->createUrl($component_name.'/view', array('url'=>$this->url));
+			$component_name = get_class($component);
+			switch ( $component_name ) {
+				case 'CollectiveNewsList':
+					$this->_url = Yii::app()->createUrl('/news/index', array('collective_id'=>$this->collective_id));
+					break;
+				case 'CollectiveEventList':
+					$this->_url = Yii::app()->createUrl('/event/index', array('collective_id'=>$this->collective_id));
+					break;
+				case 'CollectiveGalleriesList':
+					$this->_url = Yii::app()->createUrl('/gallery/index', array('collective_id'=>$this->collective_id));
+					break;
+				default:
+					$this->_url = Yii::app()->createUrl(lcfirst($component_name).'/view', array('url'=>$this->url));
+			}
 		}
 
 		return $this->_url;
 	}
 
 
+	public function getBreadcrumbs()
+	{
+		$breadcrumbs = $this->collective->list->node->getBreadcrumbs();
+		array_pop($breadcrumbs);
+		$breadcrumbs[$this->collective->name] = $this->collective->getUrl();
+		$breadcrumbs[] = $this->name;
+		return $breadcrumbs;
+	}
+
+
 	public function getAdminBreadcrumbs()
 	{
 		$breadcrumbs = $this->collective->list->node->getAdminBreadcrumbs();
-		array_pop($breadcrumbs);
-		$breadcrumbs[$this->collective->list->node->name] = Yii::app()->urlManager->createUrl('/admin/collectivesList/update', array('id' => $this->collective->list->id));
-		$breadcrumbs[$this->collective->name] = Yii::app()->urlManager->createUrl('/admin/collective/update', array('id' => $this->collective->id));
-		$breadcrumbs['Разделы'] = Yii::app()->urlManager->createUrl('/admin/collectivesStructure/list', array('collective_id' => $this->collective->id));
+		$name = array_pop($breadcrumbs);
+		$breadcrumbs[$name] = Yii::app()->urlManager->createUrl('/admin/collectivesList/update', array('id' => $this->collective->list->id));
+		$breadcrumbs[$this->collective->name] = Yii::app()->urlManager->createUrl('/admin/collectivesStructure/list', array('collective_id' => $this->collective->id));
 		if ( $this->isNewRecord )
 			$breadcrumbs[] = 'Добавление раздела';
 		else

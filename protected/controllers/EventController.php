@@ -15,12 +15,22 @@ class EventController extends FrontController
 		));
 	}
 
-	public function actionIndex()
+	public function actionIndex($collective_id)
 	{
 		$criteria = new CDbCriteria();
-		$criteria->compare('status', CollectiveNews::STATUS_PUBLISH);
-		$criteria->compare('type', CollectiveNews::TYPE_EVENT);
-		$criteria->order = 'date_public DESC';
+		$criteria->compare('t.status', CollectiveNews::STATUS_PUBLISH);
+		$criteria->compare('t.type', CollectiveNews::TYPE_EVENT);
+		if ( $collective_id ) {
+			$collective = Collective::model()->findByPk($collective_id);
+			if ( $collective ) {
+				$criteria->with = array('list.node');
+				$criteria->compare('node.collective_id', $collective_id);
+				$this->breadcrumbs = $collective->list->node->getBreadcrumbs();
+				array_pop( $this->breadcrumbs );
+				$this->breadcrumbs[$collective->name] = $collective->getUrl();
+			}
+		}
+		$criteria->order = 't.date_public DESC';
 		$dataProvider = new CActiveDataProvider('CollectiveNews', array(
 			'criteria' => $criteria,
 			'pagination' => false
