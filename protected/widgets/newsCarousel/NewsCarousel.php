@@ -12,12 +12,18 @@
  * 		'img' => src to image
  * 		'url' => ''
  * )
+ *
+ * or $items array(
+ *		'html' => '',
+ * ) if @property $raw = true;
  */
 
 class NewsCarousel extends CWidget
 {
 	protected $id;
+	public $raw = false;
 	public $items;
+	public $clientOptions = array();
 	public $htmlOptions = array();
 
 	public function run()
@@ -29,7 +35,16 @@ class NewsCarousel extends CWidget
 			$this->htmlOptions['class'] = 'carousel';
 		}
 		$this->registerScripts();
-		$this->render('container');
+
+		$clientOptions = CMap::mergeArray(array(
+			'autoPlay' => true,
+		), $this->clientOptions);
+		Yii::app()->getClientScript()->registerScript("carousel-".$this->id, "$(document).ready(function() { $('#{$this->id}').init_carousel(".CJavaScript::encode($clientOptions)."); });", CClientScript::POS_END);
+		if ( $this->raw ) {
+			$this->render('content_container');
+		} else {
+			$this->render('container');
+		}
 	}
 
 	protected function registerScripts()
@@ -43,6 +58,5 @@ class NewsCarousel extends CWidget
 		$appAssetsPath = $this->controller->getAssetsUrl();
 		$cs->registerScriptFile($appAssetsPath.'/vendor/owl/owl.carousel.js', CClientScript::POS_END);
 		$cs->registerCssFile($appAssetsPath.'/vendor/owl/owl.carousel.css');
-		$cs->registerScript("carousel", "$(document).ready(function() { $('#{$this->id}').init_carousel(); });", CClientScript::POS_END);
 	}
 }

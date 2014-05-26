@@ -1,4 +1,36 @@
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+@fix-width:     980px;
+@big-width:     1340px;
+@sidebar-width: 234px;
+
+@white:         #fff;
+@black:         #000000;
+@dark:          #323232;
+@gray:          #808384;
+@gray-cod:      #1c1c1c;
+@gray-lite:     #f2f2f2;
+@gray-white:    #e7e7e7;
+@blue:          #8bd2f9;
+@blue-dark:     #38799e;
+@seagull:       #77c2ed;
+@blue-lite:     #eaf6fc;
+@orange:        #fb805f;
+@orange-dark:   #da6748;
+@tabasko:       #a22610;
+@scorpion:      #565656;
+
+@button-hover:   #e36342;
+@button-border:   #dc3f16;
+
+
+.input-shadow {
+    border: none;
+    border-bottom: 1px solid #6a9bb6;
+    box-shadow: 0 1px 2px 0 @gray inset;
+    -moz-box-shadow: 0 1px 2px 0 @gray inset;
+    -webkit-box-shadow: 0 1px 2px 0 @gray inset;
+}
+
 
 html,
 button,
@@ -267,33 +299,7 @@ ul {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-@fix-width:     980px;
-@big-width:     1340px;
 
-@white:         #fff;
-@black:         #000000;
-@dark:          #323232;
-@gray:          #808384;
-@gray-cod:      #1c1c1c;
-@gray-lite:     #f2f2f2;
-@gray-white:    #e7e7e7;
-@blue:          #8bd2f9;
-@blue-dark:     #38799e;
-@blue-lite:     #eaf6fc;
-@orange:        #fb805f;
-@orange-dark:   #da6748;
-
-@button-hover:   #e36342;
-@button-border:   #dc3f16;
-
-
-.input-shadow {
-    border: none;
-    border-bottom: 1px solid #6a9bb6;
-    box-shadow: 0 1px 2px 0 @gray inset;
-    -moz-box-shadow: 0 1px 2px 0 @gray inset;
-    -webkit-box-shadow: 0 1px 2px 0 @gray inset;
-}
 
 
 // regular
@@ -456,6 +462,11 @@ h3 {
     font-size: 14px;
     margin-top: 0;
     margin-bottom: 18px;
+}
+
+p {
+    color: @scorpion;
+    font-size: 14px;
 }
 
 // Шапка
@@ -653,6 +664,40 @@ header {
 }
 
 
+.columns {
+    overflow: hidden;
+    div[class|=col] {
+        float: left;
+    }
+    .col-main {
+        width: @fix-width - @sidebar-width - 16px;
+        margin-right: 16px;
+    }
+    .col-sidebar {
+        width: @sidebar-width;
+    }
+}
+
+
+.page {
+    .preview {
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+    .date {
+        color: @black;
+        font-weight: 600;
+    }
+    h2 {
+        margin-bottom: 12px;
+        color: @orange;
+        text-transform: uppercase;
+    }
+}
+
+
 .gallery {
     font-size: 0;
     .item {
@@ -689,7 +734,15 @@ header {
 }
 
 
-// Новостной блок
+// Сайдбар
+.sidebar {
+    .gallery .item:nth-child(4n) {
+        margin-right: 0;
+    }
+}
+
+
+// Новостной блок со слайдером и лентой
 .news-section  {
     font-size: 0;
     margin-bottom: 20px;
@@ -767,6 +820,47 @@ header {
             }
         }
     }
+    .content-carousel {
+        display: inline-block;
+        vertical-align: top;
+        width: 670px;
+        height: 300px;
+        margin-right: 5px;
+        font-size: 14px;
+        background-color: @white;
+        .news-slider-content {
+            padding: 40px;
+            overflow: hidden;
+            img {
+                float: left;
+                display: inline-block;
+                margin: 0 20px 20px 0;
+            }
+            p {
+                margin-top: 0;
+                margin-bottom: 14px;
+                font-size: 14px;
+            }
+            .date {
+                color: @black;
+                font-size: 13px;
+                margin-bottom: 6px;
+                font-weight: 600;
+            }
+            .title {
+                color: @orange;
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+        }
+        .carousel {
+            width: 670px;
+            height: 300px;
+            .owl-item {
+                height: 300px;
+            }
+        }
+    }
     .news-calendar {
         display: inline-block;
         vertical-align: top;
@@ -775,6 +869,8 @@ header {
 }
 
 
+
+// Услуги на главной странице
 .services {
     .container {
         position: relative;
@@ -892,9 +988,20 @@ header {
         }
         ul {
             margin-bottom: 15px;
-            padding-left: 40px;
+            padding-left: 30px;
             li {
-                line-height: 1.2;
+                padding-left: 30px;
+                line-height: 1;
+                margin-bottom: 2px;
+                a {
+                    display: block;
+                    padding: 3px 0 5px 8px;
+                    &.active {
+                        color: @white;
+                        background-color: @seagull;
+                        text-decoration: none;
+                    }
+                }
             }
         }
     }
@@ -954,6 +1061,54 @@ header {
             }
 
         }
+    }
+}
+
+
+.error {
+    text-align: center;
+    padding: 30px 0;
+    .error-balloon {
+        background: url(../img/error-balloon.png);
+        width: 406px;
+        height: 321px;
+        display: inline-block;
+        text-align: middle;
+        .code {
+            display: inline-block;
+            color: @gray-lite;
+            font-size: 100px;
+            text-shadow: 0 1px 1px @tabasko, 0 -1px 1px @tabasko, 1px 0 1px @tabasko, -1px 0 1px @tabasko;
+            background: url(../img/glow-border.png) bottom no-repeat;
+            background-size: 100% 2px;
+            margin-top: 60px;
+            width: 270px;
+        }
+        .message {
+            color: @black;
+            text-shadow: 0 1px 1px fade(@white, 35%);
+            font-size: 14px;
+            display: inline-block;
+            background: url(../img/glow-border-short.png) bottom no-repeat;
+            line-height: 1;
+            padding: 10px 0 12px;
+        }
+        .link {
+            a {
+                color: @black;
+                font-size: 14px;
+                text-transform: uppercase;
+                text-shadow: 0 1px 1px fade(@white, 35%);
+                line-height: 1;
+                display: inline-block;
+                padding: 10px 0 12px;
+            }
+        }
+    }
+    .debug {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 30px;
     }
 }
 
@@ -1197,6 +1352,28 @@ footer {
 .carousel {
     width: 450px;
     height: 300px;
+    position: relative;
+    .next, .prev {
+        position: absolute;
+        width: 18px;
+        height: 19px;
+        cursor: pointer;
+        display: block;
+        background: url(../img/navigators.png) no-repeat;
+        margin-top: -10px;
+        z-index: 100;
+        outline: none;
+    }
+    .prev {
+        top: 50%;
+        left: 16px;
+        background-position: 0 -42px;
+    }
+    .next {
+        top: 50%;
+        right: 16px;
+        background-position: -21px -42px;
+    }
     .captions {
         background-color: @black;
         height: 50px;
@@ -1248,30 +1425,8 @@ footer {
             }
 
         }
-
-        .next, .prev {
-            position: absolute;
-            width: 18px;
-            height: 19px;
-            cursor: pointer;
-            display: block;
-            background: url(../img/navigators.png) no-repeat;
-            top: 50%;
-            margin-top: -10px;
-            z-index: 100;
-            outline: none;
-        }
-        .prev {
-            left: 16px;
-            background-position: 0 -42px;
-        }
-        .next {
-            right: 16px;
-            background-position: -21px -42px;
-        }
     }
 }
-
 
 
 

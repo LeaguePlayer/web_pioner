@@ -18,7 +18,7 @@
 				</div>
 			</div>
 		</div>
-		<? if ( count($this->items) ): ?>
+		<? if ( count($this->items) > 1 ): ?>
 			<a class="prev" href="#"></a>
 			<a class="next" href="#"></a>
 		<? endif ?>

@@ -15,6 +15,8 @@ $(document).ready(function() {
         var loader = $('.loader', services_block);
         $('a.fancybox', services_block).fancybox();
         $('.loadCollectives', services_block).click(function(e) {
+            $('.loadCollectives', services_block).removeClass('active');
+            $(this).addClass('active');
             loader.show();
             $.ajax({
                 url: $(this).attr('href'),

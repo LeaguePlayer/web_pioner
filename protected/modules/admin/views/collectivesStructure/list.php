@@ -47,11 +47,6 @@ $this->menu=array(
 			'value' => '$data->material->name',
 		),
 		array(
-			'header' => 'Ссылка',
-			'type' => 'raw',
-			'value' => 'CHtml::link($data->getUrl(), $data->getUrl(), array("target" => "_blank"))',
-		),
-		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{delete}',
 		),

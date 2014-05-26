@@ -72,14 +72,16 @@
 							<ul>
 								<? foreach ( $activityNode->getChildNodesByType('Section') as $sectionNode ): ?>
 									<?php
+										$activeItem = false;
 										if ( $firstCollectivesList === null ) {
 											$listNode = $sectionNode->children()->find();
 											if ( $listNode ) {
 												$firstCollectivesList = $listNode->getComponent();
+												$activeItem = true;
 											}
 										}
 									?>
-									<li><a class="loadCollectives" href="<?= $this->createUrl('/section/loadCollectives', array('url'=>$sectionNode->url)) ?>"><?= $sectionNode->name ?></a></li>
+									<li><a class="loadCollectives<? if ($activeItem) echo ' active' ?>" href="<?= $this->createUrl('/section/loadCollectives', array('url'=>$sectionNode->url)) ?>"><?= $sectionNode->name ?></a></li>
 								<? endforeach ?>
 							</ul>
 						</li>

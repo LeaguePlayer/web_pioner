@@ -56,4 +56,30 @@ class EventController extends FrontController
 			'model' => $model
 		));
 	}
+
+	public function actionView($id)
+	{
+		$model = $this->loadModel('CollectiveNews', $id);
+
+		$criteria = new CDbCriteria();
+		$criteria->compare('status', CollectiveNews::STATUS_PUBLISH);
+		$criteria->addCondition('id<>:id');
+		$criteria->params[':id'] = $model->id;
+		$criteria->order = 'date_public DESC';
+		$feedNews = CollectiveNews::model()->findAll($criteria);
+
+		$criteria->limit = 4;
+		$criteria->compare('type', $model->type);
+		$otherNewsData = new CActiveDataProvider('CollectiveNews', array(
+			'criteria' => $criteria,
+			'pagination' => false
+		));
+
+		$this->registerSeoTags($model, 'title');
+		$this->render('//news/view', array(
+			'model'=>$model,
+			'feedNews'=>$feedNews,
+			'otherNewsData'=>$otherNewsData
+		));
+	}
 }

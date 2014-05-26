@@ -19,10 +19,25 @@ class NewsController extends FrontController
     {
         $model = $this->loadModel('CollectiveNews', $id);
 
-        $this->registerSeoTags($model, 'title');
+		$criteria = new CDbCriteria();
+		$criteria->compare('status', CollectiveNews::STATUS_PUBLISH);
+		$criteria->addCondition('id<>:id');
+		$criteria->params[':id'] = $model->id;
+		$criteria->order = 'date_public DESC';
+		$feedNews = CollectiveNews::model()->findAll($criteria);
 
+		$criteria->compare('type', $model->type);
+		$criteria->limit = 4;
+		$otherNewsData = new CActiveDataProvider('CollectiveNews', array(
+			'criteria' => $criteria,
+			'pagination' => false
+		));
+
+        $this->registerSeoTags($model, 'title');
         $this->render('view', array(
             'model'=>$model,
+            'feedNews'=>$feedNews,
+			'otherNewsData'=>$otherNewsData
         ));
     }
 }
