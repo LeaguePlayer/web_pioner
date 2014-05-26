@@ -15,6 +15,26 @@ class EventController extends FrontController
 		));
 	}
 
+	public function actionIndex()
+	{
+		$criteria = new CDbCriteria();
+		$criteria->compare('status', CollectiveNews::STATUS_PUBLISH);
+		$criteria->compare('type', CollectiveNews::TYPE_EVENT);
+		$criteria->order = 'date_public DESC';
+		$dataProvider = new CActiveDataProvider('CollectiveNews', array(
+			'criteria' => $criteria,
+			'pagination' => false
+		));
+
+		$title = 'Мероприятия';
+		$this->breadcrumbs[] = $title;
+
+		$this->render('//news/index', array(
+			'title' => $title,
+			'dataProvider' => $dataProvider
+		));
+	}
+
 	public function actionGetEnabledDays()
 	{
 		$criteria = new CDbCriteria();
@@ -76,6 +96,7 @@ class EventController extends FrontController
 		));
 
 		$this->registerSeoTags($model, 'title');
+		$this->breadcrumbs = $model->getBreadcrumbs();
 		$this->render('//news/view', array(
 			'model'=>$model,
 			'feedNews'=>$feedNews,

@@ -12,6 +12,15 @@
 	<div class="error-balloon">
 		<div class="code">404</div>
 		<div class="message">Опаньки! Страница не найдена :(</div>
-		<div class="link"><a href="<?= Yii::app()->request->urlReferrer ?>">Назад</a></div>
+		<?
+			$baseUrl = Yii::app()->getBaseUrl(true);
+			$urlReferrer = Yii::app()->request->urlReferrer;
+			if ( !$urlReferrer ) {
+				$backUrl = $baseUrl;
+			} else {
+				$backUrl = ( strpos($urlReferrer, $baseUrl) === false ) ? $baseUrl : $urlReferrer;
+			}
+		?>
+		<div class="link"><a href="<?= $backUrl ?>">Назад</a></div>
 	</div>
 </div>

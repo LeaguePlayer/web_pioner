@@ -2,18 +2,25 @@
 
 class NewsController extends FrontController
 {
-    public function accessRules()
-    {
-        return array(
-            array('allow',  // allow all users to perform 'index' and 'view' actions
-                'actions'=>array('index','view'),
-                'users'=>array('*'),
-            ),
-            array('deny',  // deny all users
-                'users'=>array('*'),
-            ),
-        );
-    }
+	public function actionIndex()
+	{
+		$criteria = new CDbCriteria();
+		$criteria->compare('status', CollectiveNews::STATUS_PUBLISH);
+		$criteria->compare('type', CollectiveNews::TYPE_NEWS);
+		$criteria->order = 'date_public DESC';
+		$dataProvider = new CActiveDataProvider('CollectiveNews', array(
+			'criteria' => $criteria,
+			'pagination' => false
+		));
+
+		$title = 'Новости';
+		$this->breadcrumbs[] = $title;
+
+		$this->render('//news/index', array(
+			'title' => $title,
+			'dataProvider' => $dataProvider
+		));
+	}
 
     public function actionView($id)
     {
@@ -34,6 +41,7 @@ class NewsController extends FrontController
 		));
 
         $this->registerSeoTags($model, 'title');
+		$this->breadcrumbs = $model->getBreadcrumbs();
         $this->render('view', array(
             'model'=>$model,
             'feedNews'=>$feedNews,

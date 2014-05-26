@@ -179,10 +179,22 @@ class CollectiveNews extends EActiveRecord
 
 	public function getUrl()
 	{
-		if ( $this->type == self::TYPE_NEWS )
+		if ( $this->type == self::TYPE_NEWS ) {
 			return Yii::app()->createUrl('/news/view', array('id'=>$this->id));
-		else {
+		} else {
 			return Yii::app()->createUrl('/event/view', array('id'=>$this->id));
 		}
+	}
+
+	public function getBreadcrumbs()
+	{
+		$breadcrumbs = array();
+		if ( $this->type == self::TYPE_NEWS ) {
+			$breadcrumbs['Новости'] = Yii::app()->createUrl('/news/index');
+		} else {
+			$breadcrumbs['Мероприятия'] = Yii::app()->createUrl('/event/index');
+		}
+		$breadcrumbs[] = $this->title;
+		return $breadcrumbs;
 	}
 }
