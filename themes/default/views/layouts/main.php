@@ -45,7 +45,7 @@
 						</ul>
 						<form method="get" class="search">
 							<div class="input-group">
-								<input type="search"/>
+								<input type="search" />
 								<button><i class="icon-search"></i></button>
 							</div>
 						</form>

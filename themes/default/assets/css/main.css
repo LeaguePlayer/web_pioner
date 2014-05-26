@@ -1342,6 +1342,10 @@ footer .master .slogan {
   width: 420px;
   margin-right: 20px;
 }
+.contacts .item .info h3 {
+  font-weight: 600;
+  text-transform: uppercase;
+}
 .contacts .item .info p {
   margin-top: 0;
   margin-bottom: 10px;
