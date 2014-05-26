@@ -120,4 +120,14 @@ class SiteHelper {
 	    $message = str_replace("\n.", "\n..", $message);
         return mail($to,'=?UTF-8?B?'.base64_encode($subject).'?=',$message,$headers);
     }
+
+	public static function intro($string, $maxlen, $endintro = '...')
+	{
+		$_str = trim($string);
+		$_len = strlen($_str);
+		if ($_len <= $maxlen)
+			return $string;
+		else
+			return mb_substr($_str, 0, $maxlen, 'UTF-8').$endintro;
+	}
 }

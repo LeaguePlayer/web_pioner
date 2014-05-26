@@ -754,9 +754,14 @@ header .sub-menu ul li a {
   display: inline-block;
   margin: 0 20px 20px 0;
 }
+.news-section .content-carousel .news-slider-content .content {
+  overflow: hidden;
+  margin-bottom: 14px;
+  max-height: 178px;
+}
 .news-section .content-carousel .news-slider-content p {
   margin-top: 0;
-  margin-bottom: 14px;
+  margin-bottom: 0;
   font-size: 14px;
 }
 .news-section .content-carousel .news-slider-content .date {
@@ -1295,6 +1300,7 @@ footer .master .slogan {
 }
 .carousel .captions .caption-carousel .item p {
   margin: 0;
+  color: #ffffff;
   text-transform: uppercase;
   font-size: 10px;
   height: 14px;
