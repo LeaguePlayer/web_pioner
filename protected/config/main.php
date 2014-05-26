@@ -43,6 +43,10 @@ return array_replace_recursive(
         ),
         // application components
         'components'=>array(
+			'cache' => array(
+				'class' => 'system.caching.CDbCache',
+				'connectionID' => 'db'
+			),
             'config' => array(
                 'class' => 'DConfig'
             ),
@@ -89,7 +93,8 @@ return array_replace_recursive(
                     'admin'=>'admin/structure',
                     'admin/<controller:!config>' => 'admin/<controller>/list',
                     '/'=>'site/index',
-                    '<controller:page>/<url:[\w_-]+>' => '<controller>/view',
+					'/contacts' => 'page/contacts',
+					'<controller:page>/<url:[\w_-]+>' => '<controller>/view',
                 ),
             ),
             'clientScript'=>array(

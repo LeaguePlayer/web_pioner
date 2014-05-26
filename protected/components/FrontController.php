@@ -9,6 +9,22 @@ class FrontController extends Controller
     public $menu=array();
     public $breadcrumbs=array();
 
+	public function behaviors()
+	{
+		return array(
+			'InlineWidgetsBehavior'=>array(
+				'class'=>'DInlineWidgetsBehavior',
+				'location'=>'application.widgets',
+				'startBlock'=> '{{w:',
+				'endBlock'=> '}}',
+				'widgets'=>array(
+					'application.widgets.childNodes.ChildNodes',
+					'application.widgets.contacts.Contacts',
+				),
+			),
+		);
+	}
+
     public function init() {
         parent::init();
         $this->title = Yii::app()->name;

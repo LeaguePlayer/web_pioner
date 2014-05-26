@@ -140,6 +140,25 @@ ul {
 }
 
 
+
+ul.grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+        padding-left: 40px;
+        padding-top: 4px;
+        padding-bottom: 5px;
+        background: url(../img/arrow.png) 10px 11px no-repeat;
+        margin-top: 0;
+        margin-bottom: 5px;
+        &:nth-child(2n) {
+            background-color: @blue-lite;
+        }
+    }
+}
+
+
 .ui-datepicker {
     .ui-datepicker-header {
         position: relative;
@@ -428,8 +447,9 @@ input[type=search] {
 
 body {
     font-family: 'segoe_ui', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.4;
+    color: @scorpion;
     * {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -935,15 +955,6 @@ header {
             margin-top: 0;
             margin-bottom: 5px;
         }
-        &.grid {
-            li {
-                padding-top: 4px;
-                padding-bottom: 5px;
-            }
-            li:nth-child(2n-1) {
-                background-color: @blue-lite;
-            }
-        }
     }
     ul.additional_training {
         & > li {
@@ -1430,6 +1441,36 @@ footer {
                 }
             }
 
+        }
+    }
+}
+
+
+
+.contacts {
+    padding: 20px;
+    background-color: @white;
+    h2 {
+        color: @black;
+        text-align: center;
+        margin: 0 20% 20px;
+    }
+    .item {
+        margin-bottom: 30px;
+        overflow: hidden;
+        .info {
+            float: left;
+            width: 420px;
+            margin-right: 20px;
+            p {
+                margin-top: 0;
+                margin-bottom: 10px;
+            }
+        }
+        .map {
+            float: left;
+            width: 460px;
+            height: 150px;
         }
     }
 }

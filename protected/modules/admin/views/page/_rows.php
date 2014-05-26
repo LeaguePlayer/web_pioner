@@ -10,15 +10,50 @@
 
 <?php echo $form->textAreaControlGroup($model,'description',array('rows'=>6, 'cols'=>50, 'class'=>'span12')); ?>
 
-<div class='control-group'>
+<!--<div class='control-group'>-->
+<!--	--><?php //echo CHtml::activeLabelEx($model, 'wswg_body'); ?>
+<!--	--><?php //$this->widget('appext.ckeditor.CKEditorWidget', array(
+//		'model' => $model,
+//		'attribute' => 'wswg_body',
+//		'config' => array(
+//			'width' => '99%'
+//		),
+//	)); ?>
+<!--	--><?php //echo $form->error($model, 'wswg_body'); ?>
+<!--</div>-->
+
+<div class='control-group' style="overflow: hidden;">
 	<?php echo CHtml::activeLabelEx($model, 'wswg_body'); ?>
-	<?php $this->widget('appext.ckeditor.CKEditorWidget', array(
+	<?php $this->widget('appext.imperavielfinder.imperavi-redactor-widget.ImperaviRedactorWidget', array(
 		'model' => $model,
 		'attribute' => 'wswg_body',
-		'config' => array(
-			'width' => '99%'
+		'options' => array(
+			'lang' => 'ru',
+			'iframe' => true,
+			'minHeight' => 500,
+			'css' => $this->getAssetsUrl('application').'/css/main.css',
+			'thumbLinkClass' => 'athumbnail', //Класс по-умолчанию для ссылки на полное изображение вокруг thumbnail
+			'thumbClass' => 'thumbnail pull-left', //Класс по-умолчанию для  thumbnail
+			'defaultUplthumb' => true, //Вставлять по-умолчанию после загрузки превью? если нет - полное изображение
+			'fmUrl' => Yii::app()->createUrl('/admin/file/fileUploaderConnector'), //ссылка на ElFinderConnectorAction
+			//'allowedTags' => array('p', 'h1', 'h2', 'pre', 'div', 'ul', 'li'),
+			'convertDivs' => false,
+			'tabSpaces' => 2
+		),
+		'plugins' => array(
+			'fullscreen' => array(
+				'js' => array('fullscreen.js',),
+			),
+			'fontsize' => array(
+				'js' => array('fontsize.js',),
+			),
+			'fontcolor' => array(
+				'js' => array('fontcolor.js',),
+			),
+			'extelf' => array(
+				'js' => array('extelf.js',),
+			),
 		),
 	)); ?>
 	<?php echo $form->error($model, 'wswg_body'); ?>
 </div>
-

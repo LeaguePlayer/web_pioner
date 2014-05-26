@@ -8,7 +8,6 @@ class PageController extends FrontController
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
 		);
 	}
 
@@ -56,6 +55,20 @@ class PageController extends FrontController
 		$dataProvider=new CActiveDataProvider('Page');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+		));
+	}
+
+	public function actionContacts()
+	{
+		$node = Structure::model()->findByUrl('contacts');
+		if ( !$node ) {
+			throw new CHttpException(404, 'Узел с идентификатором "contacts" не найден');
+		}
+
+		$this->registerSeoTags($node, 'name');
+		$this->render('contacts', array(
+			'node' => $node,
+			'page' => $node->getComponent()
 		));
 	}
 }

@@ -30,7 +30,7 @@ class Place extends EActiveRecord
             array('name', 'required'),
             array('list_id, seo_id, status, sort', 'numerical', 'integerOnly'=>true),
             array('name, address', 'length', 'max'=>255),
-            array('create_time, update_time, json_schedule', 'safe'),
+            array('create_time, update_time, json_schedule, description', 'safe'),
             // The following rule is used by search().
             array('id, name, img_preview, description, address, list_id, seo_id, status, sort, create_time, update_time', 'safe', 'on'=>'search'),
         );

@@ -7,7 +7,9 @@
 </div>
 
 
-<section class="collective">
-	<h2><?= $model->name ?></h2>
-	<?php echo $model->description ?>
-</section>
+<div class="page">
+	<section class="collective">
+		<h2><?= $model->name ?></h2>
+		<?php echo $model->description ?>
+	</section>
+</div>
