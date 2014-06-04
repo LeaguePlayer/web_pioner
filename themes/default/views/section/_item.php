@@ -18,6 +18,6 @@
 		<a href="<?= $this->createUrl('/event/index', array('collective_id'=>$data->id)) ?>">Мероприятия</a>
 		<a href="<?= $this->createUrl('/news/index', array('collective_id'=>$data->id)) ?>">Новости</a>
 		<a href="<?= $this->createUrl('/gallery/index', array('collective_id'=>$data->id)) ?>">Фотоотчеты</a>
-		<a class="order" href="<?= $this->createUrl('/collective/order', array('collective_id'=>$data->id)) ?>">Записаться</a>
+		<a class="order" href="#" rel="<?= $data->id ?>">Записаться</a>
 	</div>
 </div>

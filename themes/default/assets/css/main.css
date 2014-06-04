@@ -328,19 +328,32 @@ ul.grid li:nth-child(2n) {
   vertical-align: middle;
   background-position: -24px 0;
 }
-input {
+input[type=text],
+input[type=search],
+input[type=password] {
   font-size: 14px;
-  padding: 5px 12px;
-  box-sizing: border-box;
+  background-color: #ffffff;
+  border: 1px solid #808384;
   outline: 0;
+  color: #808384;
+  box-sizing: border-box;
+  o-border-radius: 17px;
+  moz-border-radius: 17px;
+  webkit-border-radius: 17px;
+  border-radius: 17px;
+  display: inline-block;
+}
+input[type=text],
+input[type=search],
+input[type=password] {
+  padding: 5px 12px;
+}
+input[type=search] {
   border: none;
   border-bottom: 1px solid #6a9bb6;
   box-shadow: 0 1px 2px 0 #808384 inset;
   -moz-box-shadow: 0 1px 2px 0 #808384 inset;
   -webkit-box-shadow: 0 1px 2px 0 #808384 inset;
-}
-input[type=search] {
-  border-radius: 17px;
 }
 .input-group {
   position: relative;
@@ -348,7 +361,6 @@ input[type=search] {
   border-collapse: separate;
 }
 .input-group input {
-  display: table-cell;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: none;
@@ -363,6 +375,7 @@ input[type=search] {
   margin-left: -1px;
   position: relative;
   outline: none;
+  background-color: #edf3f5;
   border: none;
   border-bottom: 1px solid #6a9bb6;
   box-shadow: 0 1px 2px 0 #808384 inset;
@@ -376,6 +389,56 @@ input[type=search] {
 .input-group input[type=search] + button .icon-search {
   height: 14px;
   background-position: -24px -5px;
+}
+.form {
+  text-align: center;
+}
+.form h3 {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+.form .row {
+  text-align: left;
+  margin-bottom: 15px;
+}
+.form .row label {
+  display: inline-block;
+  vertical-align: middle;
+  width: 160px;
+  margin-right: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.form .row label .required {
+  color: #da6748;
+}
+.form .row input[type=text],
+.form .row .selector {
+  text-align: left;
+  height: 30px;
+  width: 240px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.form .row select {
+  width: 206px;
+}
+.form .row.error {
+  text-align: left;
+  padding: 0;
+}
+.form .row .wrapError {
+  margin-left: 177px;
+  line-height: 1;
+  font-size: 12px;
+  color: #da6748;
+}
+.form button,
+.form input[type=submit] {
+  display: inline-block;
+  margin: 20px 0 0;
 }
 body {
   font-family: 'segoe_ui', sans-serif;

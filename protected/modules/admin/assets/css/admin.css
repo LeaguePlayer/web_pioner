@@ -42,8 +42,20 @@ form .line{
 .grid-view tbody tr{
   background-color: #eff;
 }
+.grid-view tbody tr.status-new{
+    background-color: #fcf8e3;
+    border-top-color: #fbeed5;
+}
+.grid-view tbody tr.status-success{
+    background-color: #dff0d8;
+    border-top-color: #d6e9c6;
+}
 .grid-view tbody .sort{
   cursor: move;
+}
+.detail-view select,
+.detail-view input {
+    margin-bottom: 0;
 }
 .row-fluid .handler{
   padding: 3px 5px;

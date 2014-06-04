@@ -19,7 +19,7 @@
 	$cs->registerCssFile($assetsUrl.'/vendor/owl/owl.carousel.css');
 	$cs->registerScriptFile($assetsUrl.'/vendor/owl/owl.carousel.js', CClientScript::POS_END);
 
-//	$cs->registerCssFile($assetsUrl.'/vendor/uniform/themes/default/css/uniform.default.css');
+	$cs->registerCssFile($assetsUrl.'/vendor/uniform/themes/pioner/css/uniform.pioner.css');
 	$cs->registerScriptFile($assetsUrl.'/vendor/uniform/jquery.uniform.min.js', CClientScript::POS_END);
 
 	$cs->registerScriptFile($assetsUrl.'/js/main.js?v=5', CClientScript::POS_END);

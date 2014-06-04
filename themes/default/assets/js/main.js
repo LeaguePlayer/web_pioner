@@ -47,9 +47,13 @@ $(document).ready(function() {
     $("select").uniform();
 
     $(document).on('click', 'a.order', function() {
+        var collective_id = $(this).attr('rel');
         $.fancybox.open('#order-form-modal', {
-            autoSize: false,
-            width: 600
+            autoSize: true,
+            afterShow: function() {
+                $('#Order_collective_id', this.inner).val(collective_id);
+                $.uniform.update();
+            }
         });
         return false;
     });

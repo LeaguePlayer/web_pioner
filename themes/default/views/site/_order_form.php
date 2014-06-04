@@ -1,7 +1,9 @@
-<div id="order-form-modal">
+<div class="form" id="order-form-modal">
+	<h3>Запись на посещение занятий</h3>
+
 	<?php $form = $this->beginWidget('CActiveForm', array(
 		'id' => 'order-form',
-		'action' => $this->createUrl('collective/order'),
+		'action' => $this->createUrl('site/order'),
 		'enableClientValidation' => true,
 		'clientOptions' => array(
 			'validateOnType' => true,
@@ -10,13 +12,13 @@
 						if ( hasError ) return;
 						var form = $(form);
 						$.ajax({
-							url: action,
+							url: form.attr('action'),
 							type: 'POST',
 							dataType: 'json',
 							data: form.serialize(),
 							success: function(data) {
 								if ( data.success ) {
-									window.location.href = '".$this->createUrl('creditprogram/thanks')."';
+									window.location.href = '".$this->createUrl('site/thanks')."';
 								}
 							}
 						});
@@ -31,6 +33,23 @@
 			<?= $form->error($model, 'collective_id') ?>
 		</div>
 	</div>
+
+	<div class="row">
+		<?= $form->labelEx($model, 'gender') ?>
+		<?= $form->dropDownList($model, 'gender', Order::lookup('gender'), array('empty' => 'Не выбрано')) ?>
+		<div class="wrapError">
+			<?= $form->error($model, 'gender') ?>
+		</div>
+	</div>
+
+	<div class="row">
+		<?= $form->labelEx($model, 'age') ?>
+		<?= $form->textField($model, 'age') ?>
+		<div class="wrapError">
+			<?= $form->error($model, 'age') ?>
+		</div>
+	</div>
+
 	<div class="row">
 		<?= $form->labelEx($model, 'name') ?>
 		<?= $form->textField($model, 'name') ?>
@@ -38,6 +57,24 @@
 			<?= $form->error($model, 'name') ?>
 		</div>
 	</div>
+
+	<div class="row">
+		<?= $form->labelEx($model, 'phone') ?>
+		<?= $form->textField($model, 'phone') ?>
+		<div class="wrapError">
+			<?= $form->error($model, 'phone') ?>
+		</div>
+	</div>
+
+	<div class="row">
+		<?= $form->labelEx($model, 'email') ?>
+		<?= $form->textField($model, 'email') ?>
+		<div class="wrapError">
+			<?= $form->error($model, 'email') ?>
+		</div>
+	</div>
+
+
 	<button class="btn">Записаться</button>
 	<?php $this->endWidget() ?>
 </div>

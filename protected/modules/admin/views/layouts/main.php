@@ -11,10 +11,13 @@
             $menuItems = array(
                 array('label'=>'Разделы сайта', 'url'=>array('/admin/structure')),
                 array('label'=>'Меню сайта', 'url'=>array('/admin/menu')),
-                array('label'=>'Материалы', 'url'=>array('/admin/material')),
                 array('label'=>'Настройки', 'url'=>array('/admin/config')),
                 array('label'=>'Галереи', 'url'=>array('/admin/gallery/manage')),
+                array('label'=>'Заявки', 'url'=>array('/admin/order')),
             );
+			if ( YII_DEBUG ) {
+				$menuItems[] = array('label'=>'Материалы', 'url'=>array('/admin/material'));
+			}
         ?>
         <?php
             $userlogin = Yii::app()->user->name ? Yii::app()->user->name : Yii::app()->user->email;

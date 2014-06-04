@@ -62,4 +62,19 @@ class SiteController extends FrontController
 				$this->render('error', $error);
 		}
 	}
+
+
+	public function actionOrder()
+	{
+		$order = new Order;
+		$response['success'] = false;
+		if ( isset($_POST['Order']) ) {
+			$order->attributes = $_POST['Order'];
+			$order->status = Order::STATUS_NEW;
+			if ( $order->save() ) {
+				$response['success'] = true;
+			}
+		}
+		echo CJSON::encode($response);
+	}
 }

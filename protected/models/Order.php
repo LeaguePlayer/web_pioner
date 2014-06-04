@@ -18,6 +18,65 @@
  */
 class Order extends CActiveRecord
 {
+	const GENDER_MALE = 1;
+	const GENDER_FEMALE = 2;
+
+	const STATUS_NEW = 1;
+	const STATUS_PROCESS = 2;
+	const STATUS_SUCCESS = 3;
+
+	public static function lookup($attribute)
+	{
+		switch ( $attribute ) {
+			case 'gender':
+				return array(
+					self::GENDER_MALE => 'Мужской',
+					self::GENDER_FEMALE => 'Женский',
+				);
+			case 'status':
+				return array(
+					self::STATUS_NEW => 'Необработанная',
+					self::STATUS_PROCESS => 'В обработке',
+					self::STATUS_SUCCESS => 'Выполнено',
+				);
+		}
+	}
+
+	public function getLookupValue($attribute)
+	{
+		$labels = self::lookup($attribute);
+		return $labels[$this->{$attribute}];
+	}
+
+	public function getIsNew()
+	{
+		return $this->status == self::STATUS_NEW;
+	}
+
+	public function getIsProcess()
+	{
+		return $this->status == self::STATUS_PROCESS;
+	}
+
+	public function getIsSuccess()
+	{
+		return $this->status == self::STATUS_SUCCESS;
+	}
+
+	public function getStatusAlias()
+	{
+		switch ( $this->status ) {
+			case self::STATUS_NEW:
+				return 'new';
+			case self::STATUS_PROCESS:
+				return 'process';
+			case self::STATUS_SUCCESS:
+				return 'success';
+			default:
+				return '';
+		}
+	}
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -34,6 +93,8 @@ class Order extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('name, phone, collective_id', 'required'),
+			array('email', 'email'),
 			array('type, gender, age, collective_id, status', 'numerical', 'integerOnly'=>true),
 			array('name, phone, email', 'length', 'max'=>255),
 			array('create_time, update_time', 'safe'),
@@ -51,6 +112,7 @@ class Order extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'collective' => array(self::BELONGS_TO, 'Collective', 'collective_id')
 		);
 	}
 
@@ -71,7 +133,20 @@ class Order extends CActiveRecord
 			'status' => 'Статус',
 			'create_time' => 'Дата создания',
 			'update_time' => 'Дата последнего редактирования',
+			'collective.name' => 'Название коллектива'
 		);
+	}
+
+	public function behaviors()
+	{
+		return CMap::mergeArray(parent::behaviors(), array(
+			'CTimestampBehavior' => array(
+				'class' => 'zii.behaviors.CTimestampBehavior',
+				'createAttribute' => 'create_time',
+				'updateAttribute' => 'update_time',
+				'setUpdateOnCreate' => true,
+			),
+		));
 	}
 
 	/**
@@ -103,6 +178,7 @@ class Order extends CActiveRecord
 		$criteria->compare('status',$this->status);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->order = 'create_time DESC';
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

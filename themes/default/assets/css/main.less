@@ -403,22 +403,34 @@ ul.grid {
 
 
 // Forms
-input {
+input[type=text],
+input[type=search],
+input[type=password] {
     font-size: 14px;
-    padding: 5px 12px;
-    box-sizing: border-box;
+    background-color: @white;
+    border: 1px solid @gray;
     outline: 0;
-    .input-shadow;
+    color: @gray;
+    box-sizing: border-box;
+    o-border-radius: 17px;
+    moz-border-radius: 17px;
+    webkit-border-radius: 17px;
+    border-radius: 17px;
+    display: inline-block;
+}
+input[type=text],
+input[type=search],
+input[type=password] {
+    padding: 5px 12px;
 }
 input[type=search] {
-    border-radius: 17px;
+    .input-shadow;
 }
 .input-group {
     position: relative;
     display: table;
     border-collapse: separate;
     input {
-        display: table-cell;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         border-right: none;
@@ -433,6 +445,7 @@ input[type=search] {
         margin-left: -1px;
         position: relative;
         outline: none;
+        background-color: #edf3f5;
         .input-shadow;
     }
     input[type=search]+button {
@@ -444,6 +457,58 @@ input[type=search] {
         }
     }
 }
+
+.form {
+    text-align: center;
+    h3 {
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    .row {
+        text-align: left;
+        margin-bottom: 15px;
+        label {
+            display: inline-block;
+            vertical-align: middle;
+            width: 160px;
+            margin-right: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            .required {
+                color: @orange-dark;
+            }
+        }
+        input[type=text],
+        .selector {
+            text-align: left;
+            height: 30px;
+            width: 240px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        select {
+            width: 206px;
+        }
+        &.error {
+            text-align: left;
+            padding: 0;
+        }
+        .wrapError {
+            margin-left: 177px;
+            line-height: 1;
+            font-size: 12px;
+            color: @orange-dark;
+        }
+    }
+    button,
+    input[type=submit] {
+        display: inline-block;
+        margin: 20px 0 0;
+    }
+}
+
 
 
 body {
