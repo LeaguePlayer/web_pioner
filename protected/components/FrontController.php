@@ -43,7 +43,7 @@ class FrontController extends Controller
 
     public function buildMenu()
     {
-        $this->menu = Menu::model()->getMenuList(0);
+        $this->menu = Menu::model()->getMenuList(1);
     }
 
 	public function registerSeoTags($model, $nameAttribute = false)

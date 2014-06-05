@@ -34,6 +34,8 @@ class ECategoryNSTreeBehavior extends CActiveRecordBehavior
      */
     public $linkActiveAttribute = 'linkActive';
 
+	public $itemClassAttribute = 'item_class';
+
 
 
 	/**
@@ -86,13 +88,17 @@ class ECategoryNSTreeBehavior extends CActiveRecordBehavior
         $children = $current->children()->findAll();
         foreach ( $children as $item ) {
             $active = $item->{$this->linkActiveAttribute};
+			$itemClass = 'item_' . $item->getPrimaryKey();
+			if ( !empty($item->{$this->itemClassAttribute}) ) {
+				$itemClass .= ' '.$item->{$this->itemClassAttribute};
+			}
             $resultArray[$item->getPrimaryKey()] = array(
                 'id'=>$item->getPrimaryKey(),
                 'label'=>$item->{$this->titleAttribute},
                 'url'=>$item->{$this->urlAttribute},
                 'icon'=>$this->iconAttribute !== null ? $item->{$this->iconAttribute} : '',
                 'active'=>$active,
-                'itemOptions'=>array('class'=>'item_' . $item->getPrimaryKey()),
+                'itemOptions'=>array('class'=>$itemClass),
                 'linkOptions'=>$active ? array('rel'=>'nofollow') : array(),
             ) + ($sub ? array('items'=>$this->_getMenuListRecursive($item, $sub - 1)) : array());
         }

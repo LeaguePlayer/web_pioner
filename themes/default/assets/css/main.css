@@ -633,25 +633,44 @@ header .main-menu ul li {
   padding: 0;
   margin: 0;
 }
-header .main-menu ul li:first-child {
+header .main-menu ul li.home a {
   background-image: url(../img/home.png);
   background-repeat: no-repeat;
   background-position: center;
-}
-header .main-menu ul li:first-child a {
   display: inline-block;
   text-indent: -9999px;
   width: 64px;
-}
-header .main-menu ul li:hover,
-header .main-menu ul li.active {
-  background-color: #da6748;
 }
 header .main-menu ul li a {
   display: inline-block;
   color: #ffffff;
   text-decoration: none;
   padding: 18px 20px;
+}
+header .main-menu ul li a:hover {
+  background-color: #da6748;
+}
+header .main-menu div > ul > li {
+  position: relative;
+}
+header .main-menu div > ul > li ul {
+  background-color: #fb805f;
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  top: 55px;
+  left: 0;
+}
+header .main-menu div > ul > li ul li,
+header .main-menu div > ul > li ul a {
+  display: block;
+}
+header .main-menu div > ul > li ul a {
+  text-align: left;
+  padding: 6px 20px;
+}
+header .main-menu div > ul > li:hover ul {
+  display: block;
 }
 header .sub-menu {
   padding: 0;
