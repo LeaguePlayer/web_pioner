@@ -660,12 +660,14 @@ header .main-menu div > ul > li ul {
   min-width: 160px;
   top: 55px;
   left: 0;
+  z-index: 1000;
 }
 header .main-menu div > ul > li ul li,
 header .main-menu div > ul > li ul a {
   display: block;
 }
 header .main-menu div > ul > li ul a {
+  line-height: 1;
   text-align: left;
   padding: 6px 20px;
 }
