@@ -186,4 +186,9 @@ class Collective extends EActiveRecord
 	{
 		$this->_employeesArray = $value;
 	}
+
+	public function getSchedule()
+	{
+		$places = Place::model()->published()->findAll();
+	}
 }

@@ -124,16 +124,16 @@
 				</div>
 			</div>
 
-			<div class="control-group">
-				<label class="control-label">Периодичность</label>
-				<div class="controls">
-					<label class="radio"><input type="radio" class="period" name="period" value="0" checked="checked" /> Нет</label>
-					<label class="radio"><input type="radio" class="period" name="period" value="every_day" /> Каждый день</label>
-					<label class="radio"><input type="radio" class="period" name="period" value="every_weekdays" /> Каждый день по будням</label>
-					<label class="radio"><input type="radio" class="period" name="period" value="every_week" /> Раз в неделю</label>
-					<!--					<label class="radio"><input type="radio" class="period" name="period" value="every_two_weeks" /> Через две недели</label>-->
-				</div>
-			</div>
+<!--			<div class="control-group">-->
+<!--				<label class="control-label">Периодичность</label>-->
+<!--				<div class="controls">-->
+<!--					<label class="radio"><input type="radio" class="period" name="period" value="0" checked="checked" /> Нет</label>-->
+<!--					<label class="radio"><input type="radio" class="period" name="period" value="every_day" /> Каждый день</label>-->
+<!--					<label class="radio"><input type="radio" class="period" name="period" value="every_weekdays" /> Каждый день по будням</label>-->
+<!--					<label class="radio"><input type="radio" class="period" name="period" value="every_week" /> Раз в неделю</label>-->
+<!--					<label class="radio"><input type="radio" class="period" name="period" value="every_two_weeks" /> Через две недели</label>-->
+<!--				</div>-->
+<!--			</div>-->
 		</div>
 	</div>
 	<div class="modal-footer">

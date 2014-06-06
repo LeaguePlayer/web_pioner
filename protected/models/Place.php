@@ -115,5 +115,8 @@ class Place extends EActiveRecord
         return parent::model($className);
     }
 
-
+	public function getScheduleInfo()
+	{
+		return CJSON::decode($this->json_schedule);
+	}
 }

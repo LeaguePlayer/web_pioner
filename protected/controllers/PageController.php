@@ -4,6 +4,24 @@ class PageController extends FrontController
 {
 	public $layout='//layouts/simple';
 
+
+	public function behaviors()
+	{
+		return array(
+			'InlineWidgetsBehavior'=>array(
+				'class'=>'DInlineWidgetsBehavior',
+				'location'=>'application.widgets',
+				'startBlock'=> '{{w:',
+				'endBlock'=> '}}',
+				'widgets'=>array(
+					'application.widgets.childNodes.ChildNodes',
+					'application.widgets.contacts.Contacts',
+					'application.widgets.schedule.Schedule',
+				),
+			),
+		);
+	}
+
 	
 	public function filters()
 	{

@@ -2,7 +2,7 @@
 	$cs = Yii::app()->clientScript;
 	$assetsUrl = $this->getAssetsUrl();
 	$cs->registerCssFile($assetsUrl.'/css/normalize.min.css');
-	$cs->registerCssFile($assetsUrl.'/css/main.css?v=6');
+	$cs->registerCssFile($assetsUrl.'/css/main.css?v=7');
 
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('jquery.ui');
@@ -22,7 +22,7 @@
 	$cs->registerCssFile($assetsUrl.'/vendor/uniform/themes/pioner/css/uniform.pioner.css');
 	$cs->registerScriptFile($assetsUrl.'/vendor/uniform/jquery.uniform.min.js', CClientScript::POS_END);
 
-	$cs->registerScriptFile($assetsUrl.'/js/main.js?v=6', CClientScript::POS_END);
+	$cs->registerScriptFile($assetsUrl.'/js/main.js?v=7', CClientScript::POS_END);
 ?><!DOCTYPE html>
 <html lang="ru">
 	<head>
@@ -59,7 +59,7 @@
 			<section class="banner">
 				<div class="fix-width">
 					<div class="wrap-banner">
-						<img src="/media/temp/banner.png" alt="" />
+						<img src="/banner.png" alt="" />
 					</div>
 				</div>
 			</section>

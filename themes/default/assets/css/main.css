@@ -1440,6 +1440,106 @@ footer .master .slogan {
   width: 500px;
   height: 150px;
 }
+.schedule .places {
+  margin-bottom: 10px;
+}
+.schedule .places .change-place {
+  display: inline-block;
+  vertical-align: middle;
+  border: 2px solid #fb805f;
+  font-size: 14px;
+  color: #fb805f;
+  margin-right: 15px;
+  text-decoration: none;
+  line-height: 24px;
+  border-radius: 12px;
+  padding: 0 14px;
+}
+.schedule .places .change-place.active {
+  background-color: #fb805f;
+  color: #ffffff;
+}
+.schedule .cabinets {
+  margin-bottom: 10px;
+}
+.schedule .cabinets a {
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #fb805f;
+  font-size: 12px;
+  color: #fb805f;
+  margin-right: 10px;
+  text-decoration: none;
+  line-height: 18px;
+  border-radius: 9px;
+  padding: 0 6px;
+}
+.schedule .cabinets a.active {
+  background-color: #fb805f;
+  color: #ffffff;
+}
+.schedule .schedule-area {
+  position: relative;
+}
+.schedule .schedule-area .schedule-map {
+  width: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.schedule .schedule-area .schedule-map .row {
+  overflow: hidden;
+}
+.schedule .schedule-area .schedule-map .row .cell {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  width: 13%;
+  height: 20px;
+  border-right: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  display: inline-block;
+}
+.schedule .schedule-area .schedule-map .row .cell.h {
+  width: 9%;
+  text-align: center;
+  font-weight: bold;
+  border-right: 2px solid #808384;
+}
+.schedule .schedule-area .schedule-map .row.head {
+  border-bottom: 2px solid #808384;
+}
+.schedule .schedule-area .schedule-map .row.head .cell {
+  text-align: center;
+  font-weight: bold;
+}
+.schedule .schedule-area .event {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  padding: 4px;
+  font-size: 12px;
+  overflow-y: auto;
+}
+.schedule .schedule-area .event span {
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.schedule .schedule-area .event span.title {
+  color: #fb805f;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.schedule .schedule-area .event span.period {
+  font-weight: bold;
+}
 div.selector {
   box-sizing: border-box;
   display: inline-block;

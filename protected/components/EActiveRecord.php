@@ -202,4 +202,16 @@ class EActiveRecord extends CActiveRecord
         if ( !empty($this->update_time) )
             return SiteHelper::russianDate($this->update_time).' в '.date('H:i', $this->update_time);
     }
+
+	public function beforeFind()
+	{
+		if ($this->hasAttribute('update_time')) {
+//			if ( in_array(get_class($this), array("Structure", "Myth")) )
+//				return parent::beforeFind();
+			$table = $this->tableSchema->name;
+			$dependency = new CDbCacheDependency("SELECT MAX(update_time) FROM {$table}");
+			$this->cache(3600, $dependency);
+		}
+		return parent::beforeFind();
+	}
 }

@@ -128,7 +128,7 @@ $(document).ready(function() {
         inputStartTime.timepicker('setTime', editingEvent.start);
         inputEndTime.timepicker('setTime', editingEvent.end);
         $('input.event-title', eventFormModal).val(editingEvent.title);
-        $('input[value='+editingEvent.repeat+'].period', eventFormModal).prop('checked', true);
+//        $('input[value='+editingEvent.repeat+'].period', eventFormModal).prop('checked', true);
         var teachers = [];
         for ( var i = 0; i < editingEvent.teachers.length; i++ ) {
             teachers.push(editingEvent.teachers[i].id);
@@ -175,7 +175,8 @@ $(document).ready(function() {
         var selectedCollective = inputCollective.select2('data');
 
         editingEvent.title = $('input.event-title', eventFormModal).val();
-        editingEvent.repeat = $('input.period:checked', eventFormModal).val();
+//        editingEvent.repeat = $('input.period:checked', eventFormModal).val();
+        editingEvent.repeat = 'every_week';
         editingEvent.teachers = teachers;
         editingEvent.collective = {
             id: selectedCollective.id,
@@ -217,6 +218,7 @@ $(document).ready(function() {
             _events.push(events[i]);
         }
         events = _events;
+        eventsMap[currentCabinet] = events;
         shedule.fullCalendar('refetchEvents');
         shedule.fullCalendar('rerenderEvents');
         eventFormModal.modal('hide');
