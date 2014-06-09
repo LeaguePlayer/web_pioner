@@ -28,4 +28,13 @@ class CollectiveController extends FrontController
 			'dataProvider'=>$dataProvider,
 		));
 	}
+
+
+    public function actionSchedule($collective_id)
+    {
+        $model = $this->loadModel('Collective', $collective_id);
+        $this->render('schedule', array(
+            'model' => $model
+        ));
+    }
 }

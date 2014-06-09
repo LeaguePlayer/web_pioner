@@ -4,6 +4,7 @@
 		<div class="col-main">
 			<section class="collective">
 				<h2><?= $model->name ?></h2>
+                <?= ( $model->img_preview ) ? $model->getImage('medium', '', array('style'=>'max-width:730px;')) : '' ?>
 				<?php echo $model->description ?>
 			</section>
 		</div>
@@ -12,6 +13,7 @@
 				<? foreach ( $nodes as $node ): ?>
 					<li><a href="<?= $node->getUrl() ?>"><?= $node->name ?></a></li>
 				<? endforeach ?>
+                <li><a href="<?= $this->createUrl('/collective/schedule', array('collective_id' => $model->id)) ?>">Расписание</a></li>
 			</ul>
 		</div>
 	</div>

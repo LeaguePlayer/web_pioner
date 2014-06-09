@@ -36,8 +36,14 @@ class Schedule extends CWidget
 						'teachers' => $teachers
 					);
 				}
+                if ( empty($cabinetItems) ) {
+                    continue;
+                }
 				$placeItems[$cabinet] = $cabinetItems;
 			}
+            if ( empty($placeItems) ) {
+                continue;
+            }
 			$schedule[$place->name] = $placeItems;
 		}
 
