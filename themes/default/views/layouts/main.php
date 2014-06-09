@@ -59,7 +59,12 @@
 			<section class="banner">
 				<div class="fix-width">
 					<div class="wrap-banner">
-						<img src="/banner.png" alt="" />
+						<?
+                            foreach ( $this->sliderImages as $photo ) {
+                                echo $photo->getImage('big', '', array('width'=>1336, 'height'=>406));
+                                break;
+                            }
+                        ?>
 					</div>
 				</div>
 			</section>

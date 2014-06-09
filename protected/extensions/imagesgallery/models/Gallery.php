@@ -193,4 +193,11 @@ class Gallery extends CActiveRecord
 		);
 		return strtr($str, $tr);
 	}
+
+    public function findByAlias($alias)
+    {
+        return $this->findByAttributes(array(
+            'alias' => $alias
+        ));
+    }
 }

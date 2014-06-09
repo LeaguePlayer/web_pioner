@@ -8,6 +8,7 @@ class FrontController extends Controller
     public $layout='//layouts/main';
     public $menu=array();
     public $breadcrumbs=array();
+    public $sliderImages = array();
 
     public function init() {
         parent::init();
@@ -22,6 +23,10 @@ class FrontController extends Controller
     public function beforeRender($view)
     {
 		$this->buildMenu();
+        $slider = Gallery::model()->findByAlias('slayder');
+        if ( $slider ) {
+            $this->sliderImages = $slider->galleryPhotos;
+        }
         return parent::beforeRender($view);
     }
 
