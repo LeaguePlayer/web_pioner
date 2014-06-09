@@ -658,9 +658,31 @@ header .main-menu div > ul > li ul {
   display: none;
   position: absolute;
   min-width: 160px;
-  top: 55px;
-  left: 0;
+  top: 50px;
+  left: -5px;
   z-index: 1000;
+  border: 2px solid #da6748;
+}
+header .main-menu div > ul > li ul:before,
+header .main-menu div > ul > li ul:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+header .main-menu div > ul > li ul:before {
+  top: -12px;
+  left: 25px;
+  border-width: 6px 7px;
+  border-color: transparent transparent #da6748;
+}
+header .main-menu div > ul > li ul:after {
+  top: -6px;
+  left: 28px;
+  border-width: 3px 4px;
+  border-color: transparent transparent #fb805f;
 }
 header .main-menu div > ul > li ul li,
 header .main-menu div > ul > li ul a {

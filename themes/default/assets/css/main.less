@@ -721,9 +721,31 @@ header {
                 display: none;
                 position: absolute;
                 min-width: 160px;
-                top: 55px;
-                left: 0;
+                top: 50px;
+                left: -5px;
                 z-index: 1000;
+                border: 2px solid @orange-dark;
+                &:before,
+                &:after {
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                }
+                &:before {
+                    top: -12px;
+                    left: 25px;
+                    border-width: 6px 7px;
+                    border-color: transparent transparent @orange-dark;
+                }
+                &:after {
+                    top: -6px;
+                    left: 28px;
+                    border-width: 3px 4px;
+                    border-color: transparent transparent @orange;
+                }
                 li, a {
                     display: block;
                 }
