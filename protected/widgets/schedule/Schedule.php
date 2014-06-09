@@ -31,8 +31,8 @@ class Schedule extends CWidget
 					$cabinetItems[$weekDay][] = array(
 						'title' => $event['title'],
 						'collective' => $event['collective']['name'],
-						'start' => date('H:i', strtotime($event['start'])),
-						'end' => date('H:i', strtotime($event['end'])),
+						'start' => date('H:i', strtotime($event['start']) + Yii::app()->date->offset),
+						'end' => date('H:i', strtotime($event['end']) + Yii::app()->date->offset),
 						'teachers' => $teachers
 					);
 				}

@@ -107,7 +107,7 @@ return array_replace_recursive(
             'date' => array(
                 'class'=>'application.components.Date',
                 //And integer that holds the offset of hours from GMT e.g. 4 for GMT +4
-                'offset' => 0,
+                'offset' => 6,
             ),
             'errorHandler'=>array(
                 'errorAction'=>'site/error',
