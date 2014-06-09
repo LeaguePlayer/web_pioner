@@ -33,6 +33,12 @@ class CollectiveController extends FrontController
     public function actionSchedule($collective_id)
     {
         $model = $this->loadModel('Collective', $collective_id);
+
+        $this->breadcrumbs = $model->list->node->getBreadcrumbs();
+        array_pop($this->breadcrumbs);
+        $this->breadcrumbs[$model->name] = $model->getUrl();
+        $this->breadcrumbs[] = 'Расписание';
+        $this->registerSeoTags($model, 'name');
         $this->render('schedule', array(
             'model' => $model
         ));
