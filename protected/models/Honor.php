@@ -69,7 +69,7 @@ class Honor extends EActiveRecord
 						'adaptiveResize' => array(150, 220),
 					),
                     'big' => array(
-                        'resize' => array(600),
+                        'resize' => array(800),
                     ),
 				),
 			),

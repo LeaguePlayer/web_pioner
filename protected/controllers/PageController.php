@@ -18,6 +18,7 @@ class PageController extends FrontController
 					'application.widgets.contacts.Contacts',
 					'application.widgets.schedule.Schedule',
 					'application.widgets.teachers.Teachers',
+					'application.widgets.honors.Honors',
 				),
 			),
 		);

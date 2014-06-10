@@ -1352,6 +1352,28 @@ footer .master .slogan {
 .flip-calendar .cover .news-description .btn {
   margin-top: 20px;
 }
+.owl-carousel .owl-next,
+.owl-carousel .owl-prev {
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  cursor: pointer;
+  display: block;
+  background: url(../img/navigators.png) no-repeat;
+  margin-top: -10px;
+  z-index: 100;
+  outline: none;
+}
+.owl-carousel .owl-prev {
+  top: 50%;
+  left: 16px;
+  background-position: 0 -42px;
+}
+.owl-carousel .owl-next {
+  top: 50%;
+  right: 16px;
+  background-position: -21px -42px;
+}
 .carousel {
   width: 450px;
   height: 300px;
@@ -1562,21 +1584,22 @@ footer .master .slogan {
 .schedule .schedule-area .event span.period {
   font-weight: bold;
 }
-.teachers h2 {
+.teachers-widget h2 {
   font-size: 22px;
   color: #38799e;
   font-weight: 600;
   text-transform: none;
+  text-align: center;
 }
-.teachers .desc {
+.teachers-widget .desc {
   color: #fb805f;
   text-transform: uppercase;
 }
-.teachers .item {
+.teachers-widget .item {
   margin-top: 0;
   margin-bottom: 5px;
 }
-.teachers .item a {
+.teachers-widget .item a {
   font-weight: 600;
 }
 .teachers-portrait {
@@ -1599,6 +1622,44 @@ footer .master .slogan {
   font-weight: normal;
   color: #fb805f;
   font-style: italic;
+}
+.honors-widget h2 {
+  font-size: 22px;
+  color: #38799e;
+  font-weight: 600;
+  text-transform: none;
+  text-align: center;
+}
+.honors-widget .honors-carousel .item {
+  padding: 10px 50px;
+  text-align: center;
+}
+.widget-well {
+  background-color: #ffffff;
+  padding: 35px 50px;
+  font-size: 0;
+  position: relative;
+}
+.widget-well .inline-widget {
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: top;
+  width: 420px;
+  margin-left: 20px;
+}
+.widget-well .inline-widget:first-child {
+  margin-left: 0;
+  margin-right: 20px;
+}
+.widget-well:after {
+  content: "";
+  width: 0;
+  border: 1px solid #808384;
+  display: block;
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  bottom: 35px;
 }
 div.selector {
   box-sizing: border-box;

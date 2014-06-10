@@ -1475,7 +1475,29 @@ footer {
 
 
 
-
+.owl-carousel {
+    .owl-next, .owl-prev {
+        position: absolute;
+        width: 18px;
+        height: 19px;
+        cursor: pointer;
+        display: block;
+        background: url(../img/navigators.png) no-repeat;
+        margin-top: -10px;
+        z-index: 100;
+        outline: none;
+    }
+    .owl-prev {
+        top: 50%;
+        left: 16px;
+        background-position: 0 -42px;
+    }
+    .owl-next {
+        top: 50%;
+        right: 16px;
+        background-position: -21px -42px;
+    }
+}
 .carousel {
     width: 450px;
     height: 300px;
@@ -1696,12 +1718,13 @@ footer {
 }
 
 
-.teachers {
+.teachers-widget {
     h2 {
         font-size: 22px;
         color: @blue-dark;
         font-weight: 600;
         text-transform: none;
+        text-align: center;
     }
     .desc {
         color: @orange;
@@ -1736,6 +1759,53 @@ footer {
             color: @orange;
             font-style: italic;
         }
+    }
+}
+
+
+
+.honors-widget {
+    h2 {
+        font-size: 22px;
+        color: @blue-dark;
+        font-weight: 600;
+        text-transform: none;
+        text-align: center;
+    }
+    .honors-carousel {
+        .item {
+            padding: 10px 50px;
+            text-align: center;
+        }
+    }
+}
+
+
+.widget-well {
+    background-color: @white;
+    padding: 35px 50px;
+    font-size: 0;
+    position: relative;
+    .inline-widget {
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: top;
+        width: 420px;
+        margin-left: 20px;
+        &:first-child {
+            margin-left: 0;
+            margin-right: 20px;
+        }
+    }
+    &:after {
+        content: "";
+        width: 0;
+        border: 1px solid @gray;
+        display: block;
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        bottom: 35px;
     }
 }
 
