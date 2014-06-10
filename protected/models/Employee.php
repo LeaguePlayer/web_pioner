@@ -31,8 +31,8 @@ class Employee extends EActiveRecord
         return array(
 			array('family, first_name, last_name', 'required'),
             array('list_id, status, sort', 'numerical', 'integerOnly'=>true),
-            array('first_name, last_name, family, short_name, img_photo, post', 'length', 'max'=>255),
-            array('birth_day, create_time, update_time', 'safe'),
+            array('first_name, last_name, family, short_name, img_photo, post, rank', 'length', 'max'=>255),
+            array('birth_day, create_time, update_time, description', 'safe'),
             // The following rule is used by search().
             array('id, first_name, last_name, family, short_name, birth_day, img_photo, post, list_id, status, sort, create_time, update_time', 'safe', 'on'=>'search'),
         );
@@ -57,6 +57,8 @@ class Employee extends EActiveRecord
             'short_name' => 'Фамилия, инициалы',
             'birth_day' => 'Дата рождения',
             'img_photo' => 'Фото',
+            'description' => 'О сотруднике',
+            'rank' => 'Звание',
             'post' => 'Должность',
             'list_id' => 'List',
             'status' => 'Статус',
@@ -79,7 +81,7 @@ class Employee extends EActiveRecord
 					),
 					'small' => array(
 						'resize' => array(200, 180),
-					)
+					),
 				),
 			),
 			'CTimestampBehavior' => array(
@@ -137,4 +139,10 @@ class Employee extends EActiveRecord
 		}
 		return false;
 	}
+
+
+    public function getFullName()
+    {
+        return $this->family.' '.$this->first_name.' '.$this->last_name;
+    }
 }

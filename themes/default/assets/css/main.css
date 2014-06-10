@@ -1562,6 +1562,44 @@ footer .master .slogan {
 .schedule .schedule-area .event span.period {
   font-weight: bold;
 }
+.teachers h2 {
+  font-size: 22px;
+  color: #38799e;
+  font-weight: 600;
+  text-transform: none;
+}
+.teachers .desc {
+  color: #fb805f;
+  text-transform: uppercase;
+}
+.teachers .item {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.teachers .item a {
+  font-weight: 600;
+}
+.teachers-portrait {
+  display: none;
+}
+.teachers-portrait img {
+  float: left;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.teachers-portrait h3 {
+  color: #38799e;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.teachers-portrait .birth_day strong {
+  font-weight: normal;
+  color: #fb805f;
+  font-style: italic;
+}
 div.selector {
   box-sizing: border-box;
   display: inline-block;

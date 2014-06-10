@@ -32,3 +32,18 @@
 	<?php echo $form->textFieldControlGroup($model,'post',array('class'=>'span8','maxlength'=>255)); ?>
 
 	<?php echo $form->dropDownListControlGroup($model, 'status', CollectiveTeacher::getStatusAliases(), array('class'=>'span8', 'displaySize'=>1)); ?>
+
+    <div class='control-group' style="overflow: hidden;">
+        <?php echo CHtml::activeLabelEx($model, 'description'); ?>
+        <?php $this->widget('appext.imperavielfinder.imperavi-redactor-widget.ImperaviRedactorWidget', array(
+            'model' => $model,
+            'attribute' => 'description',
+            'options' => array(
+                'css' => $this->getAssetsUrl('application').'/css/main.css',
+                'fmUrl' => Yii::app()->createUrl('/admin/file/fileUploaderConnector'), //ссылка на ElFinderConnectorAction
+            ),
+        )); ?>
+        <?php echo $form->error($model, 'description'); ?>
+    </div>
+
+    <?php echo $form->textFieldControlGroup($model,'rank',array('class'=>'span8','maxlength'=>255)); ?>
