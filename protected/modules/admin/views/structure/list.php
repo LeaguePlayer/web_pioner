@@ -48,7 +48,7 @@
                     <span class='cell check'></span>
                     <span class='cell menu'></span>
                     <span class='cell name'><b>Раздел</b></span>
-                    <span class='cell link'><b>Ссылка</b></span>
+<!--                    <span class='cell link'><b>Ссылка</b></span>-->
                     <span class='cell type'><b>Тип</b></span>
                 </div>
             </li>

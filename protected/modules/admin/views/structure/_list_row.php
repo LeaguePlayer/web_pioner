@@ -36,6 +36,6 @@
 		)); ?>
 	</span>
 	<span class='cell name'><?= $name_text ?></span>
-	<span class='cell link'><?= $component_url ?></span>
+<!--	<span class='cell link'>--><?//= $component_url ?><!--</span>-->
 	<span class='cell type'><?= $node->material->name ?></span>
 </div>

@@ -81,7 +81,7 @@ class CollectivesStructureController extends AdminController
 			throw new CHttpException(404, 'Раздел не найден');
 		}
 		$modelName = $node->material->class_name;
-		$model = $modelName::model()->findByAttributes(array(
+		$model = CActiveRecord::model($modelName)->findByAttributes(array(
 			'node_id'=>$node_id
 		));
 		$controllerID = lcfirst($modelName);

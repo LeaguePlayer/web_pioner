@@ -190,6 +190,9 @@ class CollectivesStructure extends EActiveRecord
 				case 'CollectiveGalleriesList':
 					$this->_url = Yii::app()->createUrl('/gallery/index', array('collective_id'=>$this->collective_id));
 					break;
+                case 'CollectiveVideosList':
+                    $this->_url = Yii::app()->createUrl('/video/index', array('collective_id'=>$this->collective_id));
+                    break;
 				default:
 					$this->_url = Yii::app()->createUrl(lcfirst($component_name).'/view', array('url'=>$this->url));
 			}
@@ -212,10 +215,10 @@ class CollectivesStructure extends EActiveRecord
 	public function getAdminBreadcrumbs()
 	{
 		$breadcrumbs = $this->collective->list->node->getAdminBreadcrumbs();
-		$name = array_pop($breadcrumbs);
-		$breadcrumbs[$name] = Yii::app()->urlManager->createUrl('/admin/collectivesList/update', array('id' => $this->collective->list->id));
-		$breadcrumbs[$this->collective->name] = Yii::app()->urlManager->createUrl('/admin/collectivesStructure/list', array('collective_id' => $this->collective->id));
-		if ( $this->isNewRecord )
+        $name = array_pop($breadcrumbs);
+        $breadcrumbs[$name] = Yii::app()->urlManager->createUrl('/admin/collectivesList/update', array('id' => $this->collective->list->id));
+        $breadcrumbs[$this->collective->name] = Yii::app()->urlManager->createUrl('/admin/collectivesStructure/list', array('collective_id' => $this->collective->id));
+        if ( $this->isNewRecord )
 			$breadcrumbs[] = 'Добавление раздела';
 		else
 			$breadcrumbs[] = $this->name;

@@ -95,6 +95,7 @@ return array_replace_recursive(
                     '/'=>'site/index',
 					'/contacts' => 'page/contacts',
 					'<controller:page>/<url:[\w_-]+>' => '<controller>/view',
+                    '<controller>' => '<controller>/index'
                 ),
             ),
             'clientScript'=>array(

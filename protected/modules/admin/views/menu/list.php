@@ -24,7 +24,7 @@
 </div>
 
 <?php $rootNode = Menu::model()->roots()->find(); ?>
-<div id="structure-grid">
+<div id="structure-grid" class="menu-grid">
     <?php if ( $rootNode ): ?>
         <ul class="root">
             <li>

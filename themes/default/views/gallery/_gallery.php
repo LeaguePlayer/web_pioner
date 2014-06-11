@@ -1,6 +1,6 @@
 <? $countPhotos = count($data->gallery->galleryPhotos) ?>
 <? if ( $countPhotos > 0 ): ?>
-<div class="item">
+<div class="list-item">
 	<?php $url = $this->createUrl('/gallery/view', array('id' => $data->id)) ?>
 	<a href="<?= $url ?>">
 		<?= $data->getFirstPhoto('small') ?>

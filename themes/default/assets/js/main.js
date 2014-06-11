@@ -57,5 +57,27 @@ $(document).ready(function() {
         });
         return false;
     });
+
+
+    var videos = $('.videowrapper');
+    for ( var i = 0; i < videos.size(); i++ ) {
+        var video = $(videos[i]);
+        var width = video.data('width');
+        var height = video.data('height');
+        if ( !width ) width = 1000;
+        if ( !height ) height = 500;
+        video.html(function(i, html) {
+            return html.replace(/(?:http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '<iframe width="'+width+'" height="'+height+'" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>').replace(/(?:http:\/\/)?(?:www\.)?(?:vimeo\.com)\/(.+)/g, '<iframe src="//player.vimeo.com/video/$1" width="'+width+'" height="'+height+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+        });
+    }
+
+
+    if ( $('.video-scroller').size() ) {
+        var videoScroller = $('.scroller', $('.video-scroller'));
+        videoScroller.baron({
+            bar: '.scroller__bar'
+        });
+    }
+
 });
 

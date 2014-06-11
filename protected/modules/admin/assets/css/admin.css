@@ -148,6 +148,8 @@ span.offset {
 #structure-grid .cell.menu {
     width: 40px; }
 #structure-grid .cell.name {
+    width: 60%; }
+#structure-grid.menu-grid .cell.name {
     width: 40%; }
 #structure-grid .cell.link {
     width: 30%; }

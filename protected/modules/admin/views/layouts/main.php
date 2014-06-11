@@ -13,6 +13,7 @@
                 array('label'=>'Меню сайта', 'url'=>array('/admin/menu')),
                 array('label'=>'Дополнительно', 'items'=>array(
                     array('label'=>'Достижения и награды', 'url'=>array('/admin/honor')),
+                    array('label'=>'Полезные ссылки', 'url'=>array('/admin/link')),
                 )),
                 array('label'=>'Настройки', 'url'=>array('/admin/config')),
                 array('label'=>'Галереи', 'url'=>array('/admin/gallery/manage')),

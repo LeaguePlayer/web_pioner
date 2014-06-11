@@ -1,4 +1,4 @@
-<div class="item">
+<div class="list-item">
 	<a href="<?= $data->getUrl() ?>">
 		<?= $data->getImage('small', '', array('width' => 234)) ?>
 	</a>
