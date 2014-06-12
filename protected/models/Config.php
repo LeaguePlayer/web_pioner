@@ -1,6 +1,6 @@
 <?php
 
-class Config extends CActiveRecord
+class Config extends LActiveRecord
 {
     public static function model($className=__CLASS__)
     {

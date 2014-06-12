@@ -10,7 +10,7 @@
     * @property string $create_time
     * @property string $update_time
 */
-class EmployeeList extends CActiveRecord
+class EmployeeList extends LActiveRecord
 {
     public function tableName()
     {

@@ -8,7 +8,7 @@
  * @property integer $node_id
  * @property integer $page_size
  */
-class CollectiveNewsList extends CActiveRecord
+class CollectiveNewsList extends LActiveRecord
 {
 	public function tableName()
 	{

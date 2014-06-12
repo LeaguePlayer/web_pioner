@@ -7,7 +7,7 @@
     * @property integer $id
     * @property integer $node_id
 */
-class PlacesList extends CActiveRecord
+class PlacesList extends LActiveRecord
 {
     public function tableName()
     {

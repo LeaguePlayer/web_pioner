@@ -10,7 +10,7 @@
     * @property string $meta_desc
     * @property string $meta_html
 */
-class Seo extends CActiveRecord
+class Seo extends LActiveRecord
 {
     public function tableName()
     {

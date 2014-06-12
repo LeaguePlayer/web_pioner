@@ -7,7 +7,7 @@
  * @property integer $id
  * @property string $value
  */
-class Tag extends CActiveRecord
+class Tag extends LActiveRecord
 {
 	/**
 	 * @return string the associated database table name

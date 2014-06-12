@@ -9,7 +9,7 @@
     * @property string $create_time
     * @property string $update_time
 */
-class CollectivesList extends CActiveRecord
+class CollectivesList extends LActiveRecord
 {
     public function tableName()
     {

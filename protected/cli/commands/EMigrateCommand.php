@@ -511,4 +511,21 @@ EOD;
 			return str_replace('CDbMigration', 'EDbMigration', parent::getTemplate());
 		}
 	}
+
+	public function run($args)
+  {
+    parent::run($args);
+    $this->flushCache();
+  }
+
+	protected function flushCache()
+  {
+    $db = $this->getDbConnection();
+
+    if ($db->schemaCachingDuration > 0) {
+      $cacher = Yii::app()->getComponent($db->schemaCacheID);
+      if ($cacher)
+        $cacher->flush();
+    }
+  }
 }

@@ -10,7 +10,7 @@
  * @copyright 2013 2amigOS! Consultation Group LLC
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
-class EActiveRecord extends CActiveRecord
+class EActiveRecord extends LActiveRecord
 {
     public $create_time;
     public $update_time;

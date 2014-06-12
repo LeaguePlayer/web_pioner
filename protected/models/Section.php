@@ -10,7 +10,7 @@
  * @property string $create_time
  * @property string $update_time
  */
-class Section extends CActiveRecord
+class Section extends LActiveRecord
 {
 	/**
 	 * @return string the associated database table name
