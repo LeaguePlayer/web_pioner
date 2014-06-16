@@ -1,4 +1,4 @@
-<div class="socials">
+<div class="social-widgets">
     <!-- Кнопка ВКонтакте -->
     <div class="like_button">
         <div id="vk_like" class="button"></div>

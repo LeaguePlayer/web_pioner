@@ -1618,11 +1618,11 @@ footer .master .slogan {
 .schedule .schedule-area .event span.period {
   font-weight: bold;
 }
-.socials {
+.social-widgets {
   margin-top: 25px;
   margin-bottom: 25px;
 }
-.socials .like_button {
+.social-widgets .like_button {
   display: inline-block;
   vertical-align: top;
   width: 150px;
