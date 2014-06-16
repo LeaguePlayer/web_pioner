@@ -98,22 +98,21 @@
 		<footer id="footer">
 			<div class="fix-width">
 				<div class="useful-links block">
+                    <? $links = Link::model()->published()->findAll(array('order'=>'t.sort')) ?>
 					<h3>Полезные ссылки</h3>
 					<ul>
-						<li><a href="#">Министерства образования и науки РФ</a></li>
-						<li><a href="#">Сайт Администрации ТО</a></li>
-						<li><a href="#">Портал гос. услуги</a></li>
-						<li><a href="#">Федеральный портал «Российское образование»</a></li>
-						<li><a href="#">Сайт департамента по спорту и молодежной политике ТО</a></li>
+                        <? foreach ( $links as $link ): ?>
+                        <li><a href="<?= $link->url ?>"><?= $link->label ?></a></li>
+                        <? endforeach ?>
 					</ul>
 				</div>
 
 				<div class="partners block">
 					<h3>Партнеры</h3>
-					<ul>
-						<li><a href="#">Тюменский  государственный университет</a></li>
-						<li><a href="#">Тюменская государственная академия культуры, искусств и социальных технологий</a></li>
-					</ul>
+<!--					<ul>-->
+<!--						<li><a href="#">Тюменский  государственный университет</a></li>-->
+<!--						<li><a href="#">Тюменская государственная академия культуры, искусств и социальных технологий</a></li>-->
+<!--					</ul>-->
 				</div>
 
 				<div class="socials block">

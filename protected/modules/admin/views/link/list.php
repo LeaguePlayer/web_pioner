@@ -4,7 +4,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Управление <?php echo $model->translition(); ?></h1>
+<h3>Полезные ссылки</h3>
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'link-grid',
@@ -17,27 +17,28 @@ $this->menu=array(
         "class"=>"status_".(isset($data->status) ? $data->status : ""),
     )',
 	'columns'=>array(
-		'url',
 		'label',
+        array(
+            'name'=>'url',
+            'type'=>'raw',
+            'value'=>'CHtml::link($data->url, $data->url, array("target" => "_blank"))',
+        ),
 		array(
 			'name'=>'status',
 			'type'=>'raw',
 			'value'=>'Link::getStatusAliases($data->status)',
 			'filter'=>Link::getStatusAliases()
 		),
-		'sort',
-		array(
-			'name'=>'create_time',
-			'type'=>'raw',
-			'value'=>'$data->create_time ? SiteHelper::russianDate($data->create_time).\' в \'.date(\'H:i\', strtotime($data->create_time)) : ""'
-		),
-		array(
-			'name'=>'update_time',
-			'type'=>'raw',
-			'value'=>'$data->update_time ? SiteHelper::russianDate($data->update_time).\' в \'.date(\'H:i\', strtotime($data->update_time)) : ""'
-		),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+            'buttons'=>array(
+                'view'=>array(
+                    'url'=>'$data->url',
+                    'options'=>array(
+                        'target'=>'_blank'
+                    )
+                )
+            )
 		),
 	),
 )); ?>

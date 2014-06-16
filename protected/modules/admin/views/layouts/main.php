@@ -11,13 +11,13 @@
             $menuItems = array(
                 array('label'=>'Разделы сайта', 'url'=>array('/admin/structure')),
                 array('label'=>'Меню сайта', 'url'=>array('/admin/menu')),
-                array('label'=>'Дополнительно', 'items'=>array(
-                    array('label'=>'Достижения и награды', 'url'=>array('/admin/honor')),
-                    array('label'=>'Полезные ссылки', 'url'=>array('/admin/link')),
-                )),
                 array('label'=>'Настройки', 'url'=>array('/admin/config')),
                 array('label'=>'Галереи', 'url'=>array('/admin/gallery/manage')),
                 array('label'=>'Заявки', 'url'=>array('/admin/order')),
+                array('label'=>'Еще...', 'items'=>array(
+                    array('label'=>'Достижения и награды', 'url'=>array('/admin/honor')),
+                    array('label'=>'Полезные ссылки', 'url'=>array('/admin/link')),
+                )),
             );
 			if ( YII_DEBUG ) {
 				$menuItems[] = array('label'=>'Материалы', 'url'=>array('/admin/material'));
