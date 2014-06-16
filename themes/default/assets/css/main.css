@@ -1157,6 +1157,12 @@ header .sub-menu ul li a {
   font-size: 16px;
   margin-bottom: 30px;
 }
+.search-page h1 {
+  font-size: 16px;
+  color: #fb805f;
+  text-transform: uppercase;
+  margin-top: 0;
+}
 footer {
   background-color: #38799e;
   padding: 25px 0;

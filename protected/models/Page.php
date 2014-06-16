@@ -114,5 +114,12 @@ class Page extends EActiveRecord
         return parent::model($className);
     }
 
-
+    private $_url;
+    public function getUrl()
+    {
+        if ( $this->_url === null ) {
+            $this->_url = Yii::app()->createUrl('page/view', array('url'=>$this->node->url));
+        }
+        return $this->_url;
+    }
 }

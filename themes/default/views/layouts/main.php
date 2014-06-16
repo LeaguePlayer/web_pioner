@@ -46,9 +46,9 @@
 							<li>8 800 906 715</li>
 							<li>76 00 45</li>
 						</ul>
-						<form method="get" class="search">
+						<form method="GET" class="search" action="<?= $this->createUrl('search/index') ?>" >
 							<div class="input-group">
-								<input type="search" />
+								<input name="query" type="search" value="<?= $_GET['query'] ?>" />
 								<button><i class="icon-search"></i></button>
 							</div>
 						</form>

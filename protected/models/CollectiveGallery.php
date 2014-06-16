@@ -130,4 +130,13 @@ class CollectiveGallery extends EActiveRecord
 		$breadcrumbs[] = $this->name;
 		return $breadcrumbs;
 	}
+
+    private $_url;
+    public function getUrl()
+    {
+        if ( $this->_url === null ) {
+            $this->_url = Yii::app()->createUrl('gallery/view', array('id' => $this->id));
+        }
+        return $this->_url;
+    }
 }
