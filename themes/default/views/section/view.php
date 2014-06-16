@@ -7,4 +7,6 @@
 			<li><?= CHtml::link($collective->name, array('/collective/view', 'id' => $collective->id)) ?></li>
 		<? endforeach ?>
 	</ul>
+
+    <? $this->renderPartial('//site/_likes') ?>
 </section>

@@ -6,11 +6,18 @@
 <div class="columns">
     <div class="col-main width-680">
         <p class="videowrapper auto-size"><?= strip_tags($model->code); ?></p>
+        <? $this->renderPartial('//site/_likes') ?>
 
         <div class="page">
             <h2><?= $model->name ?></h2>
             <p class="date"><?= SiteHelper::russianDate($model->date_publish); ?></p>
             <?= $model->description ?>
+
+            <? $this->renderPartial('//site/_vk_comments', array(
+                'widgetOptions' => array(
+
+                )
+            )) ?>
         </div>
     </div>
 

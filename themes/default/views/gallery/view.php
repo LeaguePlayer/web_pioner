@@ -31,4 +31,6 @@
 		<? endforeach ?>
 	</ul>
 	<div class="gamma-overlay"></div>
+
+    <? $this->renderPartial('//site/_likes') ?>
 </div>

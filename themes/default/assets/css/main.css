@@ -1612,6 +1612,15 @@ footer .master .slogan {
 .schedule .schedule-area .event span.period {
   font-weight: bold;
 }
+.socials {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.socials .like_button {
+  display: inline-block;
+  vertical-align: top;
+  width: 150px;
+}
 .teachers-widget h2 {
   font-size: 22px;
   color: #38799e;

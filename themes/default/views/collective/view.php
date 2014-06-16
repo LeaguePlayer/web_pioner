@@ -6,6 +6,8 @@
 				<h2><?= $model->name ?></h2>
                 <?= ( $model->img_preview ) ? $model->getImage('medium', '', array('style'=>'max-width:730px;')) : '' ?>
 				<?php echo $model->description ?>
+
+                <? $this->renderPartial('//site/_likes') ?>
 			</section>
 		</div>
 		<div class="col-sidebar">

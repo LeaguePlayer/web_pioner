@@ -32,4 +32,6 @@
 		'template'=>'{items}{pager}',
 		'itemView'=>'_item',
 	)) ?>
+
+    <? $this->renderPartial('//site/_likes') ?>
 </div>

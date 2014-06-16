@@ -33,6 +33,8 @@
 			<h2><?= $model->title ?></h2>
 
 			<?= $model->body_content ?>
+
+            <? $this->renderPartial('//site/_likes') ?>
 		</section>
 	</div>
 

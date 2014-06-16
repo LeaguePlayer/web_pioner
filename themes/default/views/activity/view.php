@@ -7,4 +7,6 @@
 			<li><a href="<?= $subNode->getUrl() ?>"><?= $subNode->name ?></a></li>
 		<? endforeach ?>
 	</ul>
+
+    <? $this->renderPartial('//site/_likes') ?>
 </section>

@@ -31,4 +31,6 @@
 	<div class="back">
 		<a href="<?= $node->getUrl().'?News_page='.$newsPage.'&tag='.$_GET['tag'] ?>">← Вернуться назад</a>
 	</div>
+
+    <? $this->renderPartial('//site/_likes') ?>
 </div>

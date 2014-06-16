@@ -11,4 +11,6 @@
 	<? else: ?>
 		<?= $this->decodeWidgets($page->wswg_body) ?>
 	<?php endif ?>
+
+    <? $this->renderPartial('//site/_likes') ?>
 </section>

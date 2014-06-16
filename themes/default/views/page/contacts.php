@@ -4,6 +4,8 @@
 		<section class="page">
 			<h2><?= $node->name ?></h2>
 			<?= $page->wswg_body ?>
+
+            <? $this->renderPartial('//site/_likes') ?>
 		</section>
 	</div>
 
