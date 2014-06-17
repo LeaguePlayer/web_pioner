@@ -24,13 +24,12 @@
 
 <div class='control-group' style="overflow: hidden;">
 	<?php echo CHtml::activeLabelEx($model, 'wswg_body'); ?>
-	<?php $this->widget('appext.imperavielfinder.imperavi-redactor-widget.ImperaviRedactorWidget', array(
-		'model' => $model,
-		'attribute' => 'wswg_body',
-		'options' => array(
-			'css' => $this->getAssetsUrl('application').'/css/main.css',
-			'fmUrl' => Yii::app()->createUrl('/admin/file/fileUploaderConnector'), //ссылка на ElFinderConnectorAction
-		),
-	)); ?>
+	<?php $this->widget('admin.widgets.ImperaviRedactor', array(
+        'model' => $model,
+        'attribute' => 'wswg_body',
+        'redactorOptions' => array(
+            'css' => $this->getAssetsUrl('application').'/css/main.css',
+        )
+    )) ?>
 	<?php echo $form->error($model, 'wswg_body'); ?>
 </div>
