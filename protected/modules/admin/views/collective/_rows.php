@@ -36,34 +36,13 @@
 
 	<div class='control-group' style="overflow: hidden;">
 		<?php echo CHtml::activeLabelEx($model, 'description'); ?>
-		<?php $this->widget('appext.imperavielfinder.imperavi-redactor-widget.ImperaviRedactorWidget', array(
-			'model' => $model,
-			'attribute' => 'description',
-			'options' => array(
-				'lang' => 'ru',
-				'iframe' => true,
-				'minHeight' => 500,
-				'css' => $this->getAssetsUrl('application').'/css/main.css',
-				'thumbLinkClass' => 'athumbnail', //Класс по-умолчанию для ссылки на полное изображение вокруг thumbnail
-				'thumbClass' => 'thumbnail pull-left', //Класс по-умолчанию для  thumbnail
-				'defaultUplthumb' => true, //Вставлять по-умолчанию после загрузки превью? если нет - полное изображение
-				'fmUrl' => Yii::app()->createUrl('/admin/file/fileUploaderConnector'), //ссылка на ElFinderConnectorAction
-			),
-			'plugins' => array(
-				'fullscreen' => array(
-					'js' => array('fullscreen.js',),
-				),
-				'fontsize' => array(
-					'js' => array('fontsize.js',),
-				),
-				'fontcolor' => array(
-					'js' => array('fontcolor.js',),
-				),
-				'extelf' => array(
-					'js' => array('extelf.js',),
-				),
-			),
-		)); ?>
+        <?php $this->widget('admin.widgets.ImperaviRedactor', array(
+            'model' => $model,
+            'attribute' => 'description',
+            'redactorOptions' => array(
+                'css' => $this->getAssetsUrl('application').'/css/main.css',
+            )
+        )) ?>
 		<?php echo $form->error($model, 'description'); ?>
 	</div>
 

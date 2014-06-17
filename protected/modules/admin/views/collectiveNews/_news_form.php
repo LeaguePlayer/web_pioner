@@ -61,14 +61,13 @@ $cs->registerScript('tagsinput', $js_tagsinput);
 
 <div class='control-group' style="overflow: hidden;">
 	<?php echo CHtml::activeLabelEx($model, 'body_content'); ?>
-	<?php $this->widget('appext.imperavielfinder.imperavi-redactor-widget.ImperaviRedactorWidget', array(
-		'model' => $model,
-		'attribute' => 'body_content',
-		'options' => array(
-			'css' => $this->getAssetsUrl('application').'/css/main.css',
-			'fmUrl' => Yii::app()->createUrl('/admin/file/fileUploaderConnector'), //ссылка на ElFinderConnectorAction
-		),
-	)); ?>
+    <?php $this->widget('admin.widgets.ImperaviRedactor', array(
+        'model' => $model,
+        'attribute' => 'body_content',
+        'redactorOptions' => array(
+            'css' => $this->getAssetsUrl('application').'/css/main.css',
+        )
+    )) ?>
 	<?php echo $form->error($model, 'body_content'); ?>
 </div>
 

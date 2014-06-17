@@ -10,18 +10,6 @@
 
 <?php echo $form->textAreaControlGroup($model,'description',array('rows'=>6, 'cols'=>50, 'class'=>'span12')); ?>
 
-<!--<div class='control-group'>-->
-<!--	--><?php //echo CHtml::activeLabelEx($model, 'wswg_body'); ?>
-<!--	--><?php //$this->widget('appext.ckeditor.CKEditorWidget', array(
-//		'model' => $model,
-//		'attribute' => 'wswg_body',
-//		'config' => array(
-//			'width' => '99%'
-//		),
-//	)); ?>
-<!--	--><?php //echo $form->error($model, 'wswg_body'); ?>
-<!--</div>-->
-
 <div class='control-group' style="overflow: hidden;">
 	<?php echo CHtml::activeLabelEx($model, 'wswg_body'); ?>
 	<?php $this->widget('admin.widgets.ImperaviRedactor', array(

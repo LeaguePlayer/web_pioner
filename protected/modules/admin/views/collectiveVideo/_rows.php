@@ -15,14 +15,13 @@
 
 <div class='control-group' style="overflow: hidden;">
     <?php echo CHtml::activeLabelEx($model, 'description'); ?>
-    <?php $this->widget('appext.imperavielfinder.imperavi-redactor-widget.ImperaviRedactorWidget', array(
+    <?php $this->widget('admin.widgets.ImperaviRedactor', array(
         'model' => $model,
         'attribute' => 'description',
-        'options' => array(
+        'redactorOptions' => array(
             'css' => $this->getAssetsUrl('application').'/css/main.css',
-            'fmUrl' => Yii::app()->createUrl('/admin/file/fileUploaderConnector'), //ссылка на ElFinderConnectorAction
-        ),
-    )); ?>
+        )
+    )) ?>
     <?php echo $form->error($model, 'description'); ?>
 </div>
 
