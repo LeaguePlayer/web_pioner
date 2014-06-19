@@ -8,7 +8,7 @@ class CollectiveController extends FrontController
 
 		$criteria = new CDbCriteria();
 		$criteria->compare('collective_id', $model->id);
-		$collectiveNodes = CollectivesStructure::model()->published()->findAll($criteria);
+		$collectiveNodes = CollectivesStructure::model()->findAll($criteria);
 
 		$this->breadcrumbs = $model->list->node->getBreadcrumbs();
 		array_pop($this->breadcrumbs);
