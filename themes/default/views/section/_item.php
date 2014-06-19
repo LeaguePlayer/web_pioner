@@ -15,9 +15,9 @@
 <!--	</div>-->
 	<div class="buttons">
 		<a href="<?= $data->getUrl() ?>">Информация</a>
-		<a href="<?= $this->createUrl('/event/index', array('collective_id'=>$data->id)) ?>">Мероприятия</a>
-		<a href="<?= $this->createUrl('/news/index', array('collective_id'=>$data->id)) ?>">Новости</a>
-		<a href="<?= $this->createUrl('/gallery/index', array('collective_id'=>$data->id)) ?>">Фотоотчеты</a>
-		<a class="order" href="#" rel="<?= $data->id ?>">Записаться</a>
+        <? foreach ( $data->nodes as $collectiveNode ): ?>
+		<a href="<?= $collectiveNode->getUrl() ?>"><?= $collectiveNode->name ?></a>
+		<? endforeach ?>
+        <a class="order" href="#" rel="<?= $data->id ?>">Записаться</a>
 	</div>
 </div>

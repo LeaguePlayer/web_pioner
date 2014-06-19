@@ -176,10 +176,7 @@ class CollectivesStructure extends EActiveRecord
 	public function getUrl()
 	{
 		if ( $this->_url === null ) {
-			$component = $this->getComponent();
-			if ( !$component )
-				return '';
-			$component_name = get_class($component);
+			$component_name = $this->material->class_name;
 			switch ( $component_name ) {
 				case 'CollectiveNewsList':
 					$this->_url = Yii::app()->createUrl('/news/index', array('collective_id'=>$this->collective_id));
