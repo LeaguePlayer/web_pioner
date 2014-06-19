@@ -16,23 +16,25 @@
 
 	<?php echo $form->textFieldControlGroup($model,'ageRight',array('class'=>'span4','maxlength'=>255)); ?>
 
-	<div class='control-group'>
-		<?php //echo CHtml::activeLabelEx($model, 'description'); ?>
-		<?php
-//		$this->widget('appext.ckeditor.CKEditorWidget', array(
-//			'model' => $model,
-//			'attribute' => 'description',
-//			'config' => array(
-//				'width' => '99%'
-//			),
-//		));
-		?>
-		<?php //echo $form->error($model, 'description'); ?>
-	</div>
 
+    <div class='control-group'>
+        <?= $form->labelEx($model, 'employeesArray', array('class'=>'control-label')) ?>
+        <div class="controls">
+            <div class="row-fluid">
+                <?php $this->widget('yiiwheels.widgets.select2.WhSelect2', array(
+                    'model' => $model,
+                    'attribute' => 'employeesArray',
+                    'data' => CHtml::listData(Employee::model()->findAll(array('order'=>'short_name')), 'id', 'short_name'),
+                    'htmlOptions' => array(
+                        'class'=>'span12',
+                        'multiple'=>true
+                    )
+                )) ?>
+            </div>
+        </div>
 
-	<?php echo $form->dropDownListControlGroup($model,'employeesArray', CHtml::listData(Employee::model()->findAll(array('order'=>'short_name')), 'id', 'short_name'), array('class'=>'span12', 'multiple'=>true)); ?>
-
+        <?php echo $form->error($model, 'employeesArray') ?>
+    </div>
 
 	<div class='control-group' style="overflow: hidden;">
 		<?php echo CHtml::activeLabelEx($model, 'description'); ?>

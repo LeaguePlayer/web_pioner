@@ -17,6 +17,7 @@ class ImperaviRedactor extends CWidget
     {
         $path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'font-awesome';
         $assetsPath = CHtml::asset($path);
+        Yii::app()->clientScript->registerScriptFile('http://code.jquery.com/jquery-migrate-1.2.1.min.js');
         Yii::app()->clientScript->registerCssFile($assetsPath . '/css/font-awesome.min.css');
 
         $redactorOptions = CMap::mergeArray(array(
@@ -60,7 +61,8 @@ class ImperaviRedactor extends CWidget
             'options'=>$redactorOptions,
         ));
 
-        echo CHtml::tag('div', array('id'=>'file-uploade'));
+        echo CHtml::openTag('div', array('id'=>'file-uploade'));
+        echo CHtml::closeTag('div');
 
         $fileBrowserOptions = CMap::mergeArray(array(
             'lang' => "ru",
