@@ -142,7 +142,7 @@
                     beforeShowDay: function(date) {
                         var dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
                         if ($.inArray(dmy, enabledDates) == -1) {
-                            return [false, "disable", "Нет новостей"];
+                            return [false, "disable", "Нет мероприятий"];
                         } else {
                             return [true, ""];
                         }

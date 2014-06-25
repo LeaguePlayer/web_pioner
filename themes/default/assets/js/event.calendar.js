@@ -8,6 +8,13 @@ $(document).ready(function() {
     var xhr;
     var baron;
 
+    var loadItems = function(date, callback) {
+
+        $.get('/event/loadCalendarItems', {
+            date: date
+        }, callback);
+    }
+
     calendar.fullCalendar({
         events: {
             url: '/event/feed',
@@ -26,12 +33,30 @@ $(document).ready(function() {
                 chooseDateInput = $('<input type="text" class="choose_date" />');
                 leftHeaderBlock.append(chooseDateInput);
                 chooseDateInput.wrap('<div class="input-group" />').parent().append('<span class="append"><i class="icon-calendar"></i></span>');
-                chooseDateInput.datepicker({
-                    onSelect: function ( dateText, inst ) {
-                        chooseDateInput.focusout();
-                        calendar.fullCalendar('gotoDate', moment(dateText, 'DD.MM.YYYY'));
-                    }
+                $.getJSON('/event/getEnabledDays', function(enabledDates) {
+                    chooseDateInput.datepicker({
+                        onSelect: function ( dateText, inst ) {
+                            chooseDateInput.focusout();
+                            calendar.fullCalendar('gotoDate', moment(dateText, 'DD.MM.YYYY'));
+                            loader.hide();
+                            loadItems(dateText, function(data) {
+                                $('.content', previewBlock).html(data);
+                                baron.update();
+                                $('.scroller', previewBlock).scrollTo(0);
+                                loader.hide();
+                            });
+                        },
+                        beforeShowDay: function(date) {
+                            var dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+                            if ($.inArray(dmy, enabledDates) == -1) {
+                                return [false, "disable", "Нет мероприятий"];
+                            } else {
+                                return [true, ""];
+                            }
+                        }
+                    });
                 });
+
             }
             chooseDateInput.datepicker('setDate', calendar.fullCalendar('getDate').format('DD.MM.YYYY'));
         },
@@ -64,9 +89,7 @@ $(document).ready(function() {
         },
         eventClick: function( event, jsEvent, view ) {
             loader.show();
-            $.get('/event/loadCalendarItems', {
-                date: event.start.format('DD-MM-YYYY'),
-            }, function(data) {
+            loadItems(event.start.format('DD-MM-YYYY'), function(data) {
                 $('.content', previewBlock).html(data);
                 baron.update();
                 loader.hide();
