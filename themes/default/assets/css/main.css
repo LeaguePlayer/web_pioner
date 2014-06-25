@@ -1062,7 +1062,7 @@ header .sub-menu ul li a {
   left: 0;
   width: 36px;
   height: 36px;
-  background: url(../img/directions.png) no-repeat;
+  background: url(../img/directions.png?v=2) no-repeat;
 }
 .services ul.additional_training > li.art span:before {
   background-position: 0 0;
@@ -1081,6 +1081,9 @@ header .sub-menu ul li a {
 }
 .services ul.additional_training > li.tech span:before {
   background-position: -180px 0;
+}
+.services ul.additional_training > li.melitary span:before {
+  background-position: -216px 0;
 }
 .services ul.additional_training ul {
   margin-bottom: 15px;
