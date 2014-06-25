@@ -169,6 +169,11 @@
                 return false;
             });
 
+//            $('.forward', mainPage).click(function(e) {
+//                alert( datepicker.datepicker('getDate') );
+//                return false;
+//            });
+
 //            $(document).on('click', function (e) {
 //                if ( !$(e.target).closest(container).size() ) {
 //                    closeCalendar();

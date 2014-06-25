@@ -3,7 +3,8 @@
 		<div class="cover-content">
 			<div class="content">
 				<div class="calendar" data-endates="<?= Yii::app()->createUrl('/event/getEnabledDays') ?>"></div>
-			</div>
+                <a class="forward" style="right: 20px; left: auto;" href="<?= Yii::app()->createUrl('/event/calendar') ?>">Подробнее</a>
+            </div>
 		</div>
 	</div>
 	<div class="cover cover-top" data-url="<?= Yii::app()->createUrl('/event/loadItems') ?>">

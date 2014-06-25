@@ -1347,7 +1347,8 @@ footer .master .slogan {
   left: 50%;
   margin-left: -18px;
 }
-.flip-calendar .cover .back {
+.flip-calendar .cover .back,
+.flip-calendar .cover .forward {
   position: absolute;
   bottom: 10px;
   left: 20px;
@@ -1357,7 +1358,8 @@ footer .master .slogan {
   text-decoration: none;
   line-height: 17px;
 }
-.flip-calendar .cover .back:before {
+.flip-calendar .cover .back:before,
+.flip-calendar .cover .forward:before {
   content: "";
   display: inline-block;
   vertical-align: top;
@@ -1366,6 +1368,9 @@ footer .master .slogan {
   height: 21px;
   margin-right: 5px;
   line-height: 21px;
+}
+.flip-calendar .cover .forward:before {
+  background-position: -21px -21px;
 }
 .flip-calendar .cover.cover-main {
   z-index: 10;
@@ -1914,6 +1919,9 @@ footer .master .slogan {
 }
 .event-preview .content .item p a {
   color: #fb805f;
+}
+.event-preview .content .item p a.btn {
+  color: #ffffff;
 }
 .event-preview .scroller__track {
   right: 4px;

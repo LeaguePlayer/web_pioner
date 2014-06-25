@@ -1456,7 +1456,8 @@ footer {
             left: 50%;
             margin-left: -18px;
         }
-        .back {
+        .back,
+        .forward {
             position: absolute;
             bottom: 10px;
             left: 20px;
@@ -1474,6 +1475,11 @@ footer {
                 height: 21px;
                 margin-right: 5px;
                 line-height: 21px;
+            }
+        }
+        .forward {
+            &:before {
+                background-position: -21px -21px;
             }
         }
         &.cover-main {
@@ -2054,6 +2060,9 @@ footer {
             p {
                 a {
                     color: @orange;
+                    &.btn {
+                        color: @white;
+                    }
                 }
             }
         }
