@@ -9,8 +9,8 @@
 
 	$cs->registerCoreScript('jquery.ui');
 
-	$cs->registerCssFile( $assetsPath.'/vendor/fullcalendar/fullcalendar.css');
-	$cs->registerScriptFile( $assetsPath.'/vendor/fullcalendar/fullcalendar.js', CClientScript::POS_END );
+	$cs->registerCssFile( $this->getAssetsUrl('application').'/vendor/fullcalendar/fullcalendar.css');
+	$cs->registerScriptFile( $this->getAssetsUrl('application').'/vendor/fullcalendar/fullcalendar.js', CClientScript::POS_END );
 
 	$cs->registerCssFile( $assetsPath.'/vendor/twbt-timepicker/css/bootstrap-timepicker.css' );
 	$cs->registerScriptFile( $assetsPath.'/vendor/twbt-timepicker/js/bootstrap-timepicker.js', CClientScript::POS_END );

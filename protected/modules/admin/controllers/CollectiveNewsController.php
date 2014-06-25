@@ -30,7 +30,10 @@ class CollectiveNewsController extends AdminController
             $model->attributes = $_POST['CollectiveNews'];
             $success = $model->save();
             if( $success ) {
-                $this->redirect(array('/admin/collectiveNewsList/update', 'id'=>$model->list_id));
+                if ( $model->type == CollectiveNews::TYPE_NEWS )
+                    $this->redirect(array('/admin/collectiveNewsList/update', 'id'=>$model->list_id));
+                else
+                    $this->redirect(array('/admin/collectiveEventList/update', 'id'=>$model->list_id));
             }
         }
         $this->render('update', array('model' => $model));

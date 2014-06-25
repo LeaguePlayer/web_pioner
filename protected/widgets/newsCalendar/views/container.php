@@ -8,7 +8,7 @@
 	</div>
 	<div class="cover cover-top" data-url="<?= Yii::app()->createUrl('/event/loadItems') ?>">
 		<div class="cover-content">
-			<div class="ui-datepicker">
+			<div class="ui-datepicker ui-datepicker-inline">
 				<div class="ui-datepicker-header">
 					<a class="ui-datepicker-prev"></a>
 					<a class="ui-datepicker-next"></a>
