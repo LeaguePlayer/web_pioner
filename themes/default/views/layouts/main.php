@@ -2,7 +2,7 @@
 	$cs = Yii::app()->clientScript;
 	$assetsUrl = $this->getAssetsUrl();
 	$cs->registerCssFile($assetsUrl.'/css/normalize.min.css');
-	$cs->registerCssFile($assetsUrl.'/css/main.css?v=10');
+	$cs->registerCssFile($assetsUrl.'/css/main.css?v=11');
 
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('jquery.ui');
